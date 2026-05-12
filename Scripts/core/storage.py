@@ -6,10 +6,8 @@ class Storage:
     def __init__(self, base_path):
         self.base = Path(base_path)
 
-        # 🔥 تغییر Content → Feeds
         self.feeds = self.base / "Feeds"
 
-        # view folder
         self.view = self.feeds / "view"
 
     def save_xml(self, name: str, data: bytes):
