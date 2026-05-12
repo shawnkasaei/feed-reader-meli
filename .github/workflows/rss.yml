@@ -3,11 +3,6 @@ name: Update Feeds
 on:
   schedule:
     - cron: "*/5 * * * *"
-#      timezone: "Asia/Tehran"
-
-  push:
-    branches:
-      - 'main'
 
   workflow_dispatch:
 
