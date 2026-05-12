@@ -34,8 +34,3 @@ jobs:
           git add Feeds/
           git commit -m "Update feeds" || echo "No changes"
           git push
-
-      - uses: gr2m/set-cron-schedule-action@v2
-        with:
-          cron: |
-            */5 * * * *
