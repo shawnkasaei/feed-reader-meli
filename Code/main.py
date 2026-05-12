@@ -4,11 +4,14 @@ import requests
 import datetime
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from email.utils import parsedate_to_datetime
 
 BASE = Path(__file__).resolve().parents[1]
 
 CONFIG_PATH = BASE / "Config" / "sources.json"
 OUTPUT_XML = BASE / "Content" / "feed.xml"
+
+TEHRAN_TZ = datetime.timezone(datetime.timedelta(hours=3, minutes=30))
 
 
 # ---------- FETCH ----------
@@ -18,22 +21,43 @@ def fetch(url):
     return r.text
 
 
+# ---------- DATE FORMATTER ----------
+def to_tehran_rss(dt):
+    return dt.astimezone(TEHRAN_TZ).strftime("%a, %d %b %Y %H:%M:%S +0330")
+
+
 # ---------- TELEGRAM PARSER ----------
 def parse_telegram(html, title):
-    blocks = re.findall(r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>', html)
+    blocks = re.findall(
+        r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>',
+        html
+    )
+
     items = []
 
     for b in blocks:
-        text_match = re.search(r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>', b)
-        time_match = re.search(r'<time[^>]*class="time"[^>]*>([\s\S]*?)<\/time>', b)
+        text_match = re.search(
+            r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
+            b
+        )
+
+        time_match = re.search(
+            r'<time[^>]*datetime="([^"]+)"',
+            b
+        )
 
         if text_match and time_match:
             text = re.sub(r"<[^>]+>", "", text_match.group(1)).strip()
-            date = time_match.group(1).strip()
+
+            utc_dt = datetime.datetime.fromisoformat(
+                time_match.group(1)
+            )
+
+            tehran_date = to_tehran_rss(utc_dt)
 
             items.append({
                 "title": f"{title} - {text}",
-                "date": date
+                "date": tehran_date
             })
 
     return items
@@ -48,10 +72,18 @@ def parse_rss(xml_content, title):
         d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item)
 
         if t and d:
-            items.append({
-                "title": f"{title} - {t.group(1).strip()}",
-                "date": d.group(1).strip()
-            })
+            try:
+                utc_dt = parsedate_to_datetime(d.group(1).strip())
+
+                tehran_date = to_tehran_rss(utc_dt)
+
+                items.append({
+                    "title": f"{title} - {t.group(1).strip()}",
+                    "date": tehran_date
+                })
+
+            except:
+                pass
 
     return items
 
@@ -59,9 +91,9 @@ def parse_rss(xml_content, title):
 # ---------- DATE NORMALIZER ----------
 def normalize_date(d):
     try:
-        return datetime.datetime.strptime(d[:25], "%a, %d %b %Y %H:%M:%S")
+        return parsedate_to_datetime(d)
     except:
-        return datetime.datetime.utcnow()
+        return datetime.datetime.now(TEHRAN_TZ)
 
 
 # ---------- BUILD XML ----------
@@ -78,12 +110,17 @@ def build_xml(items):
         date_elem = ET.SubElement(item, "pubDate")
         date_elem.text = i["date"]
 
-    return ET.tostring(root, encoding="utf-8", xml_declaration=True)
+    return ET.tostring(
+        root,
+        encoding="utf-8",
+        xml_declaration=True
+    )
 
 
 # ---------- MAIN ----------
 def main():
     config = json.loads(CONFIG_PATH.read_text())
+
     all_items = []
 
     # Telegram sources
