@@ -3,7 +3,6 @@ name: Update Feeds
 on:
   schedule:
     - cron: "*/15 * * * *"
-      timezone: 'America/New_York'
   workflow_dispatch:
 
 permissions:
