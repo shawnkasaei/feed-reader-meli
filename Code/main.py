@@ -35,7 +35,7 @@ class App:
             html = self.fetcher.get(s["url"])
             items = self.parser.parse_telegram(html)
 
-            xml = self.xml.build(items, s["title"])
+            xml = self.xml.build(items, s["title"], s["dir_name"])
             self.storage.save_xml(s["dir_name"], xml)
 
             feeds.append({
@@ -49,7 +49,7 @@ class App:
             xml_raw = self.fetcher.get(s["url"])
             items = self.parser.parse_rss(xml_raw)
 
-            xml = self.xml.build(items, s["title"])
+            xml = self.xml.build(items, s["title"], s["dir_name"])
             self.storage.save_xml(s["dir_name"], xml)
 
             feeds.append({
