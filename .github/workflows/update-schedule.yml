@@ -7,17 +7,15 @@ on:
   workflow_dispatch: {}
   schedule:
     - cron: "0 * * * *"
+      timezone: "Asia/Tehran"
 
 jobs:
   update-schedule:
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout repo content
         uses: actions/checkout@v6
-        with:
-          persist-credentials: true
-
+      
       - name: setup python
         uses: actions/setup-python@v6
         with:
@@ -36,4 +34,8 @@ jobs:
         with:
           author_name: Shawn Kasaei
           author_email: shayakasaei@gmail.com
+          force: false
+          signoff: false
           message: "Schedule: feed updated"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
