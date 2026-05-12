@@ -61,12 +61,12 @@ class HTMLBuilder:
     <div class="title">
         {item.title}
     </div>
-
+<!-- 
     <div class="content">
         {tehran_time}
     </div>
-
-</div>
+-->
+</div> 
 """)
 
         return f"""
@@ -83,7 +83,7 @@ class HTMLBuilder:
 <div class="container">
 
     <div class="header">
-        <h1>فید خبری</h1>
+        <h1>آخرین خبرها</h1>
         <div class="meta">
             آخرین بروزرسانی: {latest_update}
         </div>
