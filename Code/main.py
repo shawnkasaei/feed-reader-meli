@@ -20,25 +20,68 @@ TEHRAN_TZ = datetime.timezone(
 
 # ---------- FETCH ----------
 def fetch(url):
-    r = requests.get(url, timeout=15)
+    r = requests.get(
+        url,
+        timeout=15,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 "
+                "(Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 "
+                "(KHTML, like Gecko) "
+                "Chrome/124.0 Safari/537.36"
+            )
+        }
+    )
+
     r.raise_for_status()
+
     return r.text
-
-
-# ---------- DATE FORMATTER ----------
-def to_tehran_rss(dt):
-    return dt.astimezone(
-        TEHRAN_TZ
-    ).strftime("%a, %d %b %Y %H:%M:%S +0330")
 
 
 # ---------- CLEAN HTML ----------
 def clean_html(text):
-    return re.sub(r"<[^>]+>", "", text).strip()
+
+    text = re.sub(r"<br\s*\/?>", "\n", text)
+
+    text = re.sub(r"<[^>]+>", "", text)
+
+    text = (
+        text
+        .replace("&amp;", "&")
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", '"')
+    )
+
+    return text.strip()
+
+
+# ---------- DATE FORMAT ----------
+def to_tehran_rss(dt):
+
+    return dt.astimezone(
+        TEHRAN_TZ
+    ).strftime(
+        "%a, %d %b %Y %H:%M:%S +0330"
+    )
+
+
+# ---------- DATE NORMALIZER ----------
+def normalize_date(d):
+
+    try:
+        return parsedate_to_datetime(d)
+
+    except:
+        return datetime.datetime.now(
+            TEHRAN_TZ
+        )
 
 
 # ---------- TELEGRAM PARSER ----------
-def parse_telegram(html, source_title):
+def parse_telegram(html):
+
     blocks = re.findall(
         r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>',
         html
@@ -46,32 +89,36 @@ def parse_telegram(html, source_title):
 
     items = []
 
-    for b in blocks:
+    for block in blocks:
 
         text_match = re.search(
             r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
-            b
+            block
         )
 
         time_match = re.search(
             r'<time[^>]*datetime="([^"]+)"',
-            b
+            block
         )
 
         if not text_match or not time_match:
             continue
 
         try:
+
             text = clean_html(
                 text_match.group(1)
             )
+
+            if not text:
+                continue
 
             utc_dt = datetime.datetime.fromisoformat(
                 time_match.group(1)
             )
 
             items.append({
-                "title": f"{source_title} - {text}",
+                "title": text,
                 "date": to_tehran_rss(utc_dt)
             })
 
@@ -82,7 +129,8 @@ def parse_telegram(html, source_title):
 
 
 # ---------- RSS PARSER ----------
-def parse_rss(xml_content, source_title):
+def parse_rss(xml_content):
+
     items = []
 
     for block in re.findall(
@@ -104,12 +152,20 @@ def parse_rss(xml_content, source_title):
             continue
 
         try:
+
+            title = clean_html(
+                title_match.group(1)
+            )
+
+            if not title:
+                continue
+
             utc_dt = parsedate_to_datetime(
-                title_match and date_match.group(1).strip()
+                date_match.group(1).strip()
             )
 
             items.append({
-                "title": f"{source_title} - {clean_html(title_match.group(1))}",
+                "title": title,
                 "date": to_tehran_rss(utc_dt)
             })
 
@@ -119,33 +175,46 @@ def parse_rss(xml_content, source_title):
     return items
 
 
-# ---------- SORT ----------
-def normalize_date(d):
-    try:
-        return parsedate_to_datetime(d)
-    except:
-        return datetime.datetime.now(TEHRAN_TZ)
-
-
 # ---------- BUILD XML ----------
-def build_xml(items, source_title):
+def build_xml(items, feed_title):
 
-    root = ET.Element("rss", version="2.0")
+    root = ET.Element(
+        "rss",
+        version="2.0"
+    )
 
-    channel = ET.SubElement(root, "channel")
+    channel = ET.SubElement(
+        root,
+        "channel"
+    )
 
-    title_elem = ET.SubElement(channel, "title")
-    title_elem.text = source_title
+    channel_title = ET.SubElement(
+        channel,
+        "title"
+    )
+
+    channel_title.text = feed_title
 
     for i in items:
 
-        item = ET.SubElement(channel, "item")
+        item = ET.SubElement(
+            channel,
+            "item"
+        )
 
-        item_title = ET.SubElement(item, "title")
-        item_title.text = i["title"]
+        title_elem = ET.SubElement(
+            item,
+            "title"
+        )
 
-        item_date = ET.SubElement(item, "pubDate")
-        item_date.text = i["date"]
+        title_elem.text = i["title"]
+
+        date_elem = ET.SubElement(
+            item,
+            "pubDate"
+        )
+
+        date_elem.text = i["date"]
 
     return ET.tostring(
         root,
@@ -154,7 +223,7 @@ def build_xml(items, source_title):
     )
 
 
-# ---------- SAVE ----------
+# ---------- SAVE XML ----------
 def save_feed(filename, xml_data):
 
     OUTPUT_DIR.mkdir(
@@ -164,21 +233,29 @@ def save_feed(filename, xml_data):
 
     output_path = OUTPUT_DIR / f"{filename}.xml"
 
-    output_path.write_bytes(xml_data)
+    if not output_path.exists():
+        output_path.touch()
+
+    output_path.write_bytes(
+        xml_data
+    )
 
 
 # ---------- PROCESS TELEGRAM ----------
 def process_telegram(source):
 
-    html = fetch(source["url"])
+    html = fetch(
+        source["url"]
+    )
 
     items = parse_telegram(
-        html,
-        source["title"]
+        html
     )
 
     items.sort(
-        key=lambda x: normalize_date(x["date"]),
+        key=lambda x: normalize_date(
+            x["date"]
+        ),
         reverse=True
     )
 
@@ -190,21 +267,30 @@ def process_telegram(source):
     save_feed(
         source["dir_name"],
         xml_data
+    )
+
+    print(
+        f"Telegram OK -> "
+        f"{source['dir_name']}.xml "
+        f"({len(items)} items)"
     )
 
 
 # ---------- PROCESS RSS ----------
 def process_rss(source):
 
-    xml_content = fetch(source["url"])
+    xml_content = fetch(
+        source["url"]
+    )
 
     items = parse_rss(
-        xml_content,
-        source["title"]
+        xml_content
     )
 
     items.sort(
-        key=lambda x: normalize_date(x["date"]),
+        key=lambda x: normalize_date(
+            x["date"]
+        ),
         reverse=True
     )
 
@@ -216,6 +302,12 @@ def process_rss(source):
     save_feed(
         source["dir_name"],
         xml_data
+    )
+
+    print(
+        f"RSS OK -> "
+        f"{source['dir_name']}.xml "
+        f"({len(items)} items)"
     )
 
 
@@ -228,20 +320,42 @@ def main():
         )
     )
 
-    for source in config.get("telegram", []):
+    for source in config.get(
+        "telegram",
+        []
+    ):
+
         try:
-            process_telegram(source)
-            print(f"Telegram OK -> {source['dir_name']}.xml")
+            process_telegram(
+                source
+            )
+
         except Exception as e:
-            print(f"Telegram ERROR -> {source['title']}")
+
+            print(
+                f"Telegram ERROR -> "
+                f"{source['title']}"
+            )
+
             print(e)
 
-    for source in config.get("rss", []):
+    for source in config.get(
+        "rss",
+        []
+    ):
+
         try:
-            process_rss(source)
-            print(f"RSS OK -> {source['dir_name']}.xml")
+            process_rss(
+                source
+            )
+
         except Exception as e:
-            print(f"RSS ERROR -> {source['title']}")
+
+            print(
+                f"RSS ERROR -> "
+                f"{source['title']}"
+            )
+
             print(e)
 
 
