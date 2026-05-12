@@ -14,10 +14,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      
       - name: setting up
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
+
+      - name: installing dependencies
         run: pip install requests
 
       - name: run script
