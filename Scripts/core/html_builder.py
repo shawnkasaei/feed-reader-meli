@@ -20,7 +20,7 @@ class HTMLBuilder:
                 return datetime.now(TEHRAN)
         else:
             return datetime.strptime(
-                    date_str.strip(),
+                    date_str.replace("+0330", "").strip(),
                     "%a, %d %b %Y %H:%M:%S"
                 )
 
