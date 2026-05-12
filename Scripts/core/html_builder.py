@@ -7,22 +7,19 @@ TEHRAN = timezone(timedelta(hours=3, minutes=30))
 class HTMLBuilder:
 
     def to_tehran(self, date_str):
-        if "GMT" in date_str:
-            try:
-                dt = datetime.strptime(
-                    date_str.replace("GMT", "").strip(),
-                    "%a, %d %b %Y %H:%M:%S"
-                )
+        if "+0330" in date_str:
+            pass
+        
+        try:
+            dt = datetime.strptime(
+                date_str.replace("GMT", "").strip(),
+                "%a, %d %b %Y %H:%M:%S"
+            )
 
-                return dt.replace(tzinfo=timezone.utc).astimezone(TEHRAN)
+            return dt.replace(tzinfo=timezone.utc).astimezone(TEHRAN)
 
-            except:
-                return datetime.now(TEHRAN)
-        else:
-            return datetime.strptime(
-                    date_str.replace("+0330", "").strip(),
-                    "%a, %d %b %Y %H:%M:%S"
-                )
+        except:
+            return datetime.now(TEHRAN)
 
     def relative(self, dt):
         now = datetime.now(TEHRAN)
