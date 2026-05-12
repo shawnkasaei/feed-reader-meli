@@ -33,6 +33,6 @@ jobs:
           author_email: shayakasaei@gmail.com
           force: false
           signoff: false
-          message: ":memo: FEED updated by Shawn Kasaei"
+          message: ":memo: FEED updated by Shawn"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
