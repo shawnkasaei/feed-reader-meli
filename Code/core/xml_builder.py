@@ -11,7 +11,8 @@ class XMLBuilder:
         ET.SubElement(channel, "title").text = title
 
         base_url = (
-            "https://raw.githubusercontent.com/"
+            "https://html-preview.github.io/"
+            "?url=https://raw.githubusercontent.com/"
             "shawnkasaei/news-reader-meli/"
             "refs/heads/main/Content/index.html"
         )
