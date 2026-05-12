@@ -12,20 +12,21 @@ class XMLBuilder:
 
         base_url = (
             "https://html-preview.github.io/"
-            "?url=https://raw.githubusercontent.com/"
+            "?url=raw.githubusercontent.com/"
             "shawnkasaei/news-reader-meli/"
-            "refs/heads/main/Content/index.html"
+            "refs/heads/main/Feeds/view/index.html"
         )
 
         for i, item in enumerate(items, 1):
 
-            node = ET.SubElement(channel, "item")
-
             anchor_id = f"{feed_name}-{i}"
+
+            node = ET.SubElement(channel, "item")
 
             ET.SubElement(node, "title").text = item.title
             ET.SubElement(node, "pubDate").text = item.date
 
+            # 🔥 لینک دقیق و sync با HTML
             ET.SubElement(node, "link").text = (
                 f"{base_url}#{anchor_id}"
             )
