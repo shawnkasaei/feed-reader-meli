@@ -7,7 +7,7 @@ TEHRAN = timezone(timedelta(hours=3, minutes=30))
 class HTMLBuilder:
 
     def to_tehran(self, date_str):
-        if date_str.includes("GMT"):
+        if "GMT" in date_str:
             try:
                 dt = datetime.strptime(
                     date_str.replace("GMT", "").strip(),
