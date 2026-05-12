@@ -1,9 +1,12 @@
-name: Fetch News
+name: Update Feeds
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -18,18 +21,19 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install requests
         run: pip install requests
 
       - name: Run Script
-        run: python Code/main.py
+        run: python Scripts/main.py
 
       - name: Commit Updates
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add Content/
+          # 🔥 مهم: مسیر جدید
+          git add Feeds/
 
           git commit -m "Update feeds" || echo "No changes"
 
