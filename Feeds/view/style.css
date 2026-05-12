@@ -5,7 +5,6 @@
     --border: rgba(255,255,255,0.08);
     --text: #f5f5f7;
     --muted: rgba(255,255,255,0.55);
-    --accent: #9ca3af;
 }
 
 * {
@@ -21,23 +20,23 @@ body {
     padding: 24px;
 }
 
-/* Container */
 .container {
     max-width: 1100px;
     margin: auto;
 }
 
-/* Header */
+/* HEADER same width as grid */
 .header {
+    width: 100%;
     background: var(--panel);
-    padding: 18px 20px;
-    border-radius: 18px;
-    margin-bottom: 18px;
     border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
 }
 
 .header h1 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -47,64 +46,44 @@ body {
     color: var(--muted);
 }
 
-/* Grid - Apple style */
+/* GRID (mobile first) */
 .grid {
     display: grid;
-    gap: 14px;
+    grid-template-columns: 1fr; /* موبایل */
+    gap: 12px;
 }
 
-/* 3 columns desktop/tablet */
-@media (min-width: 900px) {
+/* tablet + desktop */
+@media (min-width: 700px) {
     .grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 ستون */
     }
 }
 
-/* mobile 1 column */
-@media (max-width: 899px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Card */
 .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-    transition: 0.2s ease;
+    border-radius: 14px;
+    padding: 14px;
 }
 
-.card:hover {
-    transform: translateY(-2px);
-}
-
-/* Meta row */
 .meta {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
     color: var(--muted);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
-/* Title BIG & BOLD */
 .title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
-/* content */
 .content {
-    font-size: 14px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.85);
-}
-
-/* source */
-.source {
-    color: var(--accent);
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
 }

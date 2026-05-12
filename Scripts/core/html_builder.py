@@ -1,47 +1,60 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
+
+
+TEHRAN = timezone(timedelta(hours=3, minutes=30))
 
 
 class HTMLBuilder:
 
-    def _relative_time(self, date_str):
+    def to_tehran(self, date_str):
         try:
-            # RSS format parse
-            dt = datetime.strptime(date_str[:-6], "%a, %d %b %Y %H:%M:%S")
-            now = datetime.utcnow()
-            diff = now - dt
+            dt = datetime.strptime(
+                date_str.replace("GMT", "").strip(),
+                "%a, %d %b %Y %H:%M:%S"
+            )
 
-            minutes = int(diff.total_seconds() / 60)
-            hours = int(minutes / 60)
-
-            if minutes < 1:
-                return "لحظاتی پیش"
-            if minutes < 60:
-                return f"{minutes} دقیقه پیش"
-            if hours < 24:
-                return f"{hours} ساعت پیش"
-            return f"{int(hours/24)} روز پیش"
+            return dt.replace(tzinfo=timezone.utc).astimezone(TEHRAN)
 
         except:
-            return ""
+            return datetime.now(TEHRAN)
+
+    def relative(self, dt):
+        now = datetime.now(TEHRAN)
+        diff = now - dt
+
+        minutes = int(diff.total_seconds() / 60)
+        hours = int(minutes / 60)
+        days = int(hours / 24)
+
+        if minutes < 1:
+            return "لحظاتی پیش"
+        if minutes < 60:
+            return f"{minutes} دقیقه پیش"
+        if hours < 24:
+            return f"{hours} ساعت پیش"
+        return f"{days} روز پیش"
 
     def build(self, feeds):
 
         cards = []
 
-        latest_update = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+        latest_update = datetime.now(TEHRAN).strftime("%Y-%m-%d %H:%M")
 
         for f in feeds:
 
             for i, item in enumerate(f["items"], 1):
 
                 anchor = f"{f['file']}-{i}"
-                relative = self._relative_time(item.date)
+
+                dt = self.to_tehran(item.date)
+                relative = self.relative(dt)
+                tehran_time = dt.strftime("%Y-%m-%d %H:%M")
 
                 cards.append(f"""
 <div class="card" id="{anchor}">
 
     <div class="meta">
-        <span class="source">{f['source']}</span>
+        <span>{f['source']}</span>
         <span>{relative}</span>
     </div>
 
@@ -50,7 +63,7 @@ class HTMLBuilder:
     </div>
 
     <div class="content">
-        {item.date}
+        {tehran_time}
     </div>
 
 </div>
