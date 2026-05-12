@@ -7,16 +7,22 @@ TEHRAN = timezone(timedelta(hours=3, minutes=30))
 class HTMLBuilder:
 
     def to_tehran(self, date_str):
-        try:
-            dt = datetime.strptime(
-                date_str.replace("GMT", "").strip(),
-                "%a, %d %b %Y %H:%M:%S"
-            )
+        if date_st.contains("GMT"):
+            try:
+                dt = datetime.strptime(
+                    date_str.replace("GMT", "").strip(),
+                    "%a, %d %b %Y %H:%M:%S"
+                )
 
-            return dt.replace(tzinfo=timezone.utc).astimezone(TEHRAN)
+                return dt.replace(tzinfo=timezone.utc).astimezone(TEHRAN)
 
-        except:
-            return datetime.now(TEHRAN)
+            except:
+                return datetime.now(TEHRAN)
+        else:
+            return datetime.strptime(
+                    date_str.strip(),
+                    "%a, %d %b %Y %H:%M:%S"
+                )
 
     def relative(self, dt):
         now = datetime.now(TEHRAN)
@@ -74,6 +80,7 @@ class HTMLBuilder:
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>News Feed</title>
 <link rel="stylesheet" href="style.css">
 </head>
