@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/30 * * * *"
-    - timezone: "Asia/Tehran"
+      timezone: "Asia/Tehran"
 
 jobs:
   uodate-feeds:
