@@ -13,350 +13,251 @@ BASE = Path(__file__).resolve().parents[1]
 CONFIG_PATH = BASE / "Config" / "sources.json"
 OUTPUT_DIR = BASE / "Content"
 
-TEHRAN_TZ = datetime.timezone(
-    datetime.timedelta(hours=3, minutes=30)
-)
+TEHRAN_TZ = datetime.timezone(datetime.timedelta(hours=3, minutes=30))
 
 
 # ---------- FETCH ----------
 def fetch(url):
-    r = requests.get(
-        url,
-        timeout=15,
-        headers={
-            "User-Agent": (
-                "Mozilla/5.0 "
-                "(Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 "
-                "(KHTML, like Gecko) "
-                "Chrome/124.0 Safari/537.36"
-            )
-        }
-    )
-
+    r = requests.get(url, timeout=15)
     r.raise_for_status()
-
     return r.text
 
 
-# ---------- CLEAN HTML ----------
+# ---------- CLEAN ----------
 def clean_html(text):
-
-    text = re.sub(r"<br\s*\/?>", "\n", text)
-
+    text = re.sub(r"<br\s*/?>", "\n", text)
     text = re.sub(r"<[^>]+>", "", text)
-
-    text = (
-        text
-        .replace("&amp;", "&")
-        .replace("&lt;", "<")
-        .replace("&gt;", ">")
-        .replace("&quot;", '"')
-    )
-
     return text.strip()
 
 
-# ---------- DATE FORMAT ----------
-def to_tehran_rss(dt):
-
-    return dt.astimezone(
-        TEHRAN_TZ
-    ).strftime(
-        "%a, %d %b %Y %H:%M:%S +0330"
-    )
+# ---------- DATE ----------
+def to_tehran(dt):
+    return dt.astimezone(TEHRAN_TZ).strftime("%a, %d %b %Y %H:%M:%S +0330")
 
 
-# ---------- DATE NORMALIZER ----------
 def normalize_date(d):
-
     try:
         return parsedate_to_datetime(d)
-
     except:
-        return datetime.datetime.now(
-            TEHRAN_TZ
-        )
+        return datetime.datetime.now(TEHRAN_TZ)
 
 
-# ---------- TELEGRAM PARSER ----------
+# ---------- TELEGRAM ----------
 def parse_telegram(html):
-
-    blocks = re.findall(
-        r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>',
-        html
-    )
+    blocks = re.findall(r'tgme_widget_message_bubble[\s\S]*?</div>\s*</div>', html)
 
     items = []
 
-    for block in blocks:
-
-        text_match = re.search(
-            r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
-            block
-        )
-
-        time_match = re.search(
-            r'<time[^>]*datetime="([^"]+)"',
-            block
-        )
+    for b in blocks:
+        text_match = re.search(r'tgme_widget_message_text[^>]*>([\s\S]*?)</div>', b)
+        time_match = re.search(r'<time[^>]*datetime="([^"]+)"', b)
 
         if not text_match or not time_match:
             continue
 
-        try:
+        text = clean_html(text_match.group(1))
 
-            text = clean_html(
-                text_match.group(1)
-            )
+        if not text:
+            continue
 
-            if not text:
-                continue
+        utc_dt = datetime.datetime.fromisoformat(time_match.group(1))
 
-            utc_dt = datetime.datetime.fromisoformat(
-                time_match.group(1)
-            )
-
-            items.append({
-                "title": text,
-                "date": to_tehran_rss(utc_dt)
-            })
-
-        except:
-            pass
+        items.append({
+            "title": text,
+            "date": to_tehran(utc_dt)
+        })
 
     return items
 
 
-# ---------- RSS PARSER ----------
-def parse_rss(xml_content):
-
+# ---------- RSS ----------
+def parse_rss(xml):
     items = []
 
-    for block in re.findall(
-        r"<item>([\s\S]*?)<\/item>",
-        xml_content
-    ):
+    for item in re.findall(r"<item>([\s\S]*?)</item>", xml):
+        t = re.search(r"<title>([\s\S]*?)</title>", item)
+        d = re.search(r"<pubDate>([\s\S]*?)</pubDate>", item)
 
-        title_match = re.search(
-            r"<title>([\s\S]*?)<\/title>",
-            block
-        )
-
-        date_match = re.search(
-            r"<pubDate>([\s\S]*?)<\/pubDate>",
-            block
-        )
-
-        if not title_match or not date_match:
+        if not t or not d:
             continue
 
         try:
-
-            title = clean_html(
-                title_match.group(1)
-            )
-
-            if not title:
-                continue
-
-            utc_dt = parsedate_to_datetime(
-                date_match.group(1).strip()
-            )
-
+            dt = parsedate_to_datetime(d.group(1))
             items.append({
-                "title": title,
-                "date": to_tehran_rss(utc_dt)
+                "title": clean_html(t.group(1)),
+                "date": to_tehran(dt)
             })
-
         except:
             pass
 
     return items
 
 
-# ---------- BUILD XML ----------
-def build_xml(items, feed_title):
+# ---------- XML ----------
+def build_xml(items, title):
+    root = ET.Element("rss", version="2.0")
+    channel = ET.SubElement(root, "channel")
 
-    root = ET.Element(
-        "rss",
-        version="2.0"
-    )
+    ET.SubElement(channel, "title").text = title
 
-    channel = ET.SubElement(
-        root,
-        "channel"
-    )
+    for i, item in enumerate(items, 1):
+        node = ET.SubElement(channel, "item")
 
-    channel_title = ET.SubElement(
-        channel,
-        "title"
-    )
+        ET.SubElement(node, "title").text = item["title"]
+        ET.SubElement(node, "pubDate").text = item["date"]
 
-    channel_title.text = feed_title
+        ET.SubElement(node, "guid").text = str(i)
 
-    for i in items:
-
-        item = ET.SubElement(
-            channel,
-            "item"
-        )
-
-        title_elem = ET.SubElement(
-            item,
-            "title"
-        )
-
-        title_elem.text = i["title"]
-
-        date_elem = ET.SubElement(
-            item,
-            "pubDate"
-        )
-
-        date_elem.text = i["date"]
-
-    return ET.tostring(
-        root,
-        encoding="utf-8",
-        xml_declaration=True
-    )
+    return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
 # ---------- SAVE XML ----------
-def save_feed(filename, xml_data):
-
-    OUTPUT_DIR.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    output_path = OUTPUT_DIR / f"{filename}.xml"
-
-    if not output_path.exists():
-        output_path.touch()
-
-    output_path.write_bytes(
-        xml_data
-    )
+def save_xml(name, data):
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    (OUTPUT_DIR / f"{name}.xml").write_bytes(data)
 
 
-# ---------- PROCESS TELEGRAM ----------
-def process_telegram(source):
+# ---------- CSS FILE ----------
+def write_css():
+    css = """
+body {
+    margin: 0;
+    padding: 32px 16px;
+    background: #0b0b0d;
+    color: white;
+    font-family: Vazirmatn, sans-serif;
+}
 
-    html = fetch(
-        source["url"]
-    )
+.container {
+    max-width: 920px;
+    margin: auto;
+}
 
-    items = parse_telegram(
-        html
-    )
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
-    items.sort(
-        key=lambda x: normalize_date(
-            x["date"]
-        ),
-        reverse=True
-    )
+.grid {
+    display: grid;
+    gap: 14px;
+}
 
-    xml_data = build_xml(
-        items,
-        source["title"]
-    )
+.card {
+    background: #16171c;
+    padding: 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
 
-    save_feed(
-        source["dir_name"],
-        xml_data
-    )
+.meta {
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.7;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
 
-    print(
-        f"Telegram OK -> "
-        f"{source['dir_name']}.xml "
-        f"({len(items)} items)"
-    )
+.content {
+    line-height: 1.9;
+}
+
+a {
+    display: inline-block;
+    margin-top: 12px;
+    color: white;
+    text-decoration: none;
+    opacity: 0.7;
+}
+"""
+    (OUTPUT_DIR / "style.css").write_text(css, encoding="utf-8")
 
 
-# ---------- PROCESS RSS ----------
-def process_rss(source):
+# ---------- HTML ----------
+def build_index(feeds):
+    cards = []
 
-    xml_content = fetch(
-        source["url"]
-    )
+    for f in feeds:
+        for i, item in enumerate(f["items"], 1):
+            anchor = f"{f['file']}-{i}"
 
-    items = parse_rss(
-        xml_content
-    )
+            cards.append(f"""
+<div class="card" id="{anchor}">
+    <div class="meta">
+        <span>{f['source']}</span>
+        <span>{item['date']}</span>
+    </div>
 
-    items.sort(
-        key=lambda x: normalize_date(
-            x["date"]
-        ),
-        reverse=True
-    )
+    <div class="content">{item['title']}</div>
 
-    xml_data = build_xml(
-        items,
-        source["title"]
-    )
+    <a href="#{anchor}">link</a>
+</div>
+""")
 
-    save_feed(
-        source["dir_name"],
-        xml_data
-    )
+    html = f"""
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Feed</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-    print(
-        f"RSS OK -> "
-        f"{source['dir_name']}.xml "
-        f"({len(items)} items)"
-    )
+<body>
+<div class="container">
+
+<div class="title">News Feed</div>
+
+<div class="grid">
+{''.join(cards)}
+</div>
+
+</div>
+</body>
+</html>
+"""
+
+    (OUTPUT_DIR / "index.html").write_text(html, encoding="utf-8")
 
 
 # ---------- MAIN ----------
 def main():
+    config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
-    config = json.loads(
-        CONFIG_PATH.read_text(
-            encoding="utf-8"
-        )
-    )
+    feeds = []
 
-    for source in config.get(
-        "telegram",
-        []
-    ):
+    write_css()
 
-        try:
-            process_telegram(
-                source
-            )
+    for s in config.get("telegram", []):
+        html = fetch(s["url"])
+        items = parse_telegram(html)
 
-        except Exception as e:
+        items.sort(key=lambda x: normalize_date(x["date"]), reverse=True)
 
-            print(
-                f"Telegram ERROR -> "
-                f"{source['title']}"
-            )
+        save_xml(s["dir_name"], build_xml(items, s["title"]))
 
-            print(e)
+        feeds.append({
+            "source": s["title"],
+            "file": s["dir_name"],
+            "items": items
+        })
 
-    for source in config.get(
-        "rss",
-        []
-    ):
+    for s in config.get("rss", []):
+        xml = fetch(s["url"])
+        items = parse_rss(xml)
 
-        try:
-            process_rss(
-                source
-            )
+        items.sort(key=lambda x: normalize_date(x["date"]), reverse=True)
 
-        except Exception as e:
+        save_xml(s["dir_name"], build_xml(items, s["title"]))
 
-            print(
-                f"RSS ERROR -> "
-                f"{source['title']}"
-            )
+        feeds.append({
+            "source": s["title"],
+            "file": s["dir_name"],
+            "items": items
+        })
 
-            print(e)
+    build_index(feeds)
 
 
 if __name__ == "__main__":
