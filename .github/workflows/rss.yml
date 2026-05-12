@@ -10,7 +10,7 @@ on:
       timezone: "Asia/Tehran"
 
 jobs:
-  uodate-feeds:
+  update-feeds:
     runs-on: ubuntu-latest
 
     steps:
