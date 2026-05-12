@@ -10,7 +10,6 @@ class XMLBuilder:
 
         ET.SubElement(channel, "title").text = title
 
-        # ✅ لینک درست طبق نمونه تو
         base_url = (
             "https://htmlpreview.github.io/?"
             "https://raw.githubusercontent.com/"
@@ -27,7 +26,6 @@ class XMLBuilder:
             ET.SubElement(node, "title").text = item.title
             ET.SubElement(node, "pubDate").text = item.date
 
-            # 🔥 لینک نهایی دقیق
             ET.SubElement(node, "link").text = (
                 f"{base_url}#{anchor_id}"
             )
