@@ -1,16 +1,16 @@
-name: Update
+name: Update Schedule
 
 permissions:
   contents: write
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   schedule:
     - cron: "*/15 * * * *"
       timezone: "Asia/Tehran"
 
 jobs:
-  update-feeds:
+  update-schedule:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo content
@@ -36,6 +36,6 @@ jobs:
           author_email: shayakasaei@gmail.com
           force: false
           signoff: false
-          message: ":memo: FEED updated by Shawn"
+          message: "Schedule: FEED updated"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
