@@ -1,19 +1,11 @@
 {
   "telegram": [
-    {
-      "title": "مطهرنیا",
-      "url": "https://t.me/s/MehdiMotaharnia1344"
-    },
-    {
-      "title": "ضد تی وی",
-      "url": "https://t.me/s/ZTVofficial"
-    },
-    {
-      "title": "اینترنشنال",
-      "url": "https://t.me/s/Iranintltv"
-    }
+    
   ],
   "rss": [
-    
+    {
+       "title": "اینترنشنال",
+       "url": "https://www.iranintl.com/feed"
+    }
   ]
 }
