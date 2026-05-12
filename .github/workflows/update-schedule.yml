@@ -6,7 +6,7 @@ permissions:
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/30 * * * *"
       timezone: "Asia/Tehran"
 
 jobs:
@@ -36,6 +36,6 @@ jobs:
           author_email: shayakasaei@gmail.com
           force: false
           signoff: false
-          message: "Schedule: FEED updated"
+          message: "Schedule: feed updated"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
