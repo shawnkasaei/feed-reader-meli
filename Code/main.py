@@ -1,5 +1,4 @@
 import json
-
 from pathlib import Path
 
 from core.fetcher import Fetcher
@@ -16,51 +15,92 @@ class App:
 
     def __init__(self):
 
+        # config
         self.config = json.loads(
-            (BASE / "Config/sources.json").read_text(encoding="utf-8")
+            (BASE / "Config" / "sources.json").read_text(encoding="utf-8")
         )
 
+        # core services
         self.fetcher = Fetcher()
         self.parser = Parser()
-        self.xml = XMLBuilder()
-        self.html = HTMLBuilder()
+        self.xml_builder = XMLBuilder()
+        self.html_builder = HTMLBuilder()
         self.storage = Storage(BASE)
 
     def run(self):
 
         feeds = []
 
-        for s in self.config.get("telegram", []):
+        # ---------- TELEGRAM ----------
+        for source in self.config.get("telegram", []):
 
-            html = self.fetcher.get(s["url"])
-            items = self.parser.parse_telegram(html)
+            try:
+                html = self.fetcher.get(source["url"])
+                items = self.parser.parse_telegram(html)
 
-            xml = self.xml.build(items, s["title"], s["dir_name"])
-            self.storage.save_xml(s["dir_name"], xml)
+                # build xml
+                xml_data = self.xml_builder.build(
+                    items,
+                    source["title"],
+                    source["dir_name"]
+                )
 
-            feeds.append({
-                "source": s["title"],
-                "file": s["dir_name"],
-                "items": items
-            })
+                # save xml
+                self.storage.save_xml(
+                    source["dir_name"],
+                    xml_data
+                )
 
-        for s in self.config.get("rss", []):
+                feeds.append({
+                    "source": source["title"],
+                    "file": source["dir_name"],
+                    "items": items
+                })
 
-            xml_raw = self.fetcher.get(s["url"])
-            items = self.parser.parse_rss(xml_raw)
+                print(f"✔ Telegram -> {source['dir_name']}")
 
-            xml = self.xml.build(items, s["title"], s["dir_name"])
-            self.storage.save_xml(s["dir_name"], xml)
+            except Exception as e:
+                print(f"❌ Telegram error -> {source['title']}")
+                print(e)
 
-            feeds.append({
-                "source": s["title"],
-                "file": s["dir_name"],
-                "items": items
-            })
+        # ---------- RSS ----------
+        for source in self.config.get("rss", []):
 
-        html = self.html.build(feeds)
+            try:
+                xml = self.fetcher.get(source["url"])
+                items = self.parser.parse_rss(xml)
+
+                xml_data = self.xml_builder.build(
+                    items,
+                    source["title"],
+                    source["dir_name"]
+                )
+
+                self.storage.save_xml(
+                    source["dir_name"],
+                    xml_data
+                )
+
+                feeds.append({
+                    "source": source["title"],
+                    "file": source["dir_name"],
+                    "items": items
+                })
+
+                print(f"✔ RSS -> {source['dir_name']}")
+
+            except Exception as e:
+                print(f"❌ RSS error -> {source['title']}")
+                print(e)
+
+        # ---------- BUILD UI ----------
+        html = self.html_builder.build(feeds)
+
         self.storage.save_html(html)
 
+        print("✔ index.html generated in Feeds/view/")
 
+
+# ---------- ENTRY POINT ----------
 if __name__ == "__main__":
     App().run()

@@ -12,12 +12,16 @@ class HTMLBuilder:
 
                 cards.append(f"""
 <div class="card" id="{anchor}">
+
     <div class="meta">
-        <span>{f['source']}</span>
+        <span class="source">{f['source']}</span>
         <span>{item.date}</span>
     </div>
 
-    <div class="content">{item.title}</div>
+    <div class="content">
+        {item.title}
+    </div>
+
 </div>
 """)
 
@@ -26,20 +30,26 @@ class HTMLBuilder:
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>Feed</title>
+<title>News Feed</title>
+
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
 <div class="container">
 
-<h1>News Feed</h1>
+    <div class="header">
+        <h1>فید خبری</h1>
+        <p>آخرین اخبار به‌روزرسانی شده</p>
+    </div>
 
-<div class="grid">
-{''.join(cards)}
+    <div class="grid">
+        {''.join(cards)}
+    </div>
+
 </div>
 
-</div>
 </body>
 </html>
 """
