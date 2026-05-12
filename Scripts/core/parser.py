@@ -42,7 +42,7 @@ class Parser:
             except:
                 continue
 
-        return items.reverse()
+        return items
 
     def parse_rss(self, xml: str):
         items = []
