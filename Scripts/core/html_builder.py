@@ -175,6 +175,29 @@ class HTMLBuilder:
 
 </div>
 
+<div onclick="window.scrollTo({{top:0, behavior:'smooth'}})" style="
+        position:fixed;
+        bottom:20px;
+        left:20px;
+        width:55px;
+        height:55px;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        user-select:none;
+        font-size:1.2rem;
+
+        background:rgba(255,255,255,0.02);
+        backdrop-filter:blur(10px);
+        -webkit-backdrop-filter:blur(10px);
+
+        border:1px solid rgba(255,255,255,0.25);
+        box-shadow:0 4px 20px rgba(0,0,0,0.25);
+     ">بالا
+</div>
+
 </body>
 </html>
 """
