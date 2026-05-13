@@ -58,11 +58,6 @@
       "url": "https://www.iranintl.com/feed"
     },
     {
-      "title": "ایندیپندنت فارسی",
-      "dir_name": "feed-indypersian",
-      "url": "https://www.independentpersian.com/rss.xml"
-    },
-    {
       "title": "هکر نیوز",
       "dir_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
