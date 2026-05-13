@@ -1,6 +1,7 @@
 import json
 import time
 from pathlib import Path
+from datetime import datetime
 
 from core.fetcher import Fetcher
 from core.parser import Parser
@@ -99,6 +100,11 @@ class App:
             time.sleep(1)
 
         # ---------- BUILD UI ----------
+        feeds.sort(
+            key=lambda f: max((item.date for item in f["items"]), default=datetime.min),
+            reverse=True
+        )
+
         html = self.html_builder.build(feeds)
 
         self.storage.save_html(html)

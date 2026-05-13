@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
 
@@ -8,11 +6,6 @@ class HTMLBuilder:
     def build(self, feeds):
 
         cards = []
-
-        feeds.sort(
-            key=lambda f: max(i.date for i in f["items"], default=datetime.min.replace(tzinfo=timezone.utc)),
-            reverse=True
-        )
 
         latest_update = TimeUtils.to_string(TimeUtils.now())
 
