@@ -1,21 +1,216 @@
 {
   "telegram": [
     {
-      "title": "مطهرنیا",
-      "dir_name": "motaharnia",
-      "url": "https://t.me/s/MehdiMotaharnia1344"
+      "title": "ایران اینترنشنال",
+      "dir_name": "iranintl",
+      "url": "https://t.me/s/iranintltv"
+    },
+    {
+      "title": "منوتو",
+      "dir_name": "manoto",
+      "url": "https://t.me/s/manototv"
+    },
+    {
+      "title": "بی‌بی‌سی فارسی",
+      "dir_name": "bbcpersian",
+      "url": "https://t.me/s/bbcpersian"
+    },
+    {
+      "title": "رادیو فردا",
+      "dir_name": "radiofarda",
+      "url": "https://t.me/s/radiofarda"
+    },
+    {
+      "title": "دویچه وله فارسی",
+      "dir_name": "dwfarsi",
+      "url": "https://t.me/s/dw_farsi"
+    },
+    {
+      "title": "ایندیپندنت فارسی",
+      "dir_name": "indypersian",
+      "url": "https://t.me/s/indypersian"
+    },
+    {
+      "title": "صدای آمریکا",
+      "dir_name": "voapersian",
+      "url": "https://t.me/s/voafarsi"
+    },
+    {
+      "title": "وحید آنلاین",
+      "dir_name": "vahidonline",
+      "url": "https://t.me/s/VahidOnline"
     },
     {
       "title": "ضد تی وی",
       "dir_name": "ztv",
       "url": "https://t.me/s/ZTVofficial"
+    },
+    {
+      "title": "مطهرنیا",
+      "dir_name": "motaharnia",
+      "url": "https://t.me/s/MehdiMotaharnia1344"
     }
   ],
   "rss": [
     {
-      "title": "اینترنشنال",
+      "title": "ایران اینترنشنال",
       "dir_name": "iranintl",
       "url": "https://www.iranintl.com/feed"
+    },
+    {
+      "title": "بی‌بی‌سی فارسی",
+      "dir_name": "bbcpersian",
+      "url": "https://feeds.bbci.co.uk/persian/rss.xml"
+    },
+    {
+      "title": "رادیو فردا",
+      "dir_name": "radiofarda",
+      "url": "https://www.radiofarda.com/api/zrqiteuuir"
+    },
+    {
+      "title": "دویچه وله فارسی",
+      "dir_name": "dwfarsi",
+      "url": "https://rss.dw.com/xml/rss-pers-all"
+    },
+    {
+      "title": "ایندیپندنت فارسی",
+      "dir_name": "indypersian",
+      "url": "https://www.independentpersian.com/rss.xml"
+    },
+    {
+      "title": "یورونیوز فارسی",
+      "dir_name": "euronews",
+      "url": "https://fa.euronews.com/rss"
+    },
+    {
+      "title": "ایران وایر",
+      "dir_name": "iranwire",
+      "url": "https://iranwire.com/fa/rss/"
+    },
+    {
+      "title": "گویا نیوز",
+      "dir_name": "gooya",
+      "url": "https://news.gooya.com/feed.xml"
+    },
+    {
+      "title": "هکر نیوز",
+      "dir_name": "hackernews",
+      "url": "https://hnrss.org/frontpage"
+    },
+    {
+      "title": "تک‌کرانچ",
+      "dir_name": "techcrunch",
+      "url": "https://techcrunch.com/feed/"
+    },
+    {
+      "title": "ورج",
+      "dir_name": "theverge",
+      "url": "https://www.theverge.com/rss/index.xml"
+    },
+    {
+      "title": "آرس تکنیکا",
+      "dir_name": "arstechnica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index"
+    },
+    {
+      "title": "وایرد",
+      "dir_name": "wired",
+      "url": "https://www.wired.com/feed/rss"
+    },
+    {
+      "title": "بلومبرگ تکنولوژی",
+      "dir_name": "bloombergtech",
+      "url": "https://feeds.bloomberg.com/technology/news.rss"
+    },
+    {
+      "title": "رویترز جهان",
+      "dir_name": "reutersworld",
+      "url": "https://feeds.reuters.com/Reuters/worldNews"
+    },
+    {
+      "title": "رویترز فناوری",
+      "dir_name": "reuterstech",
+      "url": "https://feeds.reuters.com/reuters/technologyNews"
+    },
+    {
+      "title": "اسوشیتد پرس",
+      "dir_name": "apnews",
+      "url": "https://apnews.com/rss"
+    },
+    {
+      "title": "نیویورک تایمز جهان",
+      "dir_name": "nytimesworld",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+    },
+    {
+      "title": "گاردین جهان",
+      "dir_name": "guardianworld",
+      "url": "https://www.theguardian.com/world/rss"
+    },
+    {
+      "title": "فایننشال تایمز",
+      "dir_name": "ft",
+      "url": "https://www.ft.com/world?format=rss"
+    },
+    {
+      "title": "Foreign Affairs",
+      "dir_name": "foreignaffairs",
+      "url": "https://www.foreignaffairs.com/rss.xml"
+    },
+    {
+      "title": "Foreign Policy",
+      "dir_name": "foreignpolicy",
+      "url": "https://foreignpolicy.com/feed/"
+    },
+    {
+      "title": "Brookings",
+      "dir_name": "brookings",
+      "url": "https://www.brookings.edu/feed/"
+    },
+    {
+      "title": "Carnegie",
+      "dir_name": "carnegie",
+      "url": "https://carnegieendowment.org/rss"
+    },
+    {
+      "title": "CSIS",
+      "dir_name": "csis",
+      "url": "https://www.csis.org/rss.xml"
+    },
+    {
+      "title": "Council on Foreign Relations",
+      "dir_name": "cfr",
+      "url": "https://www.cfr.org/rss.xml"
+    },
+    {
+      "title": "Chatham House",
+      "dir_name": "chathamhouse",
+      "url": "https://www.chathamhouse.org/rss.xml"
+    },
+    {
+      "title": "RAND",
+      "dir_name": "rand",
+      "url": "https://www.rand.org/topics.rss"
+    },
+    {
+      "title": "Atlantic Council",
+      "dir_name": "atlanticcouncil",
+      "url": "https://www.atlanticcouncil.org/feed/"
+    },
+    {
+      "title": "Wilson Center",
+      "dir_name": "wilsoncenter",
+      "url": "https://www.wilsoncenter.org/rss.xml"
+    },
+    {
+      "title": "Hoover Institution",
+      "dir_name": "hoover",
+      "url": "https://www.hoover.org/rss.xml"
+    },
+    {
+      "title": "Bellingcat",
+      "dir_name": "bellingcat",
+      "url": "https://www.bellingcat.com/feed/"
     }
   ]
 }
