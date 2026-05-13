@@ -9,15 +9,14 @@ class HTMLBuilder:
 
         latest_update = TimeUtils.relative(TimeUtils.now())
 
-        for item in feeds:
-            print(item)
+        for f in feeds:
+            for item in f["items"]:
+                anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
 
-            anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
+                dt = TimeUtils.to_tehran(item.date)
+                relative = TimeUtils.relative(dt)
 
-            dt = TimeUtils.to_tehran(item.date)
-            relative = TimeUtils.relative(dt)
-
-            cards.append(f"""
+                cards.append(f"""
 <div class="card" id="{anchor}">
 
     <div class="meta">
