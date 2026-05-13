@@ -110,17 +110,6 @@ class App:
             ),
             reverse=True
         )
-        
-        feeds.sort(
-            key=lambda f: max(
-                (
-                    datetime.strptime(i.date, "%Y-%m-%d %H:%M:%S")
-                    for i in f["items"]
-                ),
-                default=datetime.min
-            ),
-            reverse=True
-        )
 
         html = self.html_builder.build(feeds)
 
