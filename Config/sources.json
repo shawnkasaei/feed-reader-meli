@@ -66,51 +66,6 @@
       "title": "هکر نیوز",
       "dir_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
-    },
-    {
-      "title": "نیویورک تایمز جهان",
-      "dir_name": "feed-nytimesworld",
-      "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
-    },
-    {
-      "title": "گاردین جهان",
-      "dir_name": "feed-guardianworld",
-      "url": "https://www.theguardian.com/world/rss"
-    },
-    {
-      "title": "فارین افرز",
-      "dir_name": "feed-foreignaffairs",
-      "url": "https://www.foreignaffairs.com/rss.xml"
-    },
-    {
-      "title": "فارین پالیسی",
-      "dir_name": "feed-foreignpolicy",
-      "url": "https://foreignpolicy.com/feed/"
-    },
-    {
-      "title": "مرکز مطالعات استراتژیک و بین‌المللی",
-      "dir_name": "feed-csis",
-      "url": "https://www.csis.org/rss.xml"
-    },
-    {
-      "title": "چتم هاوس",
-      "dir_name": "feed-chathamhouse",
-      "url": "https://www.chathamhouse.org/path/news-releases.xml"
-    },
-    {
-      "title": "شورای آتلانتیک",
-      "dir_name": "feed-atlanticcouncil",
-      "url": "https://www.atlanticcouncil.org/feed/"
-    },
-    {
-      "title": "مؤسسه هوور",
-      "dir_name": "feed-hoover",
-      "url": "https://www.hoover.org/rss.xml"
-    },
-    {
-      "title": "بیلینگ‌کت",
-      "dir_name": "feed-bellingcat",
-      "url": "https://www.bellingcat.com/feed/"
     }
   ]
 }
