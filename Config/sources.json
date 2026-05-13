@@ -88,11 +88,6 @@
       "url": "https://news.ycombinator.com/rss"
     },
     {
-      "title": "رویترز جهان",
-      "dir_name": "feed-reutersworld",
-      "url": "https://feeds.reuters.com/Reuters/worldNews"
-    },
-    {
       "title": "اسوشیتد پرس سیاسی",
       "dir_name": "feed-apnewspolitics",
       "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/politics.xml"
@@ -118,62 +113,47 @@
       "url": "https://www.theguardian.com/world/rss"
     },
     {
-      "title": "فایننشال تایمز",
-      "dir_name": "feed-ft",
-      "url": "https://www.ft.com/world?format=rss"
-    },
-    {
-      "title": "Foreign Affairs",
+      "title": "فارین افرز",
       "dir_name": "feed-foreignaffairs",
       "url": "https://www.foreignaffairs.com/rss.xml"
     },
     {
-      "title": "Foreign Policy",
+      "title": "فارین پالیسی",
       "dir_name": "feed-foreignpolicy",
       "url": "https://foreignpolicy.com/feed/"
     },
     {
-      "title": "Brookings",
+      "title": "مؤسسه بروکینگز",
       "dir_name": "feed-brookings",
       "url": "https://www.brookings.or.us/rss.aspx"
     },
     {
-      "title": "Carnegie",
+      "title": "مؤسسه کارنگی",
       "dir_name": "feed-carnegie",
       "url": "https://carnegieendowment.org/rss"
     },
     {
-      "title": "CSIS",
+      "title": "مرکز مطالعات استراتژیک و بین‌المللی",
       "dir_name": "feed-csis",
       "url": "https://www.csis.org/rss.xml"
     },
     {
-      "title": "Council on Foreign Relations",
-      "dir_name": "feed-cfr",
-      "url": "https://www.cfr.org/rss-feeds"
-    },
-    {
-      "title": "Chatham House",
+      "title": "چتم هاوس",
       "dir_name": "feed-chathamhouse",
       "url": "https://www.chathamhouse.org/path/news-releases.xml"
     },
     {
-      "title": "RAND",
-      "dir_name": "feed-rand",
-      "url": "https://www.rand.org/news/rss.html"
-    },
-    {
-      "title": "Atlantic Council",
+      "title": "شورای آتلانتیک",
       "dir_name": "feed-atlanticcouncil",
       "url": "https://www.atlanticcouncil.org/feed/"
     },
     {
-      "title": "feed-Hoover Institution",
+      "title": "مؤسسه هوور",
       "dir_name": "hoover",
       "url": "https://www.hoover.org/rss.xml"
     },
     {
-      "title": "Bellingcat",
+      "title": "بیلینگ‌کت",
       "dir_name": "feed-bellingcat",
       "url": "https://www.bellingcat.com/feed/"
     }
