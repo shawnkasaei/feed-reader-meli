@@ -12,7 +12,28 @@ class TimeUtils:
         return datetime.now(TEHRAN)
 
     @staticmethod
-    def to_tehran(dt: datetime) -> str:
+    def _normalize(dt):
+        if dt is None:
+            return TimeUtils.now()
+
+        if isinstance(dt, str):
+            try:
+                dt = datetime.strptime(dt, "%a, %d %b %Y %H:%M:%S +0330")
+                dt = dt.replace(tzinfo=TEHRAN)
+            except:
+                try:
+                    dt = parsedate_to_datetime(dt)
+                except:
+                    return TimeUtils.now()
+
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=UTC)
+
+        return dt
+
+    @staticmethod
+    def to_tehran(dt) -> str:
+        dt = TimeUtils._normalize(dt)
         return dt.astimezone(TEHRAN).strftime(
             "%a, %d %b %Y %H:%M:%S +0330"
         )
@@ -25,36 +46,19 @@ class TimeUtils:
             return TimeUtils.now()
 
     @staticmethod
-    def _normalize(dt):
-        if isinstance(dt, str):
-            try:
-                dt = datetime.strptime(dt, "%a, %d %b %Y %H:%M:%S +0330")
-                dt = dt.replace(tzinfo=TEHRAN)
-            except:
-                dt = parsedate_to_datetime(dt)
-
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=UTC)
-
-        return dt
-
-    @staticmethod
     def relative(dt) -> str:
         now = TimeUtils.now()
-
         dt = TimeUtils._normalize(dt)
-        dt_tehran = dt.astimezone(TEHRAN)
 
-        diff = now - dt_tehran
+        diff = now - dt.astimezone(TEHRAN)
         seconds = int(diff.total_seconds())
 
         if seconds < 60:
             return "چند ثانیه پیش"
-        elif seconds < 3600:
+        if seconds < 3600:
             return f"{seconds // 60} دقیقه پیش"
-        elif seconds < 86400:
+        if seconds < 86400:
             return f"{seconds // 3600} ساعت پیش"
-        elif seconds < 2592000:
+        if seconds < 2592000:
             return f"{seconds // 86400} روز پیش"
-        else:
-            return f"{seconds // 2592000} ماه پیش"
+        return f"{seconds // 2592000} ماه پیش"
