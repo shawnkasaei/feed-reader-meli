@@ -106,15 +106,39 @@ class HTMLBuilder:
 
 <style>
     :root {{
-        --bg: #161617;
-        --panel: rgba(44,44,46,0.72);
-        --card: rgba(44,44,46,0.72);
-        --border: #444444;
+        --bg: #161618;
+        --panel: #333335;
+        --card: #333335;
+        --border: #333335;
         --text: #FFFFFF;
-        --muted: #BF5AF2;
+        --muted: #818183;
 
         font-size: 16px;
     }}
+
+    @font-face {
+        font-family: Ravi;
+        font-style: normal;
+        font-weight: normal;
+        src: url('assets/fonts/woff/Ravi-Regular.woff') format('woff'),   
+        url('assets/fonts/woff2/Ravi-Regular.woff2') format('woff2');		 
+    }
+
+    @font-face {
+        font-family: Ravi;
+        font-style: normal;
+        font-weight: bold;
+        src: url('assets/fonts/woff/Ravi-Bold.woff') format('woff'),   
+        url('assets/fonts/woff2/Ravi-Bold.woff2') format('woff2'); 
+    }
+
+    @font-face {
+        font-family: Ravi;
+        font-style: normal;
+        font-weight: 950;
+        src: url('assets/fonts/woff/Ravi-ExtraBlack.woff') format('woff'),   
+        url('assets/fonts/woff2/Ravi-ExtraBlack.woff2') format('woff2');		 
+    }
 
     * {{
         margin: 0;
@@ -123,7 +147,7 @@ class HTMLBuilder:
     }}
 
     body {{
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: "Ravi", sans-serif;
         background: var(--bg);
         color: var(--text);
         padding: 0.75rem;
