@@ -31,7 +31,7 @@ class Parser:
             try:
                 dt = TimeUtils.parse_telegram(time.group(1))
 
-                items.append(
+                items.insert(0,
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", text.group(1)).strip(),
                         date=TimeUtils.to_string(dt)
@@ -41,7 +41,7 @@ class Parser:
             except:
                 continue
 
-        return items.reverse()
+        return items
 
     def parse_rss(self, xml: str):
         items = []
