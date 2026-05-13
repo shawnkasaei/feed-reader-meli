@@ -11,6 +11,8 @@ class HTMLBuilder:
 
         for f in feeds:
             for item in f:
+                print(item)
+
                 anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
 
                 dt = TimeUtils.to_tehran(item.date)
