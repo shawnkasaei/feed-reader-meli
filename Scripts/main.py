@@ -100,17 +100,6 @@ class App:
             time.sleep(1)
 
         # ---------- BUILD UI ----------
-        feeds.sort(
-            key=lambda f: max(
-                (
-                    datetime.strptime(i.date, "%Y-%m-%d %H:%M:%S")
-                    for i in f["items"]
-                ),
-                default=datetime.min
-            ),
-            reverse=True
-        )
-
         html = self.html_builder.build(feeds)
 
         self.storage.save_html(html)
