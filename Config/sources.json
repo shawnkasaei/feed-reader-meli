@@ -33,7 +33,7 @@
     {
       "title": "صدای آمریکا",
       "dir_name": "voapersian",
-      "url": "https://t.me/s/voafarsi"
+      "url": "https://t.me/s/farsivoa"
     },
     {
       "title": "وحید آنلاین",
@@ -83,44 +83,9 @@
       "url": "https://fa.euronews.com/rss"
     },
     {
-      "title": "ایران وایر",
-      "dir_name": "iranwire",
-      "url": "https://iranwire.com/fa/rss/"
-    },
-    {
-      "title": "گویا نیوز",
-      "dir_name": "gooya",
-      "url": "https://news.gooya.com/feed.xml"
-    },
-    {
       "title": "هکر نیوز",
-      "dir_name": "hackernews",
-      "url": "https://hnrss.org/frontpage"
-    },
-    {
-      "title": "تک‌کرانچ",
-      "dir_name": "techcrunch",
-      "url": "https://techcrunch.com/feed/"
-    },
-    {
-      "title": "ورج",
-      "dir_name": "theverge",
-      "url": "https://www.theverge.com/rss/index.xml"
-    },
-    {
-      "title": "آرس تکنیکا",
-      "dir_name": "arstechnica",
-      "url": "https://feeds.arstechnica.com/arstechnica/index"
-    },
-    {
-      "title": "وایرد",
-      "dir_name": "wired",
-      "url": "https://www.wired.com/feed/rss"
-    },
-    {
-      "title": "بلومبرگ تکنولوژی",
-      "dir_name": "bloombergtech",
-      "url": "https://feeds.bloomberg.com/technology/news.rss"
+      "dir_name": "ycombinator",
+      "url": "https://news.ycombinator.com/rss"
     },
     {
       "title": "رویترز جهان",
@@ -128,14 +93,19 @@
       "url": "https://feeds.reuters.com/Reuters/worldNews"
     },
     {
-      "title": "رویترز فناوری",
-      "dir_name": "reuterstech",
-      "url": "https://feeds.reuters.com/reuters/technologyNews"
+      "title": "اسوشیتد پرس سیاسی",
+      "dir_name": "apnews",
+      "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/politics.xml"
     },
     {
-      "title": "اسوشیتد پرس",
+      "title": "اسوشیتد پرس آمریکا",
       "dir_name": "apnews",
-      "url": "https://apnews.com/rss"
+      "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/us-news.xml"
+    },
+    {
+      "title": "اسوشیتد پرس جهان",
+      "dir_name": "apnews",
+      "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/world-news.xml"
     },
     {
       "title": "نیویورک تایمز جهان",
@@ -165,7 +135,7 @@
     {
       "title": "Brookings",
       "dir_name": "brookings",
-      "url": "https://www.brookings.edu/feed/"
+      "url": "https://www.brookings.or.us/rss.aspx"
     },
     {
       "title": "Carnegie",
@@ -180,27 +150,22 @@
     {
       "title": "Council on Foreign Relations",
       "dir_name": "cfr",
-      "url": "https://www.cfr.org/rss.xml"
+      "url": "https://www.cfr.org/rss-feeds"
     },
     {
       "title": "Chatham House",
       "dir_name": "chathamhouse",
-      "url": "https://www.chathamhouse.org/rss.xml"
+      "url": "https://www.chathamhouse.org/path/news-releases.xml"
     },
     {
       "title": "RAND",
       "dir_name": "rand",
-      "url": "https://www.rand.org/topics.rss"
+      "url": "https://www.rand.org/news/rss.html"
     },
     {
       "title": "Atlantic Council",
       "dir_name": "atlanticcouncil",
       "url": "https://www.atlanticcouncil.org/feed/"
-    },
-    {
-      "title": "Wilson Center",
-      "dir_name": "wilsoncenter",
-      "url": "https://www.wilsoncenter.org/rss.xml"
     },
     {
       "title": "Hoover Institution",
