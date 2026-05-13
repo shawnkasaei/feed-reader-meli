@@ -58,21 +58,6 @@
       "url": "https://www.iranintl.com/feed"
     },
     {
-      "title": "بی‌بی‌سی فارسی",
-      "dir_name": "feed-bbcpersian",
-      "url": "https://feeds.bbci.co.uk/persian/rss.xml"
-    },
-    {
-      "title": "رادیو فردا",
-      "dir_name": "feed-radiofarda",
-      "url": "https://www.radiofarda.com/api/zrqiteuuir"
-    },
-    {
-      "title": "دویچه وله فارسی",
-      "dir_name": "feed-dwfarsi",
-      "url": "https://rss.dw.com/xml/rss-pers-all"
-    },
-    {
       "title": "ایندیپندنت فارسی",
       "dir_name": "feed-indypersian",
       "url": "https://www.independentpersian.com/rss.xml"
@@ -86,21 +71,6 @@
       "title": "هکر نیوز",
       "dir_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
-    },
-    {
-      "title": "اسوشیتد پرس سیاسی",
-      "dir_name": "feed-apnewspolitics",
-      "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/politics.xml"
-    },
-    {
-      "title": "اسوشیتد پرس آمریکا",
-      "dir_name": "feed-apnewsus",
-      "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/us-news.xml"
-    },
-    {
-      "title": "اسوشیتد پرس جهان",
-      "dir_name": "feed-apnewsworld",
-      "url": "http://associated-press.s3-website-us-east-1.amazonaws.com/world-news.xml"
     },
     {
       "title": "نیویورک تایمز جهان",
@@ -123,16 +93,6 @@
       "url": "https://foreignpolicy.com/feed/"
     },
     {
-      "title": "مؤسسه بروکینگز",
-      "dir_name": "feed-brookings",
-      "url": "https://www.brookings.or.us/rss.aspx"
-    },
-    {
-      "title": "مؤسسه کارنگی",
-      "dir_name": "feed-carnegie",
-      "url": "https://carnegieendowment.org/rss"
-    },
-    {
       "title": "مرکز مطالعات استراتژیک و بین‌المللی",
       "dir_name": "feed-csis",
       "url": "https://www.csis.org/rss.xml"
@@ -149,7 +109,7 @@
     },
     {
       "title": "مؤسسه هوور",
-      "dir_name": "hoover",
+      "dir_name": "feed-hoover",
       "url": "https://www.hoover.org/rss.xml"
     },
     {
