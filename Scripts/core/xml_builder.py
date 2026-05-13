@@ -20,8 +20,7 @@ class XMLBuilder:
 
         for item in items:
 
-            d_str = TimeUtils.to_string(item.date)
-            anchor_id = f"{TextIDGenerator.generate(d_str+item.title)}"
+            anchor_id = f"{TextIDGenerator.generate(item.date+item.title)}"
 
             node = ET.SubElement(channel, "item")
 
