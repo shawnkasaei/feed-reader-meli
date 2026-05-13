@@ -1,4 +1,5 @@
 import json
+import time
 from pathlib import Path
 
 from core.fetcher import Fetcher
@@ -63,6 +64,8 @@ class App:
                 print(f"❌ Telegram error -> {source['title']}")
                 print(e)
 
+            time.sleep(1)
+
         # ---------- RSS ----------
         for source in self.config.get("rss", []):
 
@@ -92,6 +95,8 @@ class App:
             except Exception as e:
                 print(f"❌ RSS error -> {source['title']}")
                 print(e)
+
+            time.sleep(1)
 
         # ---------- BUILD UI ----------
         html = self.html_builder.build(feeds)
