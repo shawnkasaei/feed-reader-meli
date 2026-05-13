@@ -101,7 +101,10 @@ class App:
 
         # ---------- BUILD UI ----------
         feeds.sort(
-            key=lambda f: max((item.date for item in f["items"]), default=datetime.min),
+            key=lambda f: max(
+                datetime.strptime(item.date, "%Y-%m-%d %H:%M:%S")
+                for item in f["items"]
+            ),
             reverse=True
         )
 
