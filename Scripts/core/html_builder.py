@@ -95,14 +95,17 @@ class HTMLBuilder:
 </div>
 """)
 
-        return f"""
+       return f"""
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>News Feed</title>
+
 <style>
-    :root {
+    :root {{
         --bg: #161617;
         --panel: rgba(44,44,46,0.72);
         --card: rgba(44,44,46,0.72);
@@ -111,126 +114,91 @@ class HTMLBuilder:
         --muted: #BF5AF2;
 
         font-size: 16px;
-    }
+    }}
 
-    * {
+    * {{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    }
+    }}
 
-    body {
+    body {{
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
         background: var(--bg);
         color: var(--text);
-
         padding: 0.75rem;
-    }
+    }}
 
-    .container {
+    .container {{
         width: 100%;
-    }
+    }}
 
-    .header {
+    .header {{
         width: 100%;
-
         background: var(--panel);
-
         border: 1px solid var(--border);
         border-radius: 1rem;
-
         padding: 1rem;
-
         margin-bottom: 0.75rem;
-    }
+    }}
 
-    .header h1 {
+    .header h1 {{
         font-size: 1.15rem;
         font-weight: 700;
         line-height: 1.4;
-    }
+    }}
 
-    .header .meta {
+    .header .meta {{
         margin-top: 0.35rem;
-
         font-size: 0.75rem;
-
         color: var(--muted);
-    }
+    }}
 
-    .grid {
+    .grid {{
         display: grid;
-
         grid-template-columns: 1fr !important;
-
         gap: 0.75rem;
-    }
+    }}
 
-    @media (min-width: 700px) {
-        .grid {
+    @media (min-width: 700px) {{
+        .grid {{
             grid-template-columns: repeat(2, 1fr) !important;
-        }
-    }
+        }}
+    }}
 
-    @media (min-width: 900px) {
-        .grid {
+    @media (min-width: 900px) {{
+        .grid {{
             grid-template-columns: repeat(3, 1fr) !important;
-        }
-    }
+        }}
+    }}
 
-    .card {
+    .card {{
         background: var(--card);
-
         border: 1px solid var(--border);
         border-radius: 0.9rem;
-
         padding: 0.9rem;
-
         overflow: hidden;
         min-width: 0;
-    }
+    }}
 
-    .meta {
+    .meta {{
         display: flex;
-
         justify-content: space-between;
         align-items: center;
-
         gap: 0.5rem;
-
         margin-bottom: 0.5rem;
-
         font-size: 0.75rem;
-
         color: var(--muted);
-    }
+    }}
 
-    .title {
+    .title {{
         font-size: 0.85rem;
-
         font-weight: 700;
-
         line-height: 1.7;
-
         word-break: break-word;
         overflow-wrap: anywhere;
-    }
-
-    /* .content {
-        margin-top: 0.45rem;
-
-        font-size: 0.82rem;
-
-        line-height: 1.8;
-
-        color: rgba(255,255,255,0.72);
-
-        word-break: break-word;
-        overflow-wrap: anywhere;
-    } */
+    }}
 </style>
-<title>News Feed</title>
 </head>
 
 <body>
