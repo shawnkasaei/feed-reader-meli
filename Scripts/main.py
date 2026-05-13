@@ -71,7 +71,7 @@ class App:
 
             try:
                 xml = self.fetcher.get(source["url"])
-                items = self.parser.parse_rss(xml)
+                items = self.parser.prse_rss(xml)
 
                 xml_data = self.xml_builder.build(
                     items,

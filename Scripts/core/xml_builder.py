@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-
+from core.TextIDGenerator import TextIDGenerator
 
 class XMLBuilder:
 
@@ -17,15 +17,14 @@ class XMLBuilder:
             "refs/heads/main/Feeds/view/index.html"
         )
 
-        for i, item in enumerate(items, 1):
+        for item in items:
 
-            anchor_id = f"{feed_name}-{i}"
+            anchor_id = f"{TextIDGenerator.generate(item.date+item.title)}"
 
             node = ET.SubElement(channel, "item")
 
             ET.SubElement(node, "title").text = item.title
             ET.SubElement(node, "pubDate").text = item.date
-
             ET.SubElement(node, "link").text = (
                 f"{base_url}#{anchor_id}"
             )
