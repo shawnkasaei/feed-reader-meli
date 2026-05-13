@@ -18,7 +18,7 @@ class TimeUtils:
 
         if isinstance(dt, str):
             try:
-                dt = datetime.strptime(dt, "%a, %d %b %Y %H:%M:%S +0330")
+                dt = datetime.strptime(dt, "%a, %d %b %Y %H:%M:%S")
                 dt = dt.replace(tzinfo=TEHRAN)
             except:
                 try:
@@ -35,7 +35,7 @@ class TimeUtils:
     def to_tehran(dt) -> str:
         dt = TimeUtils._normalize(dt)
         return dt.astimezone(TEHRAN).strftime(
-            "%a, %d %b %Y %H:%M:%S +0330"
+            "%a, %d %b %Y %H:%M:%S"
         )
 
     @staticmethod
