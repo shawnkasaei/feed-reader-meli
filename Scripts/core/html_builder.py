@@ -7,7 +7,7 @@ class HTMLBuilder:
 
         cards = []
 
-        latest_update = TimeUtils.relative(TimeUtils.now())
+        latest_update = TimeUtils.now()
 
         for f in feeds:
             for item in f["items"]:
