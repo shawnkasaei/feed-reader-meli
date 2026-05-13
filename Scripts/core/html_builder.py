@@ -95,7 +95,7 @@ class HTMLBuilder:
 </div>
 """)
 
-       return f"""
+        return f"""
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
