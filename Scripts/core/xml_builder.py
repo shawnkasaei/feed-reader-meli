@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
 
 class XMLBuilder:
@@ -19,7 +20,8 @@ class XMLBuilder:
 
         for item in items:
 
-            anchor_id = f"{TextIDGenerator.generate(item.date+item.title)}"
+            d_str = TimeUtils.to_string(item.date)
+            anchor_id = f"{TextIDGenerator.generate(d_str+item.title)}"
 
             node = ET.SubElement(channel, "item")
 
