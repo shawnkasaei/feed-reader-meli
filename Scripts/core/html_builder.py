@@ -116,29 +116,29 @@ class HTMLBuilder:
         font-size: 16px;
     }}
 
-    @font-face {
+    @font-face {{
         font-family: Ravi;
         font-style: normal;
         font-weight: normal;
-        src: url('assets/fonts/woff/Ravi-Regular.woff') format('woff'),   
-        url('assets/fonts/woff2/Ravi-Regular.woff2') format('woff2');		 
-    }
+        src: url('assets/fonts/woff/Ravi-Regular.woff') format('woff'),
+             url('assets/fonts/woff2/Ravi-Regular.woff2') format('woff2');
+    }}
 
-    @font-face {
+    @font-face {{
         font-family: Ravi;
         font-style: normal;
         font-weight: bold;
-        src: url('assets/fonts/woff/Ravi-Bold.woff') format('woff'),   
-        url('assets/fonts/woff2/Ravi-Bold.woff2') format('woff2'); 
-    }
+        src: url('assets/fonts/woff/Ravi-Bold.woff') format('woff'),
+             url('assets/fonts/woff2/Ravi-Bold.woff2') format('woff2');
+    }}
 
-    @font-face {
+    @font-face {{
         font-family: Ravi;
         font-style: normal;
         font-weight: 950;
-        src: url('assets/fonts/woff/Ravi-ExtraBlack.woff') format('woff'),   
-        url('assets/fonts/woff2/Ravi-ExtraBlack.woff2') format('woff2');		 
-    }
+        src: url('assets/fonts/woff/Ravi-ExtraBlack.woff') format('woff'),
+             url('assets/fonts/woff2/Ravi-ExtraBlack.woff2') format('woff2');
+    }}
 
     * {{
         margin: 0;
