@@ -63,11 +63,6 @@
       "url": "https://www.independentpersian.com/rss.xml"
     },
     {
-      "title": "یورونیوز فارسی",
-      "dir_name": "feed-euronews",
-      "url": "https://fa.euronews.com/rss"
-    },
-    {
       "title": "هکر نیوز",
       "dir_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
