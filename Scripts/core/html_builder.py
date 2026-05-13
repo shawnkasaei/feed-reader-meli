@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
 
@@ -6,6 +8,14 @@ class HTMLBuilder:
     def build(self, feeds):
 
         cards = []
+
+        feeds.sort(
+            key=lambda f: max(
+                (datetime.strptime(i.date, "%a, %d %b %Y %H:%M:%S") for i in f["items"]),
+                default=datetime.min
+            ),
+            reverse=True
+        )
 
         latest_update = TimeUtils.now()
 
