@@ -1,277 +1,127 @@
-from collections import defaultdict
-from datetime import datetime
-from pathlib import Path
+from datetime import datetime, timedelta, timezone
 
-BASE = Path(__file__).resolve().parents[2]
-VIEW_PATH = BASE / "Feeds" / "view"
-STYLE_PATH = VIEW_PATH / "style.css"
-OUTPUT_PATH = VIEW_PATH / "index.html"
+TEHRAN = timezone(timedelta(hours=3, minutes=30))
+UTC = timezone.utc
 
 
 class HTMLBuilder:
 
-    def __init__(self, items):
-        self.items = items
+    def to_tehran(self, date_str):
+        date_str = date_str.strip()
 
-    def build(self):
-        grouped = defaultdict(list)
+        try:
+            # حالت 1: GMT (RFC-like)
+            if "GMT" in date_str or "+0000" in date_str:
+                dt = datetime.strptime(
+                    date_str.replace("GMT", "").strip(),
+                    "%a, %d %b %Y %H:%M:%S"
+                )
 
-        for item in self.items:
-            grouped[item.source].append(item)
+                return dt.replace(tzinfo=UTC).astimezone(TEHRAN)
 
-        style = STYLE_PATH.read_text(encoding="utf-8")
+            # حالت 2: فرمت RSS با +0330 (از قبل Tehran time)
+            if "+0330" in date_str:
+                cleaned = date_str.replace("+0330", "").strip()
 
-        latest_html = self.render_latest_section(self.items[:20])
+                dt = datetime.strptime(
+                    cleaned,
+                    "%a, %d %b %Y %H:%M:%S"
+                )
 
-        sections_html = ""
+                return dt.replace(tzinfo=TEHRAN)
 
-        for source, source_items in grouped.items():
-            sections_html += self.render_section(source, source_items)
+            # حالت 3: فرمت ساده "YYYY-MM-DD HH:MM +0330"
+            match = None
+            if "+0330" in date_str:
+                parts = date_str.split("+")[0].strip()
+                dt = datetime.strptime(parts, "%Y-%m-%d %H:%M")
+                return dt.replace(tzinfo=TEHRAN)
 
-        html = f"""
+            # حالت 4: fallback استاندارد
+            dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            return dt.replace(tzinfo=TEHRAN)
+
+        except Exception:
+            return datetime.now(TEHRAN)
+
+    def relative(self, dt):
+        now = datetime.now(TEHRAN)
+
+        # safety: جلوگیری از naive/aware mismatch
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=TEHRAN)
+
+        diff = now - dt
+
+        minutes = int(diff.total_seconds() / 60)
+        hours = int(minutes / 60)
+        days = int(hours / 24)
+
+        if minutes < 1:
+            return "لحظاتی پیش"
+        if minutes < 60:
+            return f"{minutes} دقیقه پیش"
+        if hours < 24:
+            return f"{hours} ساعت پیش"
+        return f"{days} روز پیش"
+
+    def build(self, feeds):
+
+        cards = []
+
+        latest_update = datetime.now(TEHRAN).strftime("%Y-%m-%d %H:%M")
+
+        for f in feeds:
+            for i, item in enumerate(f["items"], 1):
+
+                anchor = f"{f['file']}-{i}"
+
+                dt = self.to_tehran(item.date)
+                relative = self.relative(dt)
+                tehran_time = dt.strftime("%Y-%m-%d %H:%M")
+
+                cards.append(f"""
+<div class="card" id="{anchor}">
+
+    <div class="meta">
+        <span>{f['source']}</span>
+        <span>{relative}</span>
+    </div>
+
+    <div class="title">
+        {item.title}
+    </div>
+
+</div>
+""")
+
+        return f"""
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News Reader</title>
-<style>
-{style}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>News Feed</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app">
+<div class="container">
 
-<header class="header glass">
-    <div>
-        <h1>خبرخوان</h1>
-        <div class="header-meta">
-            بروزرسانی: {datetime.now().strftime('%Y-%m-%d %H:%M')}
+    <div class="header">
+        <h1>آخرین خبرها</h1>
+        <div class="meta">
+            آخرین بروزرسانی: {latest_update}
         </div>
     </div>
 
-    <div class="header-actions">
-        <input type="text" id="searchInput" placeholder="جستجو در خبرها...">
+    <div class="grid">
+        {''.join(cards)}
     </div>
-</header>
-
-<div class="filter-bar" id="filterBar"></div>
-
-{latest_html}
-
-{sections_html}
 
 </div>
-
-<div id="modal" class="modal hidden">
-    <div class="modal-overlay" id="modalOverlay"></div>
-
-    <div class="modal-content glass">
-
-        <button class="close-btn" id="closeModal">×</button>
-
-        <div class="modal-source" id="modalSource"></div>
-
-        <h2 id="modalTitle"></h2>
-
-        <div class="modal-body" id="modalBody"></div>
-
-    </div>
-</div>
-
-<script>
-const cards = document.querySelectorAll('.card')
-const modal = document.getElementById('modal')
-const modalTitle = document.getElementById('modalTitle')
-const modalBody = document.getElementById('modalBody')
-const modalSource = document.getElementById('modalSource')
-const closeModal = document.getElementById('closeModal')
-const modalOverlay = document.getElementById('modalOverlay')
-const searchInput = document.getElementById('searchInput')
-const filterBar = document.getElementById('filterBar')
-
-const sources = [...new Set([...cards].map(card => card.dataset.source))]
-
-let activeFilter = 'all'
-
-function renderFilters() {{
-    filterBar.innerHTML = ''
-
-    const allBtn = document.createElement('button')
-    allBtn.textContent = 'همه'
-    allBtn.className = 'filter-btn active'
-    allBtn.dataset.filter = 'all'
-    filterBar.appendChild(allBtn)
-
-    sources.forEach(source => {{
-        const btn = document.createElement('button')
-        btn.textContent = source
-        btn.className = 'filter-btn'
-        btn.dataset.filter = source
-        filterBar.appendChild(btn)
-    }})
-
-    attachFilterEvents()
-}}
-
-function attachFilterEvents() {{
-    document.querySelectorAll('.filter-btn').forEach(btn => {{
-
-        btn.addEventListener('click', () => {{
-
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
-            btn.classList.add('active')
-
-            activeFilter = btn.dataset.filter
-
-            applyFilters()
-        }})
-    }})
-}}
-
-function applyFilters() {{
-
-    const query = searchInput.value.toLowerCase().trim()
-
-    cards.forEach(card => {{
-
-        const text = card.innerText.toLowerCase()
-        const source = card.dataset.source
-
-        const searchMatch = text.includes(query)
-        const filterMatch = activeFilter === 'all' || activeFilter === source
-
-        if (searchMatch && filterMatch) {{
-            card.style.display = 'flex'
-        }} else {{
-            card.style.display = 'none'
-        }}
-    }})
-}}
-
-searchInput.addEventListener('input', applyFilters)
-
-cards.forEach(card => {{
-
-    card.addEventListener('click', () => {{
-
-        modalTitle.innerText = card.dataset.title
-        modalBody.innerText = card.dataset.content
-        modalSource.innerText = card.dataset.source
-
-        modal.classList.remove('hidden')
-        document.body.style.overflow = 'hidden'
-    }})
-}})
-
-function closeModalHandler() {{
-    modal.classList.add('hidden')
-    document.body.style.overflow = 'auto'
-}}
-
-closeModal.addEventListener('click', closeModalHandler)
-modalOverlay.addEventListener('click', closeModalHandler)
-
-window.addEventListener('keydown', e => {{
-    if (e.key === 'Escape') {{
-        closeModalHandler()
-    }}
-}})
-
-renderFilters()
-</script>
 
 </body>
 </html>
-        """
-
-        OUTPUT_PATH.write_text(html, encoding="utf-8")
-
-    def render_latest_section(self, items):
-        cards = ''.join(self.render_card(item) for item in items)
-
-        return f"""
-<section class="news-section">
-
-<div class="section-header">
-    <h2>آخرین خبرها</h2>
-</div>
-
-<div class="carousel">
-    {cards}
-</div>
-
-</section>
-        """
-
-    def render_section(self, source, items):
-        cards = ''.join(self.render_card(item) for item in items)
-
-        return f"""
-<section class="news-section source-section">
-
-<div class="section-header">
-    <h2>{source}</h2>
-</div>
-
-<div class="carousel">
-    {cards}
-</div>
-
-</section>
-        """
-
-    def render_card(self, item):
-        preview = item.title[:220]
-
-        tags = self.extract_tags(item.title)
-
-        tags_html = ''.join(
-            f'<span class="tag">{tag}</span>' for tag in tags
-        )
-
-        return f"""
-<article
-class="card glass"
-data-source="{item.source}"
-data-title="{item.title.replace('"', '&quot;')}"
-data-content="{item.title.replace('"', '&quot;')}"
->
-
-<div class="card-top">
-    <span class="source">{item.source}</span>
-    <span class="time">{item.relative_time}</span>
-</div>
-
-<h3 class="title">{item.title}</h3>
-
-<p class="preview">{preview}</p>
-
-<div class="tags">
-    {tags_html}
-</div>
-
-</article>
-        """
-
-    def extract_tags(self, text):
-        tags = []
-
-        keywords = {
-            'ایران': 'ایران',
-            'ترامپ': 'آمریکا',
-            'اسرائیل': 'اسرائیل',
-            'جنگ': 'جنگ',
-            'اینترنت': 'اینترنت',
-            'اقتصاد': 'اقتصاد',
-            'ورزش': 'ورزش',
-            'فوتبال': 'فوتبال',
-            'فناوری': 'فناوری'
-        }
-
-        for key, value in keywords.items():
-            if key in text:
-                tags.append(value)
-
-        return tags[:3]
+"""
