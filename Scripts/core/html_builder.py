@@ -198,6 +198,7 @@ class HTMLBuilder:
         cursor:pointer;
         user-select:none;
         font-size:1.2rem;
+        font-weight:600;
 
         background:rgba(255,255,255,0.02);
         backdrop-filter:blur(10px);
