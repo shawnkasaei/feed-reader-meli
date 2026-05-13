@@ -12,16 +12,13 @@ class HTMLBuilder:
         for f in feeds:
             for item in f["items"]:
                 anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
-
-                dt = TimeUtils.to_tehran(item.date)
-                relative = TimeUtils.relative(dt)
-
+                
                 cards.append(f"""
 <div class="card" id="{anchor}">
 
     <div class="meta">
         <span>{f['source']}</span>
-        <span>{relative}</span>
+        <span>{item.date}</span>
     </div>
 
     <div class="title">
