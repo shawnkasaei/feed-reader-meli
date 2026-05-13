@@ -1,5 +1,4 @@
 import re
-import datetime
 from models.feed_item import FeedItem
 from core.time_utils import TimeUtils
 
@@ -30,12 +29,12 @@ class Parser:
                 continue
 
             try:
-                dt = datetime.datetime.fromisoformat(time.group(1))
+                dt = TimeUtils.parse_telegram(time.group(1))
 
                 items.append(
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", text.group(1)).strip(),
-                        date=TimeUtils.to_tehran(dt)
+                        date=dt
                     )
                 )
 
@@ -61,7 +60,7 @@ class Parser:
                 items.append(
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", t.group(1)).strip(),
-                        date=TimeUtils.to_tehran(dt)
+                        date=dt
                     )
                 )
 

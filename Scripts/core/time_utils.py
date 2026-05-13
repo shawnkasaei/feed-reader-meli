@@ -1,64 +1,33 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 
-TEHRAN = timezone(timedelta(hours=3, minutes=30))
-UTC = timezone.utc
+TEHRAN_TZ = timezone(timedelta(hours=3, minutes=30))
 
 
 class TimeUtils:
 
     @staticmethod
-    def now() -> datetime:
-        return TimeUtils.to_tehran(datetime.now())
+    def parse_telegram(time_str: str) -> datetime:
+        # Example: 2026-05-13T14:47:05+00:00
+        dt = datetime.fromisoformat(time_str)
+        return dt.astimezone(TEHRAN_TZ)
 
     @staticmethod
-    def _normalize(dt):
-        if dt is None:
-            return TimeUtils.now()
+    def parse_rss(time_str: str) -> datetime:
+        # Example: Wed, 13 May 2026 14:37:11 GMT
+        dt = parsedate_to_datetime(time_str)
+        return dt.astimezone(TEHRAN_TZ)
 
-        if isinstance(dt, str):
-            try:
-                dt = datetime.strptime(dt, "%a, %d %b %Y %H:%M:%S")
-                dt = dt.replace(tzinfo=TEHRAN)
-            except:
-                try:
-                    dt = parsedate_to_datetime(dt)
-                except:
-                    return TimeUtils.now()
-
+    @staticmethod
+    def to_tehran(dt: datetime) -> datetime:
         if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=UTC)
-
-        return dt
-
-    @staticmethod
-    def to_tehran(dt) -> str:
-        dt = TimeUtils._normalize(dt)
-        return dt.astimezone(TEHRAN).strftime(
-            "%a, %d %b %Y %H:%M:%S"
-        )
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(TEHRAN_TZ)
 
     @staticmethod
-    def parse_rss(date_str: str):
-        try:
-            return parsedate_to_datetime(date_str)
-        except:
-            return TimeUtils.now()
+    def to_string(dt: datetime, fmt: str = "%Y-%m-%d %H:%M:%S") -> str:
+        return dt.strftime(fmt)
 
     @staticmethod
-    def relative(dt) -> str:
-        now = TimeUtils.now()
-        dt = TimeUtils._normalize(dt)
-
-        diff = now - dt.astimezone(TEHRAN)
-        seconds = int(diff.total_seconds())
-
-        if seconds < 60:
-            return "چند ثانیه پیش"
-        if seconds < 3600:
-            return f"{seconds // 60} دقیقه پیش"
-        if seconds < 86400:
-            return f"{seconds // 3600} ساعت پیش"
-        if seconds < 2592000:
-            return f"{seconds // 86400} روز پیش"
-        return f"{seconds // 2592000} ماه پیش"
+    def now() -> datetime:
+        return datetime.now(TEHRAN_TZ)

@@ -10,14 +10,11 @@ class HTMLBuilder:
         cards = []
 
         feeds.sort(
-            key=lambda f: max(
-                (datetime.strptime(i.date, "%a, %d %b %Y %H:%M:%S") for i in f["items"]),
-                default=datetime.min
-            ),
+            key=lambda f: max(i.date for i in f["items"], default=datetime.min.replace(tzinfo=timezone.utc)),
             reverse=True
         )
 
-        latest_update = TimeUtils.now()
+        latest_update = TimeUtils.to_string(TimeUtils.now())
 
         for f in feeds:
             for item in f["items"]:
