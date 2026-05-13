@@ -9,7 +9,7 @@ class TimeUtils:
 
     @staticmethod
     def now() -> datetime:
-        return datetime.now(TEHRAN)
+        return TimeUtils.to_tehran(datetime.now())
 
     @staticmethod
     def _normalize(dt):

@@ -12,7 +12,7 @@ class HTMLBuilder:
         for f in feeds:
             for item in f["items"]:
                 anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
-                
+
                 cards.append(f"""
 <div class="card" id="{anchor}">
 
@@ -100,7 +100,7 @@ class HTMLBuilder:
     }}
 
     .header h1 {{
-        font-size: 1.15rem;
+        font-size: 1.35rem;
         font-weight: 700;
         line-height: 1.4;
     }}
