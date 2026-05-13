@@ -1,5 +1,5 @@
-import core.time_utils as time_utils
-from core.TextIDGenerator import TextIDGenerator
+from core.time_utils import TimeUtils
+from core.text_id_generator import TextIDGenerator
 
 
 class HTMLBuilder:
@@ -7,14 +7,14 @@ class HTMLBuilder:
 
         cards = []
 
-        latest_update = time_utils.relative(time_utils.now())
+        latest_update = TimeUtils.relative(TimeUtils.now())
 
         for f in feeds:
             for item in f:
                 anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
 
-                dt = time_utils.to_tehran(item.date)
-                relative = time_utils.relative(dt)
+                dt = TimeUtils.to_tehran(item.date)
+                relative = TimeUtils.relative(dt)
 
                 cards.append(f"""
 <div class="card" id="{anchor}">

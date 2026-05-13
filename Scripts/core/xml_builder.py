@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from core.TextIDGenerator import TextIDGenerator
+from core.text_id_generator import TextIDGenerator
 
 class XMLBuilder:
 
