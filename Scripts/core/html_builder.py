@@ -178,7 +178,7 @@ class HTMLBuilder:
 <div onclick="window.scrollTo({{top:0, behavior:'smooth'}})" style="
         position:fixed;
         bottom:20px;
-        left:20px;
+        right:20px;
         width:55px;
         height:55px;
         border-radius:50%;
