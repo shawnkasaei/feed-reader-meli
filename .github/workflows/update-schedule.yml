@@ -5,6 +5,7 @@ permissions:
 
 on:
   workflow_dispatch: {}
+  push: {}
   schedule:
     - cron: "0 * * * *"
       timezone: "Asia/Tehran"
