@@ -1,64 +1,54 @@
 {
   "telegram": [
     {
-      "title": "ایران اینترنشنال",
+      "title": "تلگرام | ایران اینترنشنال",
       "dir_name": "tgm-iranintl",
       "url": "https://t.me/s/iranintltv"
     },
     {
-      "title": "منوتو",
-      "dir_name": "tgm-manoto",
-      "url": "https://t.me/s/manototv"
-    },
-    {
-      "title": "بی‌بی‌سی فارسی",
-      "dir_name": "tgm-bbcpersian",
-      "url": "https://t.me/s/bbcpersian"
-    },
-    {
-      "title": "رادیو فردا",
-      "dir_name": "tgm-radiofarda",
-      "url": "https://t.me/s/radiofarda"
-    },
-    {
-      "title": "دویچه وله فارسی",
-      "dir_name": "tgm-dwfarsi",
-      "url": "https://t.me/s/dw_farsi"
-    },
-    {
-      "title": "ایندیپندنت فارسی",
-      "dir_name": "tgm-indypersian",
-      "url": "https://t.me/s/indypersian"
-    },
-    {
-      "title": "صدای آمریکا",
-      "dir_name": "tgm-voapersian",
-      "url": "https://t.me/s/farsivoa"
-    },
-    {
-      "title": "وحید آنلاین",
-      "dir_name": "tgm-vahidonline",
-      "url": "https://t.me/s/VahidOnline"
-    },
-    {
-      "title": "ضد تی وی",
+      "title": "تلگرام | ضد تی وی",
       "dir_name": "tgm-ztv",
       "url": "https://t.me/s/ZTVofficial"
     },
     {
-      "title": "مطهرنیا",
+      "title": "تلگرام | مهدی مطهرنیا",
       "dir_name": "tgm-motaharnia",
       "url": "https://t.me/s/MehdiMotaharnia1344"
+    },
+    {
+      "title": "تلگرام | منوتو",
+      "dir_name": "tgm-manoto",
+      "url": "https://t.me/s/manototv"
+    },
+    {
+      "title": "تلگرام | بی‌بی‌سی فارسی",
+      "dir_name": "tgm-bbcpersian",
+      "url": "https://t.me/s/bbcpersian"
+    },
+    {
+      "title": "تلگرام | رادیو فردا",
+      "dir_name": "tgm-radiofarda",
+      "url": "https://t.me/s/radiofarda"
+    },
+    {
+      "title": "تلگرام | صدای آمریکا",
+      "dir_name": "tgm-voapersian",
+      "url": "https://t.me/s/farsivoa"
+    },
+    {
+      "title": "تلگرام | وحید آنلاین",
+      "dir_name": "tgm-vahidonline",
+      "url": "https://t.me/s/VahidOnline"
     }
   ],
   "rss": [
     {
-      "title": "ایران اینترنشنال",
+      "title": "فید | ایران اینترنشنال",
       "dir_name": "feed-iranintl",
       "url": "https://www.iranintl.com/feed"
     },
     {
-      "title": "هکر نیوز",
+      "title": "فید | هکر نیوز",
       "dir_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
     }

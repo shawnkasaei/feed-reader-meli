@@ -52,6 +52,30 @@ class HTMLBuilder:
 <title>News Feed</title>
 
 <style>
+    @font-face {{
+          font-family: Ravi;
+          font-style: normal;
+          font-weight: normal;
+          src: url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff/Ravi-Regular.woff') format('woff'),
+               url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff2/Ravi-Regular.woff2') format('woff2');
+      }}
+
+      @font-face {{
+          font-family: Ravi;
+          font-style: normal;
+          font-weight: bold;
+          src: url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff/Ravi-Bold.woff') format('woff'),
+               url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff2/Ravi-Bold.woff2') format('woff2');
+      }}
+
+      @font-face {{
+          font-family: Ravi;
+          font-style: normal;
+          font-weight: 950;
+          src: url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff/Ravi-ExtraBlack.woff') format('woff'),
+               url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff2/Ravi-ExtraBlack.woff2') format('woff2');
+      }}
+    
     :root {{
         --bg: #161618;
         --panel: #333335;
