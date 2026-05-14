@@ -5,24 +5,52 @@ from core.text_id_generator import TextIDGenerator
 class HTMLBuilder:
     def build(self, feeds):
 
-        cards = []
-
         latest_update = TimeUtils.to_string(TimeUtils.now())
+        carousels = []
 
-        for f in feeds:
-            for item in f["items"]:
-                anchor = f"{TextIDGenerator.generate(item.date+item.title)}"
+        for idx, f in enumerate(feeds):
 
-                cards.append(f"""
-<div class="card" id="{anchor}">
+            carousel_id = f"carousel_{idx}"
+            dots_id = f"dots_{idx}"
 
-    <div class="meta">
-        <span>{f['source']}</span>
-        <span>{item.date}</span>
+            items_html = []
+            dots_html = []
+
+            items = f["items"]
+
+            for i, item in enumerate(items):
+                anchor = TextIDGenerator.generate(item.date + item.title)
+
+                items_html.append(f"""
+<div class="card" data-index="{i}" id="{anchor}">
+    <div class="meta">{item.date}</div>
+    <div class="title">{item.title}</div>
+</div>
+""")
+
+                dots_html.append(f"""
+<span class="dot" onclick="goToSlide('{carousel_id}', {i})"></span>
+""")
+
+            carousels.append(f"""
+<div class="carousel-section">
+
+    <div class="carousel-header">{f['source']}</div>
+
+    <div class="carousel-wrapper">
+
+        <button class="nav left" onclick="scrollStep('{carousel_id}', -1)">‹</button>
+
+        <div class="carousel" id="{carousel_id}">
+            {''.join(items_html)}
+        </div>
+
+        <button class="nav right" onclick="scrollStep('{carousel_id}', 1)">›</button>
+
     </div>
 
-    <div class="title">
-        {item.title}
+    <div class="dots" id="{dots_id}">
+        {''.join(dots_html)}
     </div>
 
 </div>
@@ -33,171 +61,212 @@ class HTMLBuilder:
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>News Feed</title>
 
 <style>
-    :root {{
-        --bg: #161618;
-        --panel: #333335;
-        --card: #333335;
-        --border: #333335;
-        --text: #FFFFFF;
-        --muted: #818183;
+:root {{
+    --bg:#161618;
+    --card:#2a2a2c;
+    --text:#fff;
+    --muted:#888;
+}}
 
-        font-size: 16px;
-    }}
+body {{
+    margin:0;
+    padding:0.75rem;
+    font-family:Ravi,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}}
 
-    @font-face {{
-        font-family: Ravi;
-        font-style: normal;
-        font-weight: normal;
-        src: url('assets/fonts/woff/Ravi-Regular.woff') format('woff'),
-             url('assets/fonts/woff2/Ravi-Regular.woff2') format('woff2');
-    }}
+.header {{
+    padding:1rem;
+    background:#222;
+    border-radius:1rem;
+    margin-bottom:1rem;
+}}
 
-    @font-face {{
-        font-family: Ravi;
-        font-style: normal;
-        font-weight: bold;
-        src: url('assets/fonts/woff/Ravi-Bold.woff') format('woff'),
-             url('assets/fonts/woff2/Ravi-Bold.woff2') format('woff2');
-    }}
+.carousel-section {{
+    margin-bottom:1.5rem;
+}}
 
-    @font-face {{
-        font-family: Ravi;
-        font-style: normal;
-        font-weight: 950;
-        src: url('assets/fonts/woff/Ravi-ExtraBlack.woff') format('woff'),
-             url('assets/fonts/woff2/Ravi-ExtraBlack.woff2') format('woff2');
-    }}
+.carousel-header {{
+    font-weight:700;
+    margin-bottom:0.5rem;
+}}
 
-    * {{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }}
+.carousel-wrapper {{
+    position:relative;
+}}
 
-    body {{
-        font-family: "Ravi", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        padding: 0.75rem;
-    }}
+.carousel {{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    gap:0.75rem;
+    padding:0.2rem;
+}}
 
-    .container {{
-        width: 100%;
-    }}
+.carousel::-webkit-scrollbar {{
+    display:none;
+}}
 
-    .header {{
-        width: 100%;
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 1rem;
-        padding: 1rem;
-        margin-bottom: 0.75rem;
-    }}
+.card {{
+    flex:0 0 100%;
+    scroll-snap-align:center;
+    background:var(--card);
+    border-radius:0.9rem;
+    padding:1rem;
+}}
 
-    .header h1 {{
-        font-size: 1.35rem;
-        font-weight: 700;
-        line-height: 1.4;
-    }}
+.meta {{
+    font-size:0.75rem;
+    color:var(--muted);
+    margin-bottom:0.5rem;
+}}
 
-    .header .meta {{
-        margin-top: 0.35rem;
-        font-size: 0.75rem;
-        color: var(--muted);
-    }}
+.title {{
+    font-size:0.9rem;
+    font-weight:700;
+    line-height:1.6;
+}}
 
-    .grid {{
-        display: grid;
-        grid-template-columns: 1fr !important;
-        gap: 0.75rem;
-    }}
+.nav {{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    cursor:pointer;
+    z-index:10;
+}}
 
-    @media (min-width: 700px) {{
-        .grid {{
-            grid-template-columns: repeat(2, 1fr) !important;
-        }}
-    }}
+.nav.left {{ left:5px; }}
+.nav.right {{ right:5px; }}
 
-    @media (min-width: 900px) {{
-        .grid {{
-            grid-template-columns: repeat(3, 1fr) !important;
-        }}
-    }}
+.dots {{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:0.5rem;
+}}
 
-    .card {{
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 0.9rem;
-        padding: 0.9rem;
-        overflow: hidden;
-        min-width: 0;
-    }}
+.dot {{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#555;
+    cursor:pointer;
+}}
 
-    .meta {{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-        font-size: 0.75rem;
-        color: var(--muted);
-    }}
+.dot.active {{
+    background:#fff;
+}}
 
-    .title {{
-        font-size: 0.85rem;
-        font-weight: 700;
-        line-height: 1.7;
-        word-break: break-word;
-        overflow-wrap: anywhere;
-    }}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-    <div class="header">
-        <h1>آخرین خبرها</h1>
-        <div class="meta">
-            آخرین بروزرسانی: {latest_update}
-        </div>
+<div class="header">
+    <h1>آخرین خبرها</h1>
+    <div style="color:#888;font-size:0.8rem">
+        آخرین بروزرسانی: {latest_update}
     </div>
-
-    <div class="grid">
-        {''.join(cards)}
-    </div>
-
 </div>
+
+{''.join(carousels)}
 
 <div onclick="window.scrollTo({{top:0, behavior:'smooth'}})" style="
-        position:fixed;
-        bottom:20px;
-        right:20px;
-        width:55px;
-        height:55px;
-        border-radius:50%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        cursor:pointer;
-        user-select:none;
-        font-size:1.2rem;
-        font-weight:600;
-
-        background:rgba(255,255,255,0.02);
-        backdrop-filter:blur(10px);
-        -webkit-backdrop-filter:blur(10px);
-
-        border:1px solid rgba(255,255,255,0.25);
-        box-shadow:0 4px 20px rgba(0,0,0,0.25);
-     ">بالا
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.2);
+">
+↑
 </div>
+
+<script>
+
+function getCardWidth(carousel) {{
+    return carousel.querySelector('.card').offsetWidth + 12;
+}}
+
+// One-card step scroll
+function scrollStep(id, dir) {{
+    const el = document.getElementById(id);
+    const w = getCardWidth(el);
+    el.scrollBy({{ left: dir * w, behavior: 'smooth' }});
+}}
+
+// Go to exact slide
+function goToSlide(id, index) {{
+    const el = document.getElementById(id);
+    const w = getCardWidth(el);
+    el.scrollTo({{ left: index * w, behavior: 'smooth' }});
+}}
+
+// Update dots
+function updateDots(carousel, containerId) {{
+    const index = Math.round(carousel.scrollLeft / getCardWidth(carousel));
+    const dots = document.getElementById(containerId).children;
+
+    for (let i = 0; i < dots.length; i++) {{
+        dots[i].classList.remove('active');
+    }}
+
+    if (dots[index]) dots[index].classList.add('active');
+}}
+
+// Attach scroll listeners
+document.querySelectorAll('.carousel').forEach((carousel, i) => {{
+    const dotsId = 'dots_' + i;
+
+    carousel.addEventListener('scroll', () => {{
+        updateDots(carousel, dotsId);
+        handleInfiniteLoop(carousel);
+    }});
+
+    // init first dot
+    setTimeout(() => {{
+        const dots = document.getElementById(dotsId)?.children;
+        if (dots?.length) dots[0].classList.add('active');
+    }}, 100);
+}});
+
+// Infinite loop (simple clone-based)
+function handleInfiniteLoop(carousel) {{
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+    if (carousel.scrollLeft >= maxScroll - 10) {{
+        carousel.scrollTo({{ left: 0, behavior: 'auto' }});
+    }}
+}}
+
+// Auto scroll (pause on hover)
+document.querySelectorAll('.carousel').forEach(carousel => {{
+    let interval = setInterval(() => {{
+        carousel.scrollBy({{ left: getCardWidth(carousel), behavior: 'smooth' }});
+    }}, 4000);
+
+    carousel.addEventListener('mouseenter', () => clearInterval(interval));
+}});
+
+</script>
 
 </body>
 </html>
