@@ -6,51 +6,37 @@ class HTMLBuilder:
     def build(self, feeds):
 
         latest_update = TimeUtils.to_string(TimeUtils.now())
+
         carousels = []
 
-        for idx, f in enumerate(feeds):
+        for f in feeds:
 
-            carousel_id = f"carousel_{idx}"
-            dots_id = f"dots_{idx}"
+            cards = []
 
-            items_html = []
-            dots_html = []
-
-            items = f["items"]
-
-            for i, item in enumerate(items):
+            for item in f["items"]:
                 anchor = TextIDGenerator.generate(item.date + item.title)
 
-                items_html.append(f"""
-<div class="card" data-index="{i}" id="{anchor}">
-    <div class="meta">{item.date}</div>
-    <div class="title">{item.title}</div>
-</div>
-""")
+                cards.append(f"""
+<div class="card" id="{anchor}">
+    <div class="meta">
+        <span>{item.date}</span>
+    </div>
 
-                dots_html.append(f"""
-<span class="dot" onclick="goToSlide('{carousel_id}', {i})"></span>
+    <div class="title">
+        {item.title}
+    </div>
+</div>
 """)
 
             carousels.append(f"""
 <div class="carousel-section">
 
-    <div class="carousel-header">{f['source']}</div>
-
-    <div class="carousel-wrapper">
-
-        <button class="nav left" onclick="scrollStep('{carousel_id}', -1)">‹</button>
-
-        <div class="carousel" id="{carousel_id}">
-            {''.join(items_html)}
-        </div>
-
-        <button class="nav right" onclick="scrollStep('{carousel_id}', 1)">›</button>
-
+    <div class="carousel-header">
+        {f['source']}
     </div>
 
-    <div class="dots" id="{dots_id}">
-        {''.join(dots_html)}
+    <div class="carousel">
+        {''.join(cards)}
     </div>
 
 </div>
@@ -61,115 +47,109 @@ class HTMLBuilder:
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>News Feed</title>
 
 <style>
-:root {{
-    --bg:#161618;
-    --card:#2a2a2c;
-    --text:#fff;
-    --muted:#888;
-}}
+    :root {{
+        --bg: #161618;
+        --panel: #333335;
+        --card: #333335;
+        --border: #333335;
+        --text: #FFFFFF;
+        --muted: #818183;
+        font-size: 16px;
+    }}
 
-body {{
-    margin:0;
-    padding:0.75rem;
-    font-family:Ravi,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-}}
+    * {{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }}
 
-.header {{
-    padding:1rem;
-    background:#222;
-    border-radius:1rem;
-    margin-bottom:1rem;
-}}
+    body {{
+        font-family: "Ravi", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding: 0.75rem;
+    }}
 
-.carousel-section {{
-    margin-bottom:1.5rem;
-}}
+    .header {{
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }}
 
-.carousel-header {{
-    font-weight:700;
-    margin-bottom:0.5rem;
-}}
+    .header h1 {{
+        font-size: 1.35rem;
+        font-weight: 700;
+    }}
 
-.carousel-wrapper {{
-    position:relative;
-}}
+    .header .meta {{
+        margin-top: 0.35rem;
+        font-size: 0.75rem;
+        color: var(--muted);
+    }}
 
-.carousel {{
-    display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    scroll-behavior:smooth;
-    gap:0.75rem;
-    padding:0.2rem;
-}}
+    .carousel-section {{
+        margin-bottom: 1rem;
+    }}
 
-.carousel::-webkit-scrollbar {{
-    display:none;
-}}
+    .carousel-header {{
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin: 0.5rem 0;
+        color: var(--text);
+    }}
 
-.card {{
-    flex:0 0 100%;
-    scroll-snap-align:center;
-    background:var(--card);
-    border-radius:0.9rem;
-    padding:1rem;
-}}
+    .carousel {{
+        display: flex;
+        gap: 0.75rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        scroll-snap-type: x mandatory;
+    }}
 
-.meta {{
-    font-size:0.75rem;
-    color:var(--muted);
-    margin-bottom:0.5rem;
-}}
+    .carousel::-webkit-scrollbar {{
+        display: none;
+    }}
 
-.title {{
-    font-size:0.9rem;
-    font-weight:700;
-    line-height:1.6;
-}}
+    .card {{
+        flex: 0 0 80%;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.9rem;
+        padding: 0.9rem;
+        scroll-snap-align: start;
+    }}
 
-.nav {{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.2);
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    cursor:pointer;
-    z-index:10;
-}}
+    @media (min-width: 700px) {{
+        .card {{
+            flex: 0 0 45%;
+        }}
+    }}
 
-.nav.left {{ left:5px; }}
-.nav.right {{ right:5px; }}
+    @media (min-width: 900px) {{
+        .card {{
+            flex: 0 0 30%;
+        }}
+    }}
 
-.dots {{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-    margin-top:0.5rem;
-}}
+    .meta {{
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+    }}
 
-.dot {{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#555;
-    cursor:pointer;
-}}
-
-.dot.active {{
-    background:#fff;
-}}
-
+    .title {{
+        font-size: 0.85rem;
+        font-weight: 700;
+        line-height: 1.7;
+        word-break: break-word;
+    }}
 </style>
 </head>
 
@@ -177,7 +157,7 @@ body {{
 
 <div class="header">
     <h1>آخرین خبرها</h1>
-    <div style="color:#888;font-size:0.8rem">
+    <div class="meta">
         آخرین بروزرسانی: {latest_update}
     </div>
 </div>
@@ -188,85 +168,18 @@ body {{
     position:fixed;
     bottom:20px;
     right:20px;
-    width:50px;
-    height:50px;
+    width:55px;
+    height:55px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.2);
-">
-↑
-</div>
-
-<script>
-
-function getCardWidth(carousel) {{
-    return carousel.querySelector('.card').offsetWidth + 12;
-}}
-
-// One-card step scroll
-function scrollStep(id, dir) {{
-    const el = document.getElementById(id);
-    const w = getCardWidth(el);
-    el.scrollBy({{ left: dir * w, behavior: 'smooth' }});
-}}
-
-// Go to exact slide
-function goToSlide(id, index) {{
-    const el = document.getElementById(id);
-    const w = getCardWidth(el);
-    el.scrollTo({{ left: index * w, behavior: 'smooth' }});
-}}
-
-// Update dots
-function updateDots(carousel, containerId) {{
-    const index = Math.round(carousel.scrollLeft / getCardWidth(carousel));
-    const dots = document.getElementById(containerId).children;
-
-    for (let i = 0; i < dots.length; i++) {{
-        dots[i].classList.remove('active');
-    }}
-
-    if (dots[index]) dots[index].classList.add('active');
-}}
-
-// Attach scroll listeners
-document.querySelectorAll('.carousel').forEach((carousel, i) => {{
-    const dotsId = 'dots_' + i;
-
-    carousel.addEventListener('scroll', () => {{
-        updateDots(carousel, dotsId);
-        handleInfiniteLoop(carousel);
-    }});
-
-    // init first dot
-    setTimeout(() => {{
-        const dots = document.getElementById(dotsId)?.children;
-        if (dots?.length) dots[0].classList.add('active');
-    }}, 100);
-}});
-
-// Infinite loop (simple clone-based)
-function handleInfiniteLoop(carousel) {{
-    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-    if (carousel.scrollLeft >= maxScroll - 10) {{
-        carousel.scrollTo({{ left: 0, behavior: 'auto' }});
-    }}
-}}
-
-// Auto scroll (pause on hover)
-document.querySelectorAll('.carousel').forEach(carousel => {{
-    let interval = setInterval(() => {{
-        carousel.scrollBy({{ left: getCardWidth(carousel), behavior: 'smooth' }});
-    }}, 4000);
-
-    carousel.addEventListener('mouseenter', () => clearInterval(interval));
-}});
-
-</script>
+    cursor:pointer;
+    font-size:1.2rem;
+    background:rgba(255,255,255,0.02);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.25);
+">↑</div>
 
 </body>
 </html>
