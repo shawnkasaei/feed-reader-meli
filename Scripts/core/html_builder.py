@@ -191,7 +191,7 @@ class HTMLBuilder:
 <div onclick="window.scrollTo({{top:0, behavior:'smooth'}})" style="
     position:fixed;
     bottom:20px;
-    right:20px;
+    left:20px;
     width:55px;
     height:55px;
     border-radius:50%;
@@ -200,10 +200,11 @@ class HTMLBuilder:
     justify-content:center;
     cursor:pointer;
     font-size:1.2rem;
+    font-weight: 600;
     background:rgba(255,255,255,0.02);
     backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,0.25);
-">↑</div>
+">بالا</div>
 
 </body>
 </html>
