@@ -38,11 +38,6 @@
   ],
   "rss": [
     {
-      "title": "فید | ایران اینترنشنال",
-      "dir_name": "feed-iranintl",
-      "url": "https://www.iranintl.com/feed"
-    },
-    {
       "title": "فید | هکر نیوز",
       "dir_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
