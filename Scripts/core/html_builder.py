@@ -967,30 +967,30 @@ function timeAgo(dateString) {{
     const minutes = Math.floor(seconds / 60);
 
     if (minutes < 60) {{
-        return `${minutes} دقیقه پیش`;
+        return `${{minutes}} دقیقه پیش`;
     }}
 
     const hours = Math.floor(minutes / 60);
 
     if (hours < 24) {{
-        return `${hours} ساعت پیش`;
+        return `${{hours}} ساعت پیش`;
     }}
 
     const days = Math.floor(hours / 24);
 
     if (days < 30) {{
-        return `${days} روز پیش`;
+        return `${{days}} روز پیش`;
     }}
 
     const months = Math.floor(days / 30);
 
     if (months < 12) {{
-        return `${months} ماه پیش`;
+        return `${{months}} ماه پیش`;
     }}
 
     const years = Math.floor(months / 12);
 
-    return `${years} سال پیش`;
+    return `${{years}} سال پیش`;
 }}
 
 const updateElement = document.getElementById("latest-update");
