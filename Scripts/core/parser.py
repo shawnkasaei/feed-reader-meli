@@ -34,9 +34,9 @@ class Parser:
                 items.insert(0,
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", text.group(1)).strip(),
-                        content="",
+                        content=None,
                         date=TimeUtils.to_string(dt),
-                        link=""
+                        link=None
                     )
                 )
 
@@ -62,9 +62,9 @@ class Parser:
                 items.append(
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", t.group(1)).strip(),
-                        content="",
+                        content=None,
                         date=TimeUtils.to_string(dt),
-                        link=""
+                        link=None
                     )
                 )
 
