@@ -33,10 +33,10 @@ class Parser:
 
                 items.insert(0,
                     FeedItem(
-                        title=None,
+                        title="",
                         content=text.group(1).strip(),
                         date=TimeUtils.to_string(dt),
-                        link=None
+                        link=""
                     )
                 )
 

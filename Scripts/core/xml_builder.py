@@ -7,7 +7,7 @@ class XMLBuilder:
 
     def build(self, items, title: str, feed_name: str):
 
-        root = ET.Element("DAYEREH RSS", version="2.0")
+        root = ET.Element("RSS", version="2.0")
         channel = ET.SubElement(root, "channel")
 
         ET.SubElement(channel, "title").text = title
@@ -21,14 +21,14 @@ class XMLBuilder:
 
         for item in items:
 
+            if item.title != "":
+                item.title = re.sub(r"<[^>]+>", "", item.title)
+            else:
+                item.title = re.sub(r"<[^>]+>", "", item.content)
+
             anchor_id = f"{TextIDGenerator.generate(item.date+item.title+item.content)}"
 
             node = ET.SubElement(channel, "item")
-
-            if item.title:
-                item.title = re.sub(r"<[^>]+>", "", title)
-            else:
-                item.title = re.sub(r"<[^>]+>", "", item.content)
 
             ET.SubElement(node, "title").text = item.title
             ET.SubElement(node, "pubDate").text = item.date

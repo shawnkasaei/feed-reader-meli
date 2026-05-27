@@ -29,12 +29,12 @@ class HTMLBuilder:
 
     def build_card(self, item):
 
-        title = getattr(item, "title", None)
+        title = getattr(item, "title", "")
         content = getattr(item, "content", "")
         date = getattr(item, "date", "")
         link = getattr(item, "link", "")
 
-        if title:
+        if title != "":
             preview = self.truncate_text(title)
         else:
             preview = self.truncate_text(content)
