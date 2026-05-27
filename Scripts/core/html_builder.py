@@ -6,7 +6,7 @@ from core.text_id_generator import TextIDGenerator
 
 class HTMLBuilder:
 
-    CARD_WORD_LIMIT = 16
+    CARD_WORD_LIMIT = 22
 
     def truncate_text(self, text: str) -> str:
 
@@ -148,7 +148,7 @@ class HTMLBuilder:
 <link
     rel="icon"
     type="image/webp"
-    href="/assets/favicon.webp"
+    href="https://raw.githubusercontent.com/shawnkasaei/news-reader-meli/refs/heads/main/Feeds/view/assets/favicon.webp"
 />
 
 <style>
@@ -157,7 +157,7 @@ class HTMLBuilder:
     font-family: Peyda;
 
     src:
-        url('/assets/fonts/Peyda-Regular.ttf')
+        url('https://raw.githubusercontent.com/shawnkasaei/news-reader-meli/refs/heads/main/Feeds/view/assets/fonts/Peyda-Regular.ttf')
         format('truetype');
 
     font-weight: 400;
@@ -167,7 +167,7 @@ class HTMLBuilder:
     font-family: Peyda;
 
     src:
-        url('/assets/fonts/Peyda-Bold.ttf')
+        url('https://raw.githubusercontent.com/shawnkasaei/news-reader-meli/refs/heads/main/Feeds/view/assets/fonts/Peyda-Bold.ttf')
         format('truetype');
 
     font-weight: 700;
@@ -346,7 +346,10 @@ a {{
     border:
         1px solid rgba(255,255,255,0.08);
 
-    font-size: 0.78rem;
+        
+    color: var(--text-secondary)
+
+    font-size: 0.76rem;
 }}
 
 .live-dot {{
@@ -858,7 +861,7 @@ a {{
             </div>
 
             <div class="logo-subtitle">
-                آخرین اخبار از منابع مختلف
+                آخرین اخبار روز
             </div>
 
         </div>
