@@ -7,7 +7,7 @@ class Parser:
 
     def parse_telegram(self, html: str):
         blocks = re.findall(
-            r'tgme_widget_message_bubble[\s\S]*?</div>\s*</div>',
+            r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>',
             html
         )
 
