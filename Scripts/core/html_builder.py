@@ -143,7 +143,7 @@ class HTMLBuilder:
     content="width=device-width, initial-scale=1.0"
 />
 
-<title>خبر فوری</title>
+<title>پلتفرم دایره</title>
 
 <link
     rel="icon"
@@ -857,7 +857,7 @@ a {{
         <div class="header-left">
 
             <div class="logo-title">
-                خبر فوری
+                دایره
             </div>
 
             <div class="logo-subtitle">
@@ -889,7 +889,7 @@ a {{
         </div>
 
         <div class="hero-description">
-            آخرین انتشارات خبرگزاری‌ها و اندیشکده‌های مطرح جهان رو به روز مطالعه کنید. -شِف
+            دایره با هدف دسترسی سریع و راحت به اخبار ساخته شد. تقدیم به جاویدنامان ایران. -شِف
         </div>
 
     </section>
