@@ -945,8 +945,7 @@ a {{
 
 <script>
 
-function timeAgo(dateString) {
-    // تبدیل فرمت 28-05-2026 00:10:11
+function timeAgo(dateString) {{
     const parts = dateString.split(/[- :]/);
 
     const date = new Date(
@@ -961,48 +960,47 @@ function timeAgo(dateString) {
     const now = new Date();
     const seconds = Math.floor((now - date) / 1000);
 
-    if (seconds < 60) {
+    if (seconds < 60) {{
         return "چند لحظه پیش";
-    }
+    }}
 
     const minutes = Math.floor(seconds / 60);
 
-    if (minutes < 60) {
+    if (minutes < 60) {{
         return `${minutes} دقیقه پیش`;
-    }
+    }}
 
     const hours = Math.floor(minutes / 60);
 
-    if (hours < 24) {
+    if (hours < 24) {{
         return `${hours} ساعت پیش`;
-    }
+    }}
 
     const days = Math.floor(hours / 24);
 
-    if (days < 30) {
+    if (days < 30) {{
         return `${days} روز پیش`;
-    }
+    }}
 
     const months = Math.floor(days / 30);
 
-    if (months < 12) {
+    if (months < 12) {{
         return `${months} ماه پیش`;
-    }
+    }}
 
     const years = Math.floor(months / 12);
 
     return `${years} سال پیش`;
-}
+}}
 
 const updateElement = document.getElementById("latest-update");
 const updateTime = updateElement.dataset.time;
 
 updateElement.textContent = timeAgo(updateTime);
 
-// هر ۱ دقیقه آپدیت شود
-setInterval(() => {
+setInterval(() => {{
     updateElement.textContent = timeAgo(updateTime);
-}, 60000);
+}}, 60000);
 
 const modal =
     document.getElementById(
