@@ -349,7 +349,7 @@ a {{
         
     color: var(--text-secondary)
 
-    font-size: 0.76rem;
+    font-size: 0.6rem;
 }}
 
 .live-dot {{
@@ -890,13 +890,13 @@ a {{
     <section class="hero-banner">
 
         <div class="hero-title">
-            جدیدترین اخبار روز را سریع‌تر و زیباتر دنبال کنید
+            جدیدترین اخبار روز را سریع‌تر دنبال کنید
         </div>
 
         <div class="hero-description">
             فیدهای خبری به‌صورت دسته‌بندی‌شده،
             مدرن و قابل مطالعه در یک رابط کاربری
-            حرفه‌ای نمایش داده می‌شوند.
+            حرفه‌ای نمایش داده می‌شوند. -شِف
         </div>
 
     </section>
