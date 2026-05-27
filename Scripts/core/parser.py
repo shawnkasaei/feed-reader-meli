@@ -47,10 +47,10 @@ class Parser:
     def parse_rss(self, xml: str):
         items = []
 
-        for item in re.findall(r"<item>([\s\S]*?)</item>", xml):
+        for item in re.findall(r"<item>([\s\S]*?)<\/item>", xml):
 
-            t = re.search(r"<title>([\s\S]*?)</title>", item)
-            d = re.search(r"<pubDate>([\s\S]*?)</pubDate>", item)
+            t = re.search(r"<title>([\s\S]*?)<\/title>", item)
+            d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item)
 
             if not t or not d:
                 continue
