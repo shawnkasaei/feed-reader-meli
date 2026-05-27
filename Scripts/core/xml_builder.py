@@ -1,3 +1,4 @@
+import re
 import xml.etree.ElementTree as ET
 from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
@@ -6,7 +7,7 @@ class XMLBuilder:
 
     def build(self, items, title: str, feed_name: str):
 
-        root = ET.Element("rss", version="2.0")
+        root = ET.Element("DAYEREH RSS", version="2.0")
         channel = ET.SubElement(root, "channel")
 
         ET.SubElement(channel, "title").text = title
@@ -20,9 +21,14 @@ class XMLBuilder:
 
         for item in items:
 
-            anchor_id = f"{TextIDGenerator.generate(item.date+item.title)}"
+            anchor_id = f"{TextIDGenerator.generate(item.date+item.title+item.content)}"
 
             node = ET.SubElement(channel, "item")
+
+            if item.title:
+                item.title = re.sub(r"<[^>]+>", "", title)
+            else:
+                item.title = re.sub(r"<[^>]+>", "", item.content)
 
             ET.SubElement(node, "title").text = item.title
             ET.SubElement(node, "pubDate").text = item.date

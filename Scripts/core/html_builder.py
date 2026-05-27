@@ -41,7 +41,7 @@ class HTMLBuilder:
         
 
         anchor = TextIDGenerator.generate(
-            str(date) + str(title)
+            str(date) + str(title) + str(content)
         )
 
         safe_title = self.safe(title)
