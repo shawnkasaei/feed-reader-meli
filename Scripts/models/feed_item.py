@@ -3,4 +3,5 @@ from dataclasses import dataclass
 @dataclass
 class FeedItem:
     title: str
+    content: str
     date: str
