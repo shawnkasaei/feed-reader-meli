@@ -861,7 +861,7 @@ a {{
             </div>
 
             <div class="logo-subtitle">
-                گیت‌هاب
+                قدرت گرفته از گیت‌هاب
             </div>
 
         </div>
@@ -870,7 +870,6 @@ a {{
             <div class="live-badge">
                 <div class="live-dot"></div>
 
-                <!-- زمان اصلی داخل data-time -->
                 <span id="latest-update" data-time="{latest_update}">
                     در حال بروزرسانی...
                 </span>
@@ -949,9 +948,9 @@ function timeAgo(dateString) {{
     const parts = dateString.split(/[- :]/);
 
     const date = new Date(
-        parts[2],         // year
+        parts[0],         // year
         parts[1] - 1,     // month
-        parts[0],         // day
+        parts[2],         // day
         parts[3],         // hour
         parts[4],         // minute
         parts[5]          // second
