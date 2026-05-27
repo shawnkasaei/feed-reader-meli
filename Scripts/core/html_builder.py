@@ -6,7 +6,7 @@ from core.text_id_generator import TextIDGenerator
 
 class HTMLBuilder:
 
-    CARD_WORD_LIMIT = 24
+    CARD_WORD_LIMIT = 16
 
     def truncate_text(self, text: str) -> str:
 
@@ -49,7 +49,6 @@ class HTMLBuilder:
     class="news-card"
     id="{anchor}"
     onclick='openNewsModal(
-        `{safe_title}`,
         `{safe_content}`,
         `{safe_date}`
     )'
@@ -158,7 +157,7 @@ class HTMLBuilder:
     font-family: Peyda;
 
     src:
-        url('/assets/Peyda-Regular.ttf')
+        url('/assets/fonts/Peyda-Regular.ttf')
         format('truetype');
 
     font-weight: 400;
@@ -168,7 +167,7 @@ class HTMLBuilder:
     font-family: Peyda;
 
     src:
-        url('/assets/Peyda-Bold.ttf')
+        url('/assets/fonts/Peyda-Bold.ttf')
         format('truetype');
 
     font-weight: 700;
@@ -955,7 +954,6 @@ const modal =
     )
 
 function openNewsModal(
-    title,
     content,
     date
 ) {{
@@ -967,10 +965,6 @@ function openNewsModal(
     modal.classList.add(
         "active"
     )
-
-    document.getElementById(
-        "modalTitle"
-    ).innerHTML = title
 
     document.getElementById(
         "modalContent"
