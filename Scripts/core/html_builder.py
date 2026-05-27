@@ -861,24 +861,20 @@ a {{
             </div>
 
             <div class="logo-subtitle">
-                آخرین اخبار روز
+                گیت‌هاب
             </div>
 
         </div>
 
         <div class="header-right">
-
             <div class="live-badge">
-
                 <div class="live-dot"></div>
 
-                <span>
-                    بروزرسانی:
-                    {latest_update}
+                <!-- زمان اصلی داخل data-time -->
+                <span id="latest-update" data-time="{latest_update}">
+                    در حال بروزرسانی...
                 </span>
-
             </div>
-
         </div>
 
     </div>
@@ -890,13 +886,11 @@ a {{
     <section class="hero-banner">
 
         <div class="hero-title">
-            جدیدترین اخبار روز را سریع‌تر دنبال کنید
+            جدیدترین اخبار روز را سریع‌تر و زیباتر دنبال کنید
         </div>
 
         <div class="hero-description">
-            فیدهای خبری به‌صورت دسته‌بندی‌شده،
-            مدرن و قابل مطالعه در یک رابط کاربری
-            حرفه‌ای نمایش داده می‌شوند. -شِف
+            آخرین انتشارات خبرگزاری‌ها و اندیشکده‌های مطرح جهان رو به روز مطالعه کنید. -شِف
         </div>
 
     </section>
@@ -950,6 +944,65 @@ a {{
 </div>
 
 <script>
+
+function timeAgo(dateString) {
+    // تبدیل فرمت 28-05-2026 00:10:11
+    const parts = dateString.split(/[- :]/);
+
+    const date = new Date(
+        parts[2],         // year
+        parts[1] - 1,     // month
+        parts[0],         // day
+        parts[3],         // hour
+        parts[4],         // minute
+        parts[5]          // second
+    );
+
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+
+    if (seconds < 60) {
+        return "چند لحظه پیش";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+
+    if (minutes < 60) {
+        return `${minutes} دقیقه پیش`;
+    }
+
+    const hours = Math.floor(minutes / 60);
+
+    if (hours < 24) {
+        return `${hours} ساعت پیش`;
+    }
+
+    const days = Math.floor(hours / 24);
+
+    if (days < 30) {
+        return `${days} روز پیش`;
+    }
+
+    const months = Math.floor(days / 30);
+
+    if (months < 12) {
+        return `${months} ماه پیش`;
+    }
+
+    const years = Math.floor(months / 12);
+
+    return `${years} سال پیش`;
+}
+
+const updateElement = document.getElementById("latest-update");
+const updateTime = updateElement.dataset.time;
+
+updateElement.textContent = timeAgo(updateTime);
+
+// هر ۱ دقیقه آپدیت شود
+setInterval(() => {
+    updateElement.textContent = timeAgo(updateTime);
+}, 60000);
 
 const modal =
     document.getElementById(
