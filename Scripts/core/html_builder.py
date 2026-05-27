@@ -173,6 +173,16 @@ class HTMLBuilder:
     font-weight: 700;
 }}
 
+@font-face {{
+    font-family: Peyda;
+
+    src:
+        url('https://raw.githubusercontent.com/shawnkasaei/news-reader-meli/refs/heads/main/Feeds/view/assets/fonts/Peyda-Black.ttf')
+        format('truetype');
+
+    font-weight: 900;
+}}
+
 :root {{
 
     --bg-primary: #050d18;
@@ -305,7 +315,7 @@ a {{
 
     font-size: 1.4rem;
 
-    font-weight: 800;
+    font-weight: 900;
 
     letter-spacing: -0.02em;
 }}
@@ -429,7 +439,7 @@ a {{
 
     font-size: 1.7rem;
 
-    font-weight: 800;
+    font-weight: 900;
 
     line-height: 1.8;
 
