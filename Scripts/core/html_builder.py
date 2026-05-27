@@ -75,7 +75,7 @@ class HTMLBuilder:
     <div class="card-bottom">
 
         <div class="read-more">
-            مشاهده کامل خبر
+            بیشتر بخوانید
         </div>
 
     </div>
@@ -603,6 +603,8 @@ a {{
 
 .card-title {{
 
+    text-align: justify;
+
     font-size: 1rem;
 
     font-weight: 700;
@@ -889,7 +891,7 @@ a {{
         </div>
 
         <div class="hero-description">
-            دایره با هدف دسترسی سریع و راحت به اخبار ساخته شد. تقدیم به جاویدنامان ایران. -شِف
+            دایره با هدف دسترسی سریع و راحت به اخبار ساخته شد و تقدیم میشه به جاویدنامان ایران. -شِف
         </div>
 
     </section>
@@ -928,6 +930,7 @@ a {{
 
         <div
             class="modal-content"
+            style="text-align: justify"
             id="modalContent"
         ></div>
 
