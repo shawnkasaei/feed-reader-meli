@@ -35,7 +35,8 @@ class Parser:
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", text.group(1)).strip(),
                         content="",
-                        date=TimeUtils.to_string(dt)
+                        date=TimeUtils.to_string(dt),
+                        link=""
                     )
                 )
 
@@ -62,7 +63,8 @@ class Parser:
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", t.group(1)).strip(),
                         content="",
-                        date=TimeUtils.to_string(dt)
+                        date=TimeUtils.to_string(dt),
+                        link=""
                     )
                 )
 

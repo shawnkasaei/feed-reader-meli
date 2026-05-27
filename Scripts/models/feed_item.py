@@ -5,3 +5,4 @@ class FeedItem:
     title: str
     content: str
     date: str
+    link: str
