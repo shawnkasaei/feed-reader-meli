@@ -49,7 +49,8 @@ class HTMLBuilder:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<title>News Feed</title>
+<title>خبر فوری</title>
+<link rel="favicon" type="image/x-icon" href="/assets/favicon.webp">
 
 <style>
     @font-face {{
@@ -180,7 +181,7 @@ class HTMLBuilder:
 <body>
 
 <div class="header">
-    <h1>آخرین خبرها</h1>
+    <h1>خبر فوری</h1>
     <div class="meta">
         آخرین بروزرسانی: {latest_update}
     </div>
