@@ -1,212 +1,1028 @@
+from html import escape
+
 from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
 
 
 class HTMLBuilder:
-    def build(self, feeds):
 
-        latest_update = TimeUtils.to_string(TimeUtils.now())
+    CARD_WORD_LIMIT = 24
 
-        carousels = []
+    def truncate_text(self, text: str) -> str:
 
-        for f in feeds:
+        if not text:
+            return ""
 
-            cards = []
+        words = text.split()
 
-            for item in f["items"]:
-                anchor = TextIDGenerator.generate(item.date + item.title)
+        if len(words) <= self.CARD_WORD_LIMIT:
+            return text
 
-                cards.append(f"""
-<div class="card" id="{anchor}">
-    <div class="meta">
-        <span>{item.date}</span>
+        return " ".join(words[:self.CARD_WORD_LIMIT]) + " ..."
+
+    def safe(self, value):
+
+        if value is None:
+            return ""
+
+        return escape(str(value))
+
+    def build_card(self, item):
+
+        title = getattr(item, "title", "")
+        content = getattr(item, "content", title)
+        date = getattr(item, "date", "")
+
+        preview = self.truncate_text(title)
+
+        anchor = TextIDGenerator.generate(
+            str(date) + str(title)
+        )
+
+        safe_title = self.safe(title)
+        safe_preview = self.safe(preview)
+        safe_content = self.safe(content).replace("\n", "<br>")
+        safe_date = self.safe(date)
+
+        return f"""
+<article
+    class="news-card"
+    id="{anchor}"
+    onclick='openNewsModal(
+        `{safe_title}`,
+        `{safe_content}`,
+        `{safe_date}`
+    )'
+>
+
+    <div class="card-background-glow"></div>
+
+    <div class="card-top">
+
+        <div class="card-date">
+            {safe_date}
+        </div>
+
     </div>
 
-    <div class="title">
-        {item.title}
-    </div>
-</div>
-""")
+    <div class="card-content">
 
-            carousels.append(f"""
-<div class="carousel-section">
+        <h3 class="card-title">
+            {safe_preview}
+        </h3>
 
-    <div class="carousel-header">
-        {f['source']}
     </div>
 
-    <div class="carousel">
+    <div class="card-bottom">
+
+        <div class="read-more">
+            مشاهده کامل خبر
+        </div>
+
+    </div>
+
+</article>
+"""
+
+    def build_section(self, feed):
+
+        source = self.safe(feed.get("source", "خبرگزاری"))
+
+        cards = []
+
+        for item in feed.get("items", []):
+            cards.append(self.build_card(item))
+
+        return f"""
+<section class="feed-section">
+
+    <div class="feed-header">
+
+        <div class="feed-title-container">
+
+            <div class="feed-indicator"></div>
+
+            <h2 class="feed-title">
+                {source}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="feed-carousel">
         {''.join(cards)}
     </div>
 
-</div>
-""")
+</section>
+"""
+
+    def build(self, feeds):
+
+        latest_update = TimeUtils.to_string(
+            TimeUtils.now()
+        )
+
+        sections = []
+
+        for feed in feeds:
+            sections.append(
+                self.build_section(feed)
+            )
 
         return f"""
 <!DOCTYPE html>
+
 <html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+/>
 
 <title>خبر فوری</title>
-<link rel="favicon" type="image/x-icon" href="/assets/favicon.webp">
+
+<link
+    rel="icon"
+    type="image/webp"
+    href="/assets/favicon.webp"
+/>
 
 <style>
-    @font-face {{
-          font-family: Ravi;
-          font-style: normal;
-          font-weight: normal;
-          src: url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff/Ravi-Regular.woff') format('woff'),
-               url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff2/Ravi-Regular.woff2') format('woff2');
-      }}
 
-      @font-face {{
-          font-family: Ravi;
-          font-style: normal;
-          font-weight: bold;
-          src: url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff/Ravi-Bold.woff') format('woff'),
-               url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff2/Ravi-Bold.woff2') format('woff2');
-      }}
+@font-face {{
+    font-family: Peyda;
 
-      @font-face {{
-          font-family: Ravi;
-          font-style: normal;
-          font-weight: 950;
-          src: url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff/Ravi-ExtraBlack.woff') format('woff'),
-               url('https://github.com/shawnkasaei/news-reader-meli/raw/refs/heads/main/Feeds/view/assets/fonts/woff2/Ravi-ExtraBlack.woff2') format('woff2');
-      }}
-    
-    :root {{
-        --bg: #161618;
-        --panel: #333335;
-        --card: #333335;
-        --border: #333335;
-        --text: #FFFFFF;
-        --muted: #818183;
-        font-size: 16px;
+    src:
+        url('/assets/Peyda-Regular.ttf')
+        format('truetype');
+
+    font-weight: 400;
+}}
+
+@font-face {{
+    font-family: Peyda;
+
+    src:
+        url('/assets/Peyda-Bold.ttf')
+        format('truetype');
+
+    font-weight: 700;
+}}
+
+:root {{
+
+    --bg-primary: #050d18;
+
+    --bg-secondary: rgba(255,255,255,0.03);
+
+    --bg-card:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.025)
+        );
+
+    --border:
+        rgba(255,255,255,0.08);
+
+    --border-hover:
+        rgba(59,130,246,0.35);
+
+    --text-primary: #ffffff;
+
+    --text-secondary: #9fb0c4;
+
+    --accent: #60a5fa;
+
+    --shadow:
+        0 10px 30px rgba(0,0,0,0.35);
+
+    --modal-bg:
+        linear-gradient(
+            180deg,
+            rgba(15,20,35,0.98),
+            rgba(7,11,20,0.98)
+        );
+}}
+
+* {{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}}
+
+html {{
+    scroll-behavior: smooth;
+}}
+
+body {{
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(59,130,246,0.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at right,
+            rgba(147,51,234,0.08),
+            transparent 25%
+        ),
+        var(--bg-primary);
+
+    color: var(--text-primary);
+
+    font-family: Peyda, sans-serif;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    -webkit-font-smoothing: antialiased;
+}}
+
+body.modal-open {{
+    overflow: hidden;
+}}
+
+a {{
+    color: inherit;
+    text-decoration: none;
+}}
+
+::-webkit-scrollbar {{
+    width: 0;
+    height: 0;
+}}
+
+.app-header {{
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 999;
+
+    backdrop-filter: blur(24px);
+
+    background:
+        rgba(5,13,24,0.72);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.05);
+
+    padding:
+        1rem
+        1.2rem;
+
+}}
+
+.header-inner {{
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 1rem;
+}}
+
+.header-left {{
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.3rem;
+}}
+
+.logo-title {{
+
+    font-size: 1.4rem;
+
+    font-weight: 800;
+
+    letter-spacing: -0.02em;
+}}
+
+.logo-subtitle {{
+
+    color: var(--text-secondary);
+
+    font-size: 0.82rem;
+}}
+
+.header-right {{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+}}
+
+.live-badge {{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    padding:
+        0.55rem
+        0.9rem;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    font-size: 0.78rem;
+}}
+
+.live-dot {{
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 12px #22c55e;
+}}
+
+.main-layout {{
+
+    padding:
+        1.3rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+}}
+
+.hero-banner {{
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        1.6rem;
+
+    border-radius: 32px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59,130,246,0.14),
+            rgba(147,51,234,0.08)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    box-shadow: var(--shadow);
+}}
+
+.hero-banner::before {{
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    top: -120px;
+    left: -120px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59,130,246,0.18),
+            transparent 70%
+        );
+}}
+
+.hero-title {{
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 1.7rem;
+
+    font-weight: 800;
+
+    line-height: 1.8;
+
+    margin-bottom: 0.75rem;
+}}
+
+.hero-description {{
+
+    position: relative;
+
+    z-index: 2;
+
+    color: var(--text-secondary);
+
+    line-height: 2;
+
+    max-width: 700px;
+}}
+
+.feed-section {{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}}
+
+.feed-header {{
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}}
+
+.feed-title-container {{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+}}
+
+.feed-indicator {{
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: var(--accent);
+
+    box-shadow:
+        0 0 14px var(--accent);
+}}
+
+.feed-title {{
+
+    font-size: 1rem;
+
+    font-weight: 700;
+}}
+
+.feed-carousel {{
+
+    display: flex;
+
+    gap: 1rem;
+
+    overflow-x: auto;
+
+    scroll-snap-type: x mandatory;
+
+    padding-bottom: 0.5rem;
+}}
+
+.news-card {{
+
+    position: relative;
+
+    flex: 0 0 320px;
+
+    width: 320px;
+
+    height: 240px;
+
+    border-radius: 30px;
+
+    padding: 1.2rem;
+
+    overflow: hidden;
+
+    background: var(--bg-card);
+
+    border:
+        1px solid var(--border);
+
+    backdrop-filter: blur(18px);
+
+    scroll-snap-align: start;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        border 0.25s ease,
+        background 0.25s ease;
+}}
+
+.news-card:hover {{
+
+    transform:
+        translateY(-6px);
+
+    border:
+        1px solid var(--border-hover);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.03)
+        );
+}}
+
+.card-background-glow {{
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    top: -120px;
+    left: -120px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59,130,246,0.16),
+            transparent 70%
+        );
+}}
+
+.card-top,
+.card-content,
+.card-bottom {{
+    position: relative;
+    z-index: 2;
+}}
+
+.card-date {{
+
+    color: var(--text-secondary);
+
+    font-size: 0.76rem;
+}}
+
+.card-content {{
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+}}
+
+.card-title {{
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    line-height: 2;
+
+    overflow: hidden;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 5;
+
+    -webkit-box-orient: vertical;
+}}
+
+.card-bottom {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}}
+
+.read-more {{
+
+    color: var(--accent);
+
+    font-size: 0.82rem;
+
+    font-weight: 700;
+}}
+
+.modal-overlay {{
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 1rem;
+
+    background:
+        rgba(0,0,0,0.7);
+
+    backdrop-filter: blur(10px);
+}}
+
+.modal-overlay.active {{
+    display: flex;
+}}
+
+.news-modal {{
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 900px;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    border-radius: 34px;
+
+    padding: 2rem;
+
+    background: var(--modal-bg);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.45);
+
+    animation:
+        modalShow 0.25s ease;
+}}
+
+@keyframes modalShow {{
+
+    from {{
+        opacity: 0;
+        transform:
+            translateY(20px)
+            scale(0.98);
     }}
 
-    * {{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    to {{
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
     }}
+}}
 
-    body {{
-        font-family: "Ravi", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        padding: 0.75rem;
-    }}
+.modal-close {{
 
-    .header {{
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 1rem;
+    position: absolute;
+
+    top: 1rem;
+    left: 1rem;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    border: 0;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: white;
+
+    font-size: 1.2rem;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease;
+}}
+
+.modal-close:hover {{
+    background:
+        rgba(255,255,255,0.12);
+}}
+
+.modal-header {{
+    margin-bottom: 1.5rem;
+}}
+
+.modal-date {{
+
+    color: var(--text-secondary);
+
+    font-size: 0.85rem;
+
+    margin-bottom: 1rem;
+}}
+
+.modal-title {{
+
+    font-size: 1.8rem;
+
+    font-weight: 800;
+
+    line-height: 2;
+}}
+
+.modal-content {{
+
+    color: #d7e1ee;
+
+    line-height: 2.4;
+
+    font-size: 1rem;
+}}
+
+.scroll-top-btn {{
+
+    position: fixed;
+
+    bottom: 20px;
+    left: 20px;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    z-index: 2000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(18px);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}}
+
+.scroll-top-btn:hover {{
+
+    transform:
+        translateY(-4px);
+
+    background:
+        rgba(255,255,255,0.08);
+}}
+
+@media (max-width: 768px) {{
+
+    .main-layout {{
         padding: 1rem;
-        margin-bottom: 0.75rem;
     }}
 
-    .header h1 {{
-        font-size: 1.35rem;
-        font-weight: 700;
+    .hero-banner {{
+        border-radius: 26px;
     }}
 
-    .header .meta {{
-        margin-top: 0.35rem;
-        font-size: 0.75rem;
-        color: var(--muted);
+    .hero-title {{
+        font-size: 1.4rem;
     }}
 
-    .carousel-section {{
-        margin-bottom: 1rem;
+    .news-card {{
+
+        flex: 0 0 85vw;
+
+        width: 85vw;
+
+        height: 230px;
     }}
 
-    .carousel-header {{
-        font-size: 0.9rem;
-        font-weight: 700;
-        margin: 0.5rem 0;
-        color: var(--text);
+    .modal-title {{
+        font-size: 1.4rem;
     }}
 
-    .carousel {{
-        display: flex;
-        gap: 0.75rem;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-        scroll-snap-type: x mandatory;
+    .news-modal {{
+        padding: 1.5rem;
+        border-radius: 28px;
     }}
+}}
 
-    .carousel::-webkit-scrollbar {{
-        display: none;
-    }}
-
-    .card {{
-        flex: 0 0 80%;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 0.9rem;
-        padding: 0.9rem;
-        scroll-snap-align: start;
-    }}
-
-    @media (min-width: 700px) {{
-        .card {{
-            flex: 0 0 45%;
-        }}
-    }}
-
-    @media (min-width: 900px) {{
-        .card {{
-            flex: 0 0 30%;
-        }}
-    }}
-
-    .meta {{
-        font-size: 0.75rem;
-        color: var(--muted);
-        margin-bottom: 0.5rem;
-    }}
-
-    .title {{
-        font-size: 0.85rem;
-        font-weight: 700;
-        line-height: 1.7;
-        word-break: break-word;
-    }}
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
-    <h1>خبر فوری</h1>
-    <div class="meta">
-        آخرین بروزرسانی: {latest_update}
+<header class="app-header">
+
+    <div class="header-inner">
+
+        <div class="header-left">
+
+            <div class="logo-title">
+                خبر فوری
+            </div>
+
+            <div class="logo-subtitle">
+                آخرین اخبار از منابع مختلف
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="live-badge">
+
+                <div class="live-dot"></div>
+
+                <span>
+                    بروزرسانی:
+                    {latest_update}
+                </span>
+
+            </div>
+
+        </div>
+
     </div>
+
+</header>
+
+<main class="main-layout">
+
+    <section class="hero-banner">
+
+        <div class="hero-title">
+            جدیدترین اخبار روز را سریع‌تر و زیباتر دنبال کنید
+        </div>
+
+        <div class="hero-description">
+            فیدهای خبری به‌صورت دسته‌بندی‌شده،
+            مدرن و قابل مطالعه در یک رابط کاربری
+            حرفه‌ای نمایش داده می‌شوند.
+        </div>
+
+    </section>
+
+    {''.join(sections)}
+
+</main>
+
+<div
+    class="modal-overlay"
+    id="newsModal"
+>
+
+    <div class="news-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeNewsModal()"
+        >
+            ✕
+        </button>
+
+        <div class="modal-header">
+
+            <div
+                class="modal-date"
+                id="modalDate"
+            ></div>
+
+            <div
+                class="modal-title"
+                id="modalTitle"
+            ></div>
+
+        </div>
+
+        <div
+            class="modal-content"
+            id="modalContent"
+        ></div>
+
+    </div>
+
 </div>
 
-{''.join(carousels)}
+<div
+    class="scroll-top-btn"
+    onclick="scrollToTop()"
+>
+↑
+</div>
 
-<div onclick="window.scrollTo({{top:0, behavior:'smooth'}})" style="
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    font-size:1.2rem;
-    font-weight: 600;
-    background:rgba(255,255,255,0.02);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,0.25);
-">بالا</div>
+<script>
+
+const modal =
+    document.getElementById(
+        "newsModal"
+    )
+
+function openNewsModal(
+    title,
+    content,
+    date
+) {{
+
+    document.body.classList.add(
+        "modal-open"
+    )
+
+    modal.classList.add(
+        "active"
+    )
+
+    document.getElementById(
+        "modalTitle"
+    ).innerHTML = title
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML = content
+
+    document.getElementById(
+        "modalDate"
+    ).innerHTML = date
+}}
+
+function closeNewsModal() {{
+
+    document.body.classList.remove(
+        "modal-open"
+    )
+
+    modal.classList.remove(
+        "active"
+    )
+}}
+
+modal.addEventListener(
+    "click",
+    function(event) {{
+
+        if(event.target === modal) {{
+            closeNewsModal()
+        }}
+    }}
+)
+
+document.addEventListener(
+    "keydown",
+    function(event) {{
+
+        if(event.key === "Escape") {{
+            closeNewsModal()
+        }}
+    }}
+)
+
+function scrollToTop() {{
+
+    window.scrollTo({{
+        top: 0,
+        behavior: "smooth"
+    }})
+}}
+
+</script>
 
 </body>
+
 </html>
 """
