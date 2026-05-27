@@ -29,15 +29,15 @@ class HTMLBuilder:
 
     def build_card(self, item):
 
-        title = getattr(item, "title", "")
+        title = getattr(item, "title", None)
         content = getattr(item, "content", "")
         date = getattr(item, "date", "")
         link = getattr(item, "link", "")
 
-        if title == "":
-            preview = self.truncate_text(content)
-        else:
+        if title:
             preview = self.truncate_text(title)
+        else:
+            preview = self.truncate_text(content)
         
 
         anchor = TextIDGenerator.generate(
@@ -45,8 +45,8 @@ class HTMLBuilder:
         )
 
         safe_title = self.safe(title)
-        safe_preview = self.safe(preview)
         safe_content = self.safe(content).replace("\n", "<br>")
+        safe_preview = self.safe(preview)
         safe_date = self.safe(date)
         safe_link = self.safe(link)
 
