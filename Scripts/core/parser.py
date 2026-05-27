@@ -16,7 +16,7 @@ class Parser:
         for b in blocks:
 
             text = re.search(
-                r'tgme_widget_message_text[^>]*>([\s\S]*?)</div>',
+                r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
                 b
             )
 
