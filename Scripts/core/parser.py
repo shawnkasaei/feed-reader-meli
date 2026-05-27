@@ -33,8 +33,8 @@ class Parser:
 
                 items.insert(0,
                     FeedItem(
-                        title=re.sub(r"<[^>]+>", "", text.group(1)).strip(),
-                        content=None,
+                        title=None,
+                        content=re.sub(r"<[^>]+>", "", text.group(1)).strip(),
                         date=TimeUtils.to_string(dt),
                         link=None
                     )
@@ -51,7 +51,9 @@ class Parser:
         for item in re.findall(r"<item>([\s\S]*?)<\/item>", xml):
 
             t = re.search(r"<title>([\s\S]*?)<\/title>", item)
+            c = re.search(r"<description>([\s\S]*?)<\/description>", item)
             d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item)
+            l = re.search(r"<link>([\s\S]*?)<\/link>", item)
 
             if not t or not d:
                 continue
@@ -62,9 +64,9 @@ class Parser:
                 items.append(
                     FeedItem(
                         title=re.sub(r"<[^>]+>", "", t.group(1)).strip(),
-                        content=None,
+                        content=c.group(1),
                         date=TimeUtils.to_string(dt),
-                        link=None
+                        link=l.group(1)
                     )
                 )
 
