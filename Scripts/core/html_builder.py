@@ -30,10 +30,15 @@ class HTMLBuilder:
     def build_card(self, item):
 
         title = getattr(item, "title", "")
-        content = getattr(item, "content", title)
+        content = getattr(item, "content", "")
         date = getattr(item, "date", "")
+        link = getattr(item, "link", "")
 
-        preview = self.truncate_text(title)
+        if title == "":
+            preview = self.truncate_text(content)
+        else:
+            preview = self.truncate_text(title)
+        
 
         anchor = TextIDGenerator.generate(
             str(date) + str(title)
@@ -43,14 +48,17 @@ class HTMLBuilder:
         safe_preview = self.safe(preview)
         safe_content = self.safe(content).replace("\n", "<br>")
         safe_date = self.safe(date)
+        safe_link = self.safe(link)
 
         return f"""
 <article
     class="news-card"
     id="{anchor}"
     onclick='openNewsModal(
+        `{safe_title}`,
         `{safe_content}`,
-        `{safe_date}`
+        `{safe_date}`,
+        `{safe_link}`
     )'
 >
 
@@ -761,11 +769,11 @@ a {{
 
 .modal-title {{
 
-    font-size: 1.8rem;
+    font-weight: 700;
 
-    font-weight: 800;
+    line-height: 2.4;
 
-    line-height: 2;
+    font-size: 1rem;
 }}
 
 .modal-content {{
@@ -1018,8 +1026,10 @@ const modal =
     )
 
 function openNewsModal(
+    title,
     content,
-    date
+    date,
+    link
 ) {{
 
     document.body.classList.add(
@@ -1029,6 +1039,12 @@ function openNewsModal(
     modal.classList.add(
         "active"
     )
+
+    if (title != ""){{
+        document.getElementById(
+            "modalTitle"
+        ).innerHTML = title
+    }}
 
     document.getElementById(
         "modalContent"
