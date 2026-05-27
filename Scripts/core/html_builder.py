@@ -603,8 +603,6 @@ a {{
 
 .card-title {{
 
-    text-align: justify;
-
     font-size: 1rem;
 
     font-weight: 700;
