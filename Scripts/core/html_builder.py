@@ -6,7 +6,7 @@ from core.text_id_generator import TextIDGenerator
 
 class HTMLBuilder:
 
-    CARD_WORD_LIMIT = 22
+    CARD_WORD_LIMIT = 24
 
     def truncate_text(self, text: str) -> str:
 
@@ -18,7 +18,7 @@ class HTMLBuilder:
         if len(words) <= self.CARD_WORD_LIMIT:
             return text
 
-        return " ".join(words[:self.CARD_WORD_LIMIT]) + " ..."
+        return " ".join(words[:self.CARD_WORD_LIMIT]) + "..."
 
     def safe(self, value):
 
