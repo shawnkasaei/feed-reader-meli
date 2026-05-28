@@ -1,6 +1,26 @@
 {
   "telegram": [
     {
+      "title": "کانال رضا پهلوی",
+      "app_name": "tgm-rezapahlavi",
+      "url": "https://t.me/s/OfficialRezaPahlavi"
+    },
+    {
+      "title": "کانال فرح پهلوی",
+      "app_name": "tgm-farahpahlavi",
+      "url": "https://t.me/s/farahdibapahlavi"
+    },
+    {
+      "title": "کانال کار آنلاین",
+      "app_name": "tgm-caronline",
+      "url": "https://t.me/s/caronline_original"
+    },
+    {
+      "title": "کانال مهدی مطهرنیا",
+      "app_name": "tgm-motaharnia",
+      "url": "https://t.me/s/MehdiMotaharnia1344"
+    },
+    {
       "title": "کانال ایران اینترنشنال",
       "app_name": "tgm-iranintl",
       "url": "https://t.me/s/iranintltv"
@@ -54,467 +74,34 @@
       "title": "کانال وحید آنلاین",
       "app_name": "tgm-vahidonline",
       "url": "https://t.me/s/VahidOnline"
-    },
-    {
-      "title": "کانال کار آنلاین",
-      "app_name": "tgm-caronline",
-      "url": "https://t.me/s/caronline_original"
-    },
-    {
-      "title": "کانال مهدی مطهرنیا",
-      "app_name": "tgm-motaharnia",
-      "url": "https://t.me/s/MehdiMotaharnia1344"
     }
   ],
 
   "rss": [
     {
-      "title": "رویترز",
-      "app_name": "rss-reuters",
-      "url": "https://news.google.com/rss/search?q=site:reuters.com&hl=en-US&gl=US&ceid=US:en"
+      "title": "اخبار جهان",
+      "app_name": "rss-global",
+      "url": "https://news.google.com/rss/search?q=site:reuters.com+OR+site:bbc.com+OR+site:cnn.com+OR+site:foxnews.com+OR+site:theguardian.com+OR+site:nytimes.com+OR+site:ft.com+OR+site:aljazeera.com+OR+site:politico.com+OR+site:axios.com+OR+site:foreignaffairs.com+OR+site:foreignpolicy.com+OR+site:wsj.com+OR+site:economist.com&hl=en-US&gl=US&ceid=US:en"
     },
     {
-      "title": "رویترز درباره ایران)",
-      "app_name": "rss-iran-reuters",
-      "url": "https://news.google.com/rss/search?q=site:reuters.com+Iran&hl=en-US&gl=US&ceid=US:en"
+      "title": "ایران در نگاه جهان",
+      "app_name": "rss-global-iran",
+      "url": "https://news.google.com/rss/search?q=(Iran+OR+Tehran+OR+IRGC+OR+Pahlavi)+site:reuters.com+OR+site:bbc.com+OR+site:cnn.com+OR+site:foxnews.com+OR+site:theguardian.com+OR+site:nytimes.com+OR+site:ft.com+OR+site:aljazeera.com+OR+site:politico.com+OR+site:axios.com+OR+site:foreignaffairs.com+OR+site:foreignpolicy.com+OR+site:wsj.com+OR+site:economist.com&hl=en-US&gl=US&ceid=US:en"
     },
     {
-      "title": "بی بی سی",
-      "app_name": "rss-bbc",
-      "url": "https://news.google.com/rss/search?q=site:bbc.com&hl=en-US&gl=US&ceid=US:en"
+      "title": "اندیشکده‌های جهان",
+      "app_name": "rss-thinktanks",
+      "url": "https://news.google.com/rss/search?q=site:brookings.edu+OR+site:cfr.org+OR+site:rand.org+OR+site:csis.org+OR+site:carnegieendowment.org+OR+site:atlanticcouncil.org+OR+site:heritage.org+OR+site:americafirstpolicy.com+OR+site:hoover.org+OR+site:cato.org+OR+site:washingtoninstitute.org+OR+site:chathamhouse.org+OR+site:iiss.org+OR+site:ifri.org+OR+site:frstrategie.org+OR+site:swp-berlin.org+OR+site:sipri.org+OR+site:bruegel.org+OR+site:valdaiclub.com+OR+site:imemo.ru+OR+site:siis.org.cn+OR+site:orfonline.org&hl=en-US&gl=US&ceid=US:en"
     },
     {
-      "title": "بی بی سی درباره ایران",
-      "app_name": "rss-iran-bbc",
-      "url": "https://news.google.com/rss/search?q=site:bbc.com+Iran&hl=en-US&gl=US&ceid=US:en"
+      "title": "ایران در نگاه اندیشکده‌ها",
+      "app_name": "rss-thinktanks-iran",
+      "url": "https://news.google.com/rss/search?q=(Iran+OR+Tehran+OR+IRGC+OR+Pahlavi)+site:brookings.edu+OR+site:cfr.org+OR+site:rand.org+OR+site:csis.org+OR+site:carnegieendowment.org+OR+site:atlanticcouncil.org+OR+site:heritage.org+OR+site:americafirstpolicy.com+OR+site:hoover.org+OR+site:cato.org+OR+site:washingtoninstitute.org+OR+site:chathamhouse.org+OR+site:iiss.org+OR+site:ifri.org+OR+site:frstrategie.org+OR+site:swp-berlin.org+OR+site:sipri.org+OR+site:bruegel.org+OR+site:valdaiclub.com+OR+site:imemo.ru+OR+site:siis.org.cn+OR+site:orfonline.org&hl=en-US&gl=US&ceid=US:en"
     },
     {
-      "title": "سی ان ان",
-      "app_name": "rss-cnn",
-      "url": "https://news.google.com/rss/search?q=site:cnn.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "سی ان ان درباره ایران",
-      "app_name": "rss-iran-cnn",
-      "url": "https://news.google.com/rss/search?q=site:cnn.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فاکس نیوز",
-      "app_name": "rss-foxnews",
-      "url": "https://news.google.com/rss/search?q=site:foxnews.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فاکس نیوز درباره ایران",
-      "app_name": "rss-iran-foxnews",
-      "url": "https://news.google.com/rss/search?q=site:foxnews.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "گاردین",
-      "app_name": "rss-guardian",
-      "url": "https://news.google.com/rss/search?q=site:theguardian.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "گاردین درباره ایران",
-      "app_name": "rss-iran-guardian",
-      "url": "https://news.google.com/rss/search?q=site:theguardian.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "نیویورک تایمز",
-      "app_name": "rss-nytimes",
-      "url": "https://news.google.com/rss/search?q=site:nytimes.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "نیویورک تایمز درباره ایران",
-      "app_name": "rss-iran-nytimes",
-      "url": "https://news.google.com/rss/search?q=site:nytimes.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فایننشال تایمز",
-      "app_name": "rss-ft",
-      "url": "https://news.google.com/rss/search?q=site:ft.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فایننشال تایمز درباره ایران",
-      "app_name": "rss-iran-ft",
-      "url": "https://news.google.com/rss/search?q=site:ft.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "الجزیرة",
-      "app_name": "rss-aljazeera",
-      "url": "https://news.google.com/rss/search?q=site:aljazeera.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "الجزیرة درباره ایران",
-      "app_name": "rss-iran-aljazeera",
-      "url": "https://news.google.com/rss/search?q=site:aljazeera.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "پولیتیکو",
-      "app_name": "rss-politico",
-      "url": "https://news.google.com/rss/search?q=site:politico.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "پولیتیکو درباره ایران",
-      "app_name": "rss-iran-politico",
-      "url": "https://news.google.com/rss/search?q=site:politico.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "آکسیوس",
-      "app_name": "rss-axios",
-      "url": "https://news.google.com/rss/search?q=site:axios.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "آکسیوس درباره ایران",
-      "app_name": "rss-iran-axios",
-      "url": "https://news.google.com/rss/search?q=site:axios.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فارین افیرز",
-      "app_name": "rss-foreignaffairs",
-      "url": "https://news.google.com/rss/search?q=site:foreignaffairs.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فارین افیرز درباره ایران",
-      "app_name": "rss-iran-foreignaffairs",
-      "url": "https://news.google.com/rss/search?q=site:foreignaffairs.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فارین پولیسی",
-      "app_name": "rss-foreignpolicy",
-      "url": "https://news.google.com/rss/search?q=site:foreignpolicy.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "فارین پولیسی درباره ایران",
-      "app_name": "rss-iran-foreignpolicy",
-      "url": "https://news.google.com/rss/search?q=site:foreignpolicy.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "وال استریت ژورنال",
-      "app_name": "rss-wsj",
-      "url": "https://news.google.com/rss/search?q=site:wsj.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "وال استریت ژورنال درباره ایران",
-      "app_name": "rss-iran-wsj",
-      "url": "https://news.google.com/rss/search?q=site:wsj.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "مجله اکونومیست",
-      "app_name": "rss-economist",
-      "url": "https://news.google.com/rss/search?q=site:economist.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "مجله اکونومیست درباره ایران",
-      "app_name": "rss-iran-economist",
-      "url": "https://news.google.com/rss/search?q=site:economist.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه بروکینگز",
-      "app_name": "rss-brookings",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["سیاست خارجی", "اقتصاد جهانی", "حکمرانی"],
-      "url": "https://news.google.com/rss/search?q=site:brookings.edu&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه بروکینگز درباره ایران",
-      "app_name": "rss-iran-brookings",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "سیاست خارجی", "اقتصاد جهانی", "تحریم‌ها"],
-      "url": "https://news.google.com/rss/search?q=site:brookings.edu+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 شورای روابط خارجی",
-      "app_name": "rss-cfr",
-      "hq": "نیویورک، ایالات متحده",
-      "topics": ["دیپلماسی", "روابط بین‌الملل", "سیاست خارجی آمریکا"],
-      "url": "https://news.google.com/rss/search?q=site:cfr.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 شورای روابط خارجی درباره ایران",
-      "app_name": "rss-iran-cfr",
-      "hq": "نیویورک، ایالات متحده",
-      "topics": ["ایران", "دیپلماسی", "برجام", "سیاست خارجی آمریکا"],
-      "url": "https://news.google.com/rss/search?q=site:cfr.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه رند",
-      "app_name": "rss-rand",
-      "hq": "سانتا مونیکا، ایالات متحده",
-      "topics": ["امنیت ملی", "جنگ", "هوش مصنوعی", "سیاست دفاعی"],
-      "url": "https://news.google.com/rss/search?q=site:rand.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه رند درباره ایران",
-      "app_name": "rss-iran-rand",
-      "hq": "سانتا مونیکا، ایالات متحده",
-      "topics": ["ایران", "امنیت ملی", "برنامه هسته‌ای", "سیاست دفاعی"],
-      "url": "https://news.google.com/rss/search?q=site:rand.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مرکز مطالعات استراتژیک و بین‌المللی",
-      "app_name": "rss-csis",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["چین", "خاورمیانه", "امنیت جهانی"],
-      "url": "https://news.google.com/rss/search?q=site:csis.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مرکز مطالعات استراتژیک و بین‌المللی درباره ایران",
-      "app_name": "rss-iran-csis",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "خاورمیانه", "برنامه هسته‌ای", "امنیت منطقه‌ای"],
-      "url": "https://news.google.com/rss/search?q=site:csis.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه کارنگی برای صلح بین‌المللی",
-      "app_name": "rss-carnegie",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["دیپلماسی", "روسیه", "چین", "خاورمیانه"],
-      "url": "https://news.google.com/rss/search?q=site:carnegieendowment.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه کارنگی درباره ایران",
-      "app_name": "rss-iran-carnegie",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "دیپلماسی", "برجام", "تحریم‌ها"],
-      "url": "https://news.google.com/rss/search?q=site:carnegieendowment.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 شورای آتلانتیک",
-      "app_name": "rss-atlantic",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ناتو", "اروپا", "اوکراین", "فناوری"],
-      "url": "https://news.google.com/rss/search?q=site:atlanticcouncil.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 شورای آتلانتیک درباره ایران",
-      "app_name": "rss-iran-atlantic",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "خاورمیانه", "تحریم‌ها", "سیاست امنیتی"],
-      "url": "https://news.google.com/rss/search?q=site:atlanticcouncil.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه هریتیج",
-      "app_name": "rss-heritage",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["محافظه‌کاری", "اقتصاد بازار آزاد", "سیاست جمهوری‌خواهان"],
-      "url": "https://news.google.com/rss/search?q=site:heritage.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه هریتیج درباره ایران",
-      "app_name": "rss-iran-heritage",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "تحریم‌ها", "سیاست آمریکا", "امنیت"],
-      "url": "https://news.google.com/rss/search?q=site:heritage.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه سیاست اول آمریکا",
-      "app_name": "rss-afpi",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ترامپ", "ملی‌گرایی", "مهاجرت", "اقتصاد"],
-      "url": "https://news.google.com/rss/search?q=site:americafirstpolicy.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه سیاست اول آمریکا درباره ایران",
-      "app_name": "rss-iran-afpi",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "تحریم‌ها", "سیاست فشار حداکثری", "خاورمیانه"],
-      "url": "https://news.google.com/rss/search?q=site:americafirstpolicy.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه هوور",
-      "app_name": "rss-hoover",
-      "hq": "استنفورد، ایالات متحده",
-      "topics": ["اقتصاد", "سیاست محافظه‌کار", "امنیت ملی"],
-      "url": "https://news.google.com/rss/search?q=site:hoover.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه هوور درباره ایران",
-      "app_name": "rss-iran-hoover",
-      "hq": "استنفورد، ایالات متحده",
-      "topics": ["ایران", "امنیت ملی", "تحلیل راهبردی", "سیاست خارجی"],
-      "url": "https://news.google.com/rss/search?q=site:hoover.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه کاتو",
-      "app_name": "rss-cato",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["لیبرتارین", "آزادی اقتصادی", "کاهش مداخله دولت"],
-      "url": "https://news.google.com/rss/search?q=site:cato.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه کاتو درباره ایران",
-      "app_name": "rss-iran-cato",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "تحریم‌ها", "اقتصاد", "سیاست خارجی"],
-      "url": "https://news.google.com/rss/search?q=site:cato.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه واشنگتن برای سیاست خاور نزدیک",
-      "app_name": "rss-winep",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "اسرائیل", "خاورمیانه"],
-      "url": "https://news.google.com/rss/search?q=site:washingtoninstitute.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇺🇸 مؤسسه واشنگتن برای سیاست خاور نزدیک درباره ایران",
-      "app_name": "rss-iran-winep",
-      "hq": "واشنگتن دی‌سی، ایالات متحده",
-      "topics": ["ایران", "امنیت منطقه‌ای", "تحریم‌ها", "سیاست آمریکا"],
-      "url": "https://news.google.com/rss/search?q=site:washingtoninstitute.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇬🇧 چتم هاوس",
-      "app_name": "rss-chathamhouse",
-      "hq": "لندن، بریتانیا",
-      "topics": ["دیپلماسی", "اروپا", "ژئوپلیتیک جهانی"],
-      "url": "https://news.google.com/rss/search?q=site:chathamhouse.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇬🇧 چتم هاوس درباره ایران",
-      "app_name": "rss-iran-chathamhouse",
-      "hq": "لندن، بریتانیا",
-      "topics": ["ایران", "برجام", "دیپلماسی هسته‌ای", "خاورمیانه"],
-      "url": "https://news.google.com/rss/search?q=site:chathamhouse.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇬🇧 مؤسسه مطالعات بین‌المللی استراتژیک",
-      "app_name": "rss-iiss",
-      "hq": "لندن، بریتانیا",
-      "topics": ["قدرت نظامی", "جنگ‌ها", "امنیت جهانی"],
-      "url": "https://news.google.com/rss/search?q=site:iiss.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇬🇧 مؤسسه مطالعات بین‌المللی استراتژیک درباره ایران",
-      "app_name": "rss-iran-iiss",
-      "hq": "لندن، بریتانیا",
-      "topics": ["ایران", "توان نظامی", "امنیت منطقه‌ای", "خاورمیانه"],
-      "url": "https://news.google.com/rss/search?q=site:iiss.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇫🇷 مؤسسه فرانسوی روابط بین‌الملل",
-      "app_name": "rss-ifri",
-      "hq": "پاریس، فرانسه",
-      "topics": ["اروپا", "خاورمیانه", "امنیت بین‌الملل", "سیاست خارجی"],
-      "url": "https://news.google.com/rss/search?q=site:ifri.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇫🇷 مؤسسه فرانسوی روابط بین‌الملل درباره ایران",
-      "app_name": "rss-iran-ifri",
-      "hq": "پاریس، فرانسه",
-      "topics": ["اروپا", "خاورمیانه", "امنیت بین‌الملل", "سیاست خارجی"],
-      "url": "https://news.google.com/rss/search?q=site:ifri.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇫🇷 بنیاد تحقیقات راهبردی فرانسه",
-      "app_name": "rss-frstrategie",
-      "hq": "پاریس، فرانسه",
-      "topics": ["تهدیدات جهانی", "دفاع", "امنیت ملی"],
-      "url": "https://news.google.com/rss/search?q=site:frstrategie.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇫🇷 بنیاد تحقیقات راهبردی فرانسه درباره ایران",
-      "app_name": "rss-iran-frstrategie",
-      "hq": "پاریس، فرانسه",
-      "topics": ["تهدیدات جهانی", "دفاع", "امنیت ملی"],
-      "url": "https://news.google.com/rss/search?q=site:frstrategie.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇩🇪 مؤسسه سیاست امنیتی آلمان",
-      "app_name": "rss-swp",
-      "hq": "برلین، آلمان",
-      "topics": ["اروپا", "روسیه", "امنیت جهانی"],
-      "url": "https://news.google.com/rss/search?q=site:swp-berlin.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇩🇪 مؤسسه سیاست امنیتی آلمان درباره ایران",
-      "app_name": "rss-iran-swp",
-      "hq": "برلین، آلمان",
-      "topics": ["ایران", "خاورمیانه", "برجام", "سیاست امنیتی"],
-      "url": "https://news.google.com/rss/search?q=site:swp-berlin.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇨🇭 مؤسسه صلح استکهلم",
-      "app_name": "rss-sipri",
-      "hq": "استکهلم، سوئد",
-      "topics": ["تسلیحات", "جنگ", "آمار نظامی"],
-      "url": "https://news.google.com/rss/search?q=site:sipri.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇨🇭 مؤسسه صلح استکهلم درباره ایران",
-      "app_name": "rss-iran-sipri",
-      "hq": "استکهلم، سوئد",
-      "topics": ["ایران", "برنامه موشکی", "هسته‌ای", "امنیت منطقه‌ای"],
-      "url": "https://news.google.com/rss/search?q=site:sipri.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇧🇪 بروگل",
-      "app_name": "rss-bruegel",
-      "hq": "بروکسل، بلژیک",
-      "topics": ["اقتصاد اروپا", "سیاست مالی", "یورو"],
-      "url": "https://news.google.com/rss/search?q=site:bruegel.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇧🇪 بروگل درباره ایران",
-      "app_name": "rss-iran-bruegel",
-      "hq": "بروکسل، بلژیک",
-      "topics": ["ایران", "تحریم‌ها", "اقتصاد جهانی", "انرژی"],
-      "url": "https://news.google.com/rss/search?q=site:bruegel.org+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇷🇺 والدای",
-      "app_name": "rss-valdai",
-      "hq": "مسکو، روسیه",
-      "topics": ["روسیه", "چندقطبی", "ژئوپلیتیک"],
-      "url": "https://news.google.com/rss/search?q=site:valdaiclub.com&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇷🇺 والدای درباره ایران",
-      "app_name": "rss-iran-valdai",
-      "hq": "مسکو، روسیه",
-      "topics": ["ایران", "روسیه", "خاورمیانه", "همکاری راهبردی"],
-      "url": "https://news.google.com/rss/search?q=site:valdaiclub.com+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇷🇺 مؤسسه اقتصاد جهانی و روابط بین‌الملل",
-      "app_name": "rss-imemo",
-      "hq": "مسکو، روسیه",
-      "topics": ["اقتصاد جهانی", "ژئوپلیتیک"],
-      "url": "https://news.google.com/rss/search?q=site:imemo.ru&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇷🇺 مؤسسه اقتصاد جهانی و روابط بین‌الملل درباره ایران",
-      "app_name": "rss-iran-imemo",
-      "hq": "مسکو، روسیه",
-      "topics": ["ایران", "روسیه", "اقتصاد جهانی", "تحریم‌ها"],
-      "url": "https://news.google.com/rss/search?q=site:imemo.ru+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇨🇳 مؤسسه مطالعات بین‌المللی شانگهای",
-      "app_name": "rss-siis",
-      "hq": "شانگهای، چین",
-      "topics": ["چین", "آسیا", "امنیت منطقه‌ای"],
-      "url": "https://news.google.com/rss/search?q=site:siis.org.cn&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇨🇳 مؤسسه مطالعات بین‌المللی شانگهای درباره ایران",
-      "app_name": "rss-iran-siis",
-      "hq": "شانگهای، چین",
-      "topics": ["ایران", "چین", "همکاری اقتصادی", "کمربند-راه"],
-      "url": "https://news.google.com/rss/search?q=site:siis.org.cn+Iran&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇮🇳 مرکز تحقیقات سیاست خارجی هند",
-      "app_name": "rss-orf",
-      "hq": "دهلی نو، هند",
-      "topics": ["هند", "امنیت انرژی", "آسیا"],
-      "url": "https://news.google.com/rss/search?q=site:orfonline.org&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "🇮🇳 مرکز تحقیقات سیاست خارجی هند درباره ایران",
-      "app_name": "rss-iran-orf",
-      "hq": "دهلی نو، هند",
-      "topics": ["ایران", "انرژی", "چابهار", "ژئوپلیتیک"],
-      "url": "https://news.google.com/rss/search?q=site:orfonline.org+Iran&hl=en-US&gl=US&ceid=US:en"
+      "title": "امنیت سایبری",
+      "app_name": "rss-cybersecurity",
+      "url": "https://news.google.com/rss/search?q=site:netblocks.org+OR+site:bleepingcomputer.com+OR+site:thehackernews.com+OR+site:krebsonsecurity.com+OR+site:darkreading.com+OR+site:securityweek.com+OR+site:therecord.media+OR+site:cyberscoop.com+OR+site:schneier.com+OR+site:sans.org+OR+site:cisa.gov+OR+site:nist.gov+OR+site:mandiant.com+OR+site:crowdstrike.com+OR+site:paloaltonetworks.com+OR+site:checkpoint.com+OR+site:securelist.com&hl=en-US&gl=US&ceid=US:en"
     }
   ]
-}
+} 
