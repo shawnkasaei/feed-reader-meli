@@ -572,7 +572,7 @@ a {{
 .card-content,
 .card-bottom {{
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }}
 
 .card-date {{
