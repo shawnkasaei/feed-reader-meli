@@ -555,7 +555,7 @@ a {{
     position: absolute;
 
     width: 240px;
-    height: 240px;
+    height: 180px;
 
     top: -120px;
     left: -120px;
