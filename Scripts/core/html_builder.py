@@ -746,7 +746,7 @@ a {{
 
     line-height: 2.4;
 
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }}
 
 .modal-content {{
