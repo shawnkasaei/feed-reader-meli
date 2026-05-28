@@ -45,7 +45,7 @@ class HTMLBuilder:
 
     <div class="card-content">
 
-        <h2 class="card-title" style="{"" if StringUtils.detect_lang(safe_title.split()[0]) == "fa" else "direction: ltr; text-align: left;"}">
+        <h2 class="card-title" style="{"" if StringUtils.detect_lang(safe_title) == "fa" else "direction: ltr; text-align: left;"}">
             {safe_title}
         </h2>
 
