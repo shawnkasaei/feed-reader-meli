@@ -5,8 +5,6 @@ from core.text_id_generator import TextIDGenerator
 
 class HTMLBuilder:
 
-    CARD_WORD_LIMIT = 24
-
     def build_card(self, item):
 
         title = getattr(item, "title", "")
