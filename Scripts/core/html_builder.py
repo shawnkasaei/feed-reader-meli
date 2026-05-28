@@ -33,7 +33,7 @@ class HTMLBuilder:
         `{safe_link}`
     )'
 >
-    <a> style="display: block; position: relative; top: -250px; visibility: hidden;" id="{anchor}"</a>
+    <a style="display: block; position: relative; top: -250px; visibility: hidden;" id="{anchor}"></a>
 
     <div class="card-background-glow"></div>
 
