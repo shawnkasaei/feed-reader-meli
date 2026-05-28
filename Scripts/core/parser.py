@@ -10,25 +10,25 @@ class Parser:
 
     def parse_telegram(self, html: str):
         blocks = re.findall(
-            r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>',
+            r'(<div class="tgme_widget_message[^"]*"[^>]*data-post="([^"]+)"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>)',
             html
         )
 
         items = []
 
-        for b in blocks:
+        for full_block, data_post in blocks:
 
+            # Extract text safely
             text = re.search(
                 r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
-                b
+                full_block
             )
 
+            # Extract time
             time = re.search(
                 r'<time[^>]*datetime="([^"]+)"',
-                b
+                full_block
             )
-
-            link = None
 
             if not text or not time:
                 continue
@@ -36,14 +36,17 @@ class Parser:
             try:
                 c = text.group(1).strip()
                 c = StringUtils.remove_html_shenanegans(c)
+
                 dt = TimeUtils.parse_telegram(time.group(1))
+
+                link = f"https://t.me/{data_post}"
 
                 items.insert(0,
                     FeedItem(
                         title=StringUtils.truncate_text(c, self.TITLE_WORD_LIMIT),
                         content=c,
                         date=TimeUtils.to_string(dt),
-                        link=f"https://t.me/s/{link.group(1).strip()}" if link else ""
+                        link=link
                     )
                 )
 
