@@ -45,3 +45,15 @@ class StringUtils:
         text = re.sub(r"\s+", " ", text).strip()
 
         return text
+    
+    @staticmethod
+    def detect_lang(text: str) -> str:
+        text = text.lower()
+
+        if re.search(r'[\u0600-\u06FF]', text):
+            return "fa"
+
+        if re.search(r'[a-z]', text):
+            return "en"
+
+        return "unknown"

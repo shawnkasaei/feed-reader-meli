@@ -45,7 +45,7 @@ class HTMLBuilder:
 
     <div class="card-content">
 
-        <h2 class="card-title">
+        <h2 class="card-title" style="{"" if StringUtils.detect_lang(safe_title.split()[0]) == "fa" else "direction: ltr; text-align: left;"}">
             {safe_title}
         </h2>
 
@@ -111,7 +111,7 @@ class HTMLBuilder:
         return f"""
 <!DOCTYPE html>
 
-<html dir="auto">
+<html lang="fa" dir="auto">
 
 <head>
 
@@ -502,8 +502,7 @@ a {{
     flex: 0 0 320px;
 
     width: 320px;
-
-    height: 120px;
+    height: 280px;
 
     border-radius: 30px;
 
@@ -554,8 +553,8 @@ a {{
 
     position: absolute;
 
-    width: 240px;
-    height: 180px;
+    width: 320px;
+    height: 280px;
 
     top: -120px;
     left: -120px;
@@ -811,7 +810,7 @@ a {{
 
         width: 85vw;
 
-        height: 230px;
+        height: 200px;
     }}
 
     .news-modal {{
