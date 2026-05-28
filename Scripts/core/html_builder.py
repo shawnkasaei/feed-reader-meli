@@ -1014,6 +1014,12 @@ function openNewsModal(
     if (lang=="fa") {{
         modalTitleElement.innerHTML = title
         modalContentElement.innerHTML = content
+
+        modalTitleElement.style.direction = "rtl"
+        modalTitleElement.style.textAlign = "right"
+        
+        modalContentElement.style.direction = "rtl"
+        modalContentElement.style.textAlign = "right"
     }}
     else{{
         modalTitleElement.innerHTML = title
