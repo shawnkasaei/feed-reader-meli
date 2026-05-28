@@ -55,4 +55,4 @@ class StringUtils:
         elif re.search(r'[a-z]', text):
             return "en"
 
-        return "unknown"
+        return None

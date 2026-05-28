@@ -8,6 +8,7 @@ class HTMLBuilder:
     def build_card(self, item):
 
         title = getattr(item, "title", "")
+        lang = StringUtils.detect_lang(title)
         content = getattr(item, "content", "")
         date = getattr(item, "date", "")
         link = getattr(item, "link", "")
@@ -20,11 +21,13 @@ class HTMLBuilder:
         safe_content = StringUtils.safe(content).replace("\n", "<br>")
         safe_date = StringUtils.safe(date)
         safe_link = StringUtils.safe(link)
+        safe_lang = StringUtils.safe(lang)
 
         return f"""
 <article
     class="news-card"
         onclick='openNewsModal(
+        `{safe_lang}`,
         `{safe_title}`,
         `{safe_content}`,
         `{safe_date}`,
@@ -45,7 +48,7 @@ class HTMLBuilder:
 
     <div class="card-content">
 
-        <h2 class="card-title" style="{"" if StringUtils.detect_lang(safe_title) == "fa" else "direction: ltr; text-align: left;"}">
+        <h2 class="card-title" style="{"" if safe_lang == "fa" else "direction: ltr; text-align: left;"}">
             {safe_title}
         </h2>
 
@@ -983,6 +986,7 @@ const modal =
     )
 
 function openNewsModal(
+    lang,
     title,
     content,
     date,
@@ -997,13 +1001,30 @@ function openNewsModal(
         "active"
     )
 
-    document.getElementById(
-        "modalTitle"
-    ).innerHTML = title
+    var modalTitleElement =
+        document.getElementById(
+            "modalTitle"
+        );
+    
+    var modalContentElement =
+        document.getElementById(
+            "modalContent"
+        );
 
-    document.getElementById(
-        "modalContent"
-    ).innerHTML = content
+    if (lang=="fa") {{
+        modalTitleElement.innerHTML = title
+        modalContentElement.innerHTML = content
+    }}
+    else{{
+        modalTitleElement.innerHTML = title
+        modalContentElement.innerHTML = content
+
+        modalTitleElement.style.direction = "ltr"
+        modalTitleElement.style.textAlign = "left"
+        
+        modalContentElement.style.direction = "ltr"
+        modalContentElement.style.textAlign = "left"
+    }}
 
     document.getElementById(
         "modalDate"
