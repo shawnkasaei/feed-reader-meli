@@ -52,8 +52,7 @@ class StringUtils:
 
         if re.search(r'[\u0600-\u06FF]', text):
             return "fa"
-
-        if re.search(r'[a-z]', text):
+        elif re.search(r'[a-z]', text):
             return "en"
 
         return "unknown"
