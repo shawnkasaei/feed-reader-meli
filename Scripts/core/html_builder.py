@@ -1013,7 +1013,7 @@ function openNewsModal(
 
     if (lang=="fa") {{
         modalTitleElement.innerHTML = title
-        modalContentElement.innerHTML = content + "<br><br><a href='" + link + "' style=" text-decoration: underline; color: var(--accent);">لینک فید</a>"
+        modalContentElement.innerHTML = content + "<br><br><a href='" + link + "' style='text-decoration: underline; color: var(--accent);'>لینک فید</a>"
 
         modalTitleElement.style.direction = "rtl"
         modalTitleElement.style.textAlign = "right"
@@ -1023,7 +1023,7 @@ function openNewsModal(
     }}
     else{{
         modalTitleElement.innerHTML = title
-        modalContentElement.innerHTML = content + "<br><br><a href='" + link + "' style=" text-decoration: underline; color: var(--accent);">Feed Link</a>"
+        modalContentElement.innerHTML = content + "<br><br><a href='" + link + "' style='text-decoration: underline; color: var(--accent);'>Feed Link</a>"
 
         modalTitleElement.style.direction = "ltr"
         modalTitleElement.style.textAlign = "left"

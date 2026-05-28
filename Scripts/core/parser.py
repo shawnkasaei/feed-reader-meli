@@ -28,20 +28,22 @@ class Parser:
                 b
             )
 
+            link = None
+
             if not text or not time:
                 continue
 
             try:
-                dt = TimeUtils.parse_telegram(time.group(1))
                 c = text.group(1).strip()
                 c = StringUtils.remove_html_shenanegans(c)
+                dt = TimeUtils.parse_telegram(time.group(1))
 
                 items.insert(0,
                     FeedItem(
                         title=StringUtils.truncate_text(c, self.TITLE_WORD_LIMIT),
                         content=c,
                         date=TimeUtils.to_string(dt),
-                        link=""
+                        link=f"https://t.me/s/{link.group(1).strip()}" if link else ""
                     )
                 )
 
