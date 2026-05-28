@@ -501,7 +501,7 @@ a {{
 
     flex: 0 0 320px;
 
-    width: 320px;
+    width: 230px;
 
     height: 180px;
 
