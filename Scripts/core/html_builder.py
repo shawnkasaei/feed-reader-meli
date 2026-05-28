@@ -742,11 +742,11 @@ a {{
 
 .modal-title {{
 
-    font-weight: 700;
+    font-weight: 900;
 
     line-height: 2.4;
 
-    font-size: 1rem;
+    font-size: 0.8rem;
 }}
 
 .modal-content {{
