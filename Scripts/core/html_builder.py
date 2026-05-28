@@ -45,9 +45,9 @@ class HTMLBuilder:
 
     <div class="card-content">
 
-        <h3 class="card-title">
+        <div class="card-title">
             {safe_title}
-        </h3>
+        </div>
 
     </div>
 
