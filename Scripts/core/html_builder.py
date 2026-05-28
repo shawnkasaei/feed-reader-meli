@@ -479,7 +479,7 @@ a {{
 
     font-size: 1rem;
 
-    font-weight: 700;
+    font-weight: 900;
 }}
 
 .feed-carousel {{
