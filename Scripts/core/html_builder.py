@@ -501,9 +501,9 @@ a {{
 
     flex: 0 0 320px;
 
-    width: 230px;
+    width: 320px;
 
-    height: 180px;
+    height: 120px;
 
     border-radius: 30px;
 
