@@ -505,7 +505,7 @@ a {{
 
     width: 320px;
 
-    height: 240px;
+    height: 180px;
 
     border-radius: 30px;
 
