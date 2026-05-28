@@ -6,6 +6,8 @@ from core.time_utils import TimeUtils
 
 class Parser:
 
+    TITLE_WORD_LIMIT = 12
+
     def parse_telegram(self, html: str):
         blocks = re.findall(
             r'tgme_widget_message_bubble[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>',
@@ -35,7 +37,7 @@ class Parser:
 
                 items.insert(0,
                     FeedItem(
-                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",c).strip(), 9),
+                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",c).strip(), self.TITLE_WORD_LIMIT),
                         content=c,
                         date=TimeUtils.to_string(dt),
                         link=""
@@ -66,7 +68,7 @@ class Parser:
                 items.append(
                     FeedItem(
                         
-                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",t.group(1)).strip(), 9),
+                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",t.group(1)).strip(), self.TITLE_WORD_LIMIT),
                         content=c.group(1).strip(),
                         date=TimeUtils.to_string(dt),
                         link=l.group(1)
