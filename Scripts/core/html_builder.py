@@ -1013,7 +1013,7 @@ function openNewsModal(
 
     if (lang=="fa") {{
         modalTitleElement.innerHTML = title
-        modalContentElement.innerHTML = content
+        modalContentElement.innerHTML = content + "<br><br><a href='" + link + "'>لبنک خبر</a>"
 
         modalTitleElement.style.direction = "rtl"
         modalTitleElement.style.textAlign = "right"
@@ -1023,7 +1023,7 @@ function openNewsModal(
     }}
     else{{
         modalTitleElement.innerHTML = title
-        modalContentElement.innerHTML = content
+        modalContentElement.innerHTML = content + "<br><br><a href='" + link + "'>Feed Link</a>"
 
         modalTitleElement.style.direction = "ltr"
         modalTitleElement.style.textAlign = "left"
