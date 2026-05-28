@@ -26,14 +26,14 @@ class HTMLBuilder:
         return f"""
 <article
     class="news-card"
-    id="{anchor}"
-    onclick='openNewsModal(
+        onclick='openNewsModal(
         `{safe_title}`,
         `{safe_content}`,
         `{safe_date}`,
         `{safe_link}`
     )'
 >
+    <a> style="display: block; position: relative; top: -250px; visibility: hidden;" id="{anchor}"</a>
 
     <div class="card-background-glow"></div>
 
