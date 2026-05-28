@@ -111,7 +111,7 @@ class HTMLBuilder:
         return f"""
 <!DOCTYPE html>
 
-<html lang="fa" dir="auto">
+<html dir="auto">
 
 <head>
 
@@ -998,11 +998,9 @@ function openNewsModal(
         "active"
     )
 
-    if (title != ""){{
-        document.getElementById(
-            "modalTitle"
-        ).innerHTML = title
-    }}
+    document.getElementById(
+        "modalTitle"
+    ).innerHTML = title
 
     document.getElementById(
         "modalContent"
