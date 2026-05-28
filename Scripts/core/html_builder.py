@@ -592,7 +592,7 @@ a {{
 
 .card-title {{
 
-    font-size: 1rem;
+    font-size: 1.2rem;
 
     font-weight: 700;
 
@@ -735,7 +735,7 @@ a {{
 
     line-height: 2.4;
 
-    font-size: 1rem;
+    font-size: 1.2rem;
 }}
 
 .modal-content {{

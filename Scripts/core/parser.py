@@ -6,7 +6,7 @@ from core.time_utils import TimeUtils
 
 class Parser:
 
-    TITLE_WORD_LIMIT = 9
+    TITLE_WORD_LIMIT = 12
 
     def parse_telegram(self, html: str):
         blocks = re.findall(
