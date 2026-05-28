@@ -34,6 +34,7 @@ class Parser:
             try:
                 dt = TimeUtils.parse_telegram(time.group(1))
                 c = text.group(1).strip()
+                c = StringUtils.remove_html_shenanegans(c)
 
                 items.insert(0,
                     FeedItem(
