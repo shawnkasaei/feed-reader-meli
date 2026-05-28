@@ -69,7 +69,7 @@ class Parser:
                 items.append(
                     FeedItem(
                         title=StringUtils.truncate_text(t, self.TITLE_WORD_LIMIT),
-                        content=c + f"<br><br><a>href='{l}'>لینک خبر</a>",
+                        content=StringUtils.remove_html_shenanegans(c),
                         date=TimeUtils.to_string(dt),
                         link=l
                     )
