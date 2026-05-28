@@ -2,44 +2,44 @@
   "telegram": [
     {
       "title": "کانال ایران اینترنشنال",
-      "dir_name": "tgm-iranintl",
+      "app_name": "tgm-iranintl",
       "url": "https://t.me/s/iranintltv"
     },
     {
       "title": "کانال ضد تی وی",
-      "dir_name": "tgm-ztv",
+      "app_name": "tgm-ztv",
       "url": "https://t.me/s/ZTVofficial"
     },
     {
       "title": "کانال بی‌بی‌سی فارسی",
-      "dir_name": "tgm-bbcpersian",
+      "app_name": "tgm-bbcpersian",
       "url": "https://t.me/s/bbcpersian"
     },
     {
       "title": "کانال رادیو فردا",
-      "dir_name": "tgm-radiofarda",
+      "app_name": "tgm-radiofarda",
       "url": "https://t.me/s/radiofarda"
     },
     {
       "title": "کانال صدای آمریکا",
-      "dir_name": "tgm-voapersian",
+      "app_name": "tgm-voapersian",
       "url": "https://t.me/s/farsivoa"
     },
     {
       "title": "کانال مهدی مطهرنیا",
-      "dir_name": "tgm-motaharnia",
+      "app_name": "tgm-motaharnia",
       "url": "https://t.me/s/MehdiMotaharnia1344"
     },
     {
       "title": "کانال وحید آنلاین",
-      "dir_name": "tgm-vahidonline",
+      "app_name": "tgm-vahidonline",
       "url": "https://t.me/s/VahidOnline"
     }
   ],
   "rss": [
     {
       "title": "سایت هکر نیوز",
-      "dir_name": "feed-ycombinator",
+      "app_name": "feed-ycombinator",
       "url": "https://news.ycombinator.com/rss"
     }
   ]

@@ -1,4 +1,5 @@
 import re
+from core.string_utils import StringUtils
 from models.feed_item import FeedItem
 from core.time_utils import TimeUtils
 
@@ -30,11 +31,12 @@ class Parser:
 
             try:
                 dt = TimeUtils.parse_telegram(time.group(1))
+                c = text.group(1).strip()
 
                 items.insert(0,
                     FeedItem(
-                        title="",
-                        content=text.group(1).strip(),
+                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",c).strip(), 9),
+                        content=c,
                         date=TimeUtils.to_string(dt),
                         link=""
                     )
@@ -63,8 +65,9 @@ class Parser:
 
                 items.append(
                     FeedItem(
-                        title=re.sub(r"<[^>]+>", "", t.group(1)).strip(),
-                        content=c.group(1),
+                        
+                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",t.group(1)).strip(), 9),
+                        content=c.group(1).strip(),
                         date=TimeUtils.to_string(dt),
                         link=l.group(1)
                     )

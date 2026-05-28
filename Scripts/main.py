@@ -44,22 +44,22 @@ class App:
                 xml_data = self.xml_builder.build(
                     items,
                     source["title"],
-                    source["dir_name"]
+                    source["app_name"]
                 )
 
                 # save xml
                 self.storage.save_xml(
-                    source["dir_name"],
+                    source["app_name"],
                     xml_data
                 )
 
                 feeds.append({
                     "source": source["title"],
-                    "file": source["dir_name"],
+                    "file": source["app_name"],
                     "items": items
                 })
 
-                print(f"✔ Telegram -> {source['dir_name']}")
+                print(f"✔ Telegram -> {source['app_name']}")
 
             except Exception as e:
                 print(f"❌ Telegram error -> {source['title']}")
@@ -77,21 +77,21 @@ class App:
                 xml_data = self.xml_builder.build(
                     items,
                     source["title"],
-                    source["dir_name"]
+                    source["app_name"]
                 )
 
                 self.storage.save_xml(
-                    source["dir_name"],
+                    source["app_name"],
                     xml_data
                 )
 
                 feeds.append({
                     "source": source["title"],
-                    "file": source["dir_name"],
+                    "file": source["app_name"],
                     "items": items
                 })
 
-                print(f"✔ RSS -> {source['dir_name']}")
+                print(f"✔ RSS -> {source['app_name']}")
 
             except Exception as e:
                 print(f"❌ RSS error -> {source['title']}")

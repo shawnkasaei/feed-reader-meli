@@ -1,5 +1,4 @@
-from html import escape
-
+from core.string_utils import StringUtils
 from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
 
@@ -8,25 +7,6 @@ class HTMLBuilder:
 
     CARD_WORD_LIMIT = 24
 
-    def truncate_text(self, text: str) -> str:
-
-        if not text:
-            return ""
-
-        words = text.split()
-
-        if len(words) <= self.CARD_WORD_LIMIT:
-            return text
-
-        return " ".join(words[:self.CARD_WORD_LIMIT]) + "..."
-
-    def safe(self, value):
-
-        if value is None:
-            return ""
-
-        return escape(str(value))
-
     def build_card(self, item):
 
         title = getattr(item, "title", "")
@@ -34,21 +14,14 @@ class HTMLBuilder:
         date = getattr(item, "date", "")
         link = getattr(item, "link", "")
 
-        if title != "":
-            preview = self.truncate_text(title)
-        else:
-            preview = self.truncate_text(content)
-        
-
         anchor = TextIDGenerator.generate(
             str(date) + str(title) + str(content)
         )
 
-        safe_title = self.safe(title)
-        safe_content = self.safe(content).replace("\n", "<br>")
-        safe_preview = self.safe(preview)
-        safe_date = self.safe(date)
-        safe_link = self.safe(link)
+        safe_title = StringUtils.safe(title)
+        safe_content = StringUtils.safe(content).replace("\n", "<br>")
+        safe_date = StringUtils.safe(date)
+        safe_link = StringUtils.safe(link)
 
         return f"""
 <article
@@ -75,7 +48,7 @@ class HTMLBuilder:
     <div class="card-content">
 
         <h3 class="card-title">
-            {safe_preview}
+            {safe_title}
         </h3>
 
     </div>
@@ -93,7 +66,7 @@ class HTMLBuilder:
 
     def build_section(self, feed):
 
-        source = self.safe(feed.get("source", "خبرگزاری"))
+        source = StringUtils.safe(feed.get("source", "خبرگزاری"))
 
         cards = []
 

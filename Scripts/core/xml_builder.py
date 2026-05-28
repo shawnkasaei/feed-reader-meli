@@ -5,12 +5,7 @@ from core.text_id_generator import TextIDGenerator
 
 class XMLBuilder:
 
-    def build(self, items, title: str, feed_name: str):
-
-        root = ET.Element("RSS", version="2.0")
-        channel = ET.SubElement(root, "channel")
-
-        ET.SubElement(channel, "title").text = title
+    def build(self, items, title: str, app_name: str):
 
         base_url = (
             "https://htmlpreview.github.io/?"
@@ -19,18 +14,19 @@ class XMLBuilder:
             "refs/heads/main/Feeds/view/index.html"
         )
 
-        for item in items:
+        root = ET.Element("RSS", version="2.0")
+        channel = ET.SubElement(root, "channel")
 
-            if item.title != "":
-                item.title = re.sub(r"<[^>]+>", "", item.title)
-            else:
-                item.title = re.sub(r"<[^>]+>", "", item.content)
+        ET.SubElement(channel, "title").text = title
+
+        for item in items:
 
             anchor_id = f"{TextIDGenerator.generate(item.date+item.title+item.content)}"
 
             node = ET.SubElement(channel, "item")
 
             ET.SubElement(node, "title").text = item.title
+            ET.SubElement(node, "description").text = item.content
             ET.SubElement(node, "pubDate").text = item.date
             ET.SubElement(node, "link").text = (
                 f"{base_url}#{anchor_id}"
