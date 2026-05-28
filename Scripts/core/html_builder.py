@@ -45,9 +45,9 @@ class HTMLBuilder:
 
     <div class="card-content">
 
-        <div class="card-title">
+        <h2 class="card-title">
             {safe_title}
-        </div>
+        </h2>
 
     </div>
 
@@ -80,9 +80,9 @@ class HTMLBuilder:
 
             <div class="feed-indicator"></div>
 
-            <h2 class="feed-title">
+            <div class="feed-title">
                 {source}
-            </h2>
+            </div>
 
         </div>
 
@@ -596,15 +596,6 @@ a {{
 
     font-weight: 700;
 
-    line-height: 2;
-
-    overflow: hidden;
-
-    display: -webkit-box;
-
-    -webkit-line-clamp: 5;
-
-    -webkit-box-orient: vertical;
 }}
 
 .card-bottom {{
@@ -744,7 +735,7 @@ a {{
 
     line-height: 2.4;
 
-    font-size: 0.9rem;
+    font-size: 1rem;
 }}
 
 .modal-content {{
@@ -821,10 +812,6 @@ a {{
         width: 85vw;
 
         height: 230px;
-    }}
-
-    .modal-title {{
-        font-size: 1.4rem;
     }}
 
     .news-modal {{
