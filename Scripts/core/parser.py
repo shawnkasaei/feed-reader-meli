@@ -37,7 +37,7 @@ class Parser:
 
                 items.insert(0,
                     FeedItem(
-                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",c).strip(), self.TITLE_WORD_LIMIT),
+                        title=StringUtils.truncate_text(c, self.TITLE_WORD_LIMIT),
                         content=c,
                         date=TimeUtils.to_string(dt),
                         link=""
@@ -54,24 +54,23 @@ class Parser:
 
         for item in re.findall(r"<item>([\s\S]*?)<\/item>", xml):
 
-            t = re.search(r"<title>([\s\S]*?)<\/title>", item)
-            c = re.search(r"<description>([\s\S]*?)<\/description>", item)
-            d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item)
-            l = re.search(r"<link>([\s\S]*?)<\/link>", item)
+            t = re.search(r"<title>([\s\S]*?)<\/title>", item).group(1).strip()
+            c = re.search(r"<description>([\s\S]*?)<\/description>", item).group(1).strip()
+            d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item).group(1).strip()
+            l = re.search(r"<link>([\s\S]*?)<\/link>", item).group(1).strip()
 
             if not t or not d:
                 continue
 
             try:
-                dt = TimeUtils.parse_rss(d.group(1))
+                dt = TimeUtils.parse_rss(d)
 
                 items.append(
                     FeedItem(
-                        
-                        title=StringUtils.truncate_text(re.sub(r"<[^>]+>", " ",t.group(1)).strip(), self.TITLE_WORD_LIMIT),
-                        content=c.group(1).strip(),
+                        title=StringUtils.truncate_text(t, self.TITLE_WORD_LIMIT),
+                        content=c + f"<br><br><a>href='{l}'>لینک خبر</a>",
                         date=TimeUtils.to_string(dt),
-                        link=l.group(1)
+                        link=l
                     )
                 )
 

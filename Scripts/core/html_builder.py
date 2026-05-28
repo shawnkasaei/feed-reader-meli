@@ -111,7 +111,7 @@ class HTMLBuilder:
         return f"""
 <!DOCTYPE html>
 
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="auto">
 
 <head>
 
