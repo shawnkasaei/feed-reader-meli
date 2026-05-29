@@ -11,14 +11,19 @@
       "url": "https://t.me/s/farahdibapahlavi"
     },
     {
+      "title": "کانال مهدی مطهرنیا",
+      "app_name": "tgm-motaharnia",
+      "url": "https://t.me/s/MehdiMotaharnia1344"
+    },
+    {
       "title": "کانال کار آنلاین",
       "app_name": "tgm-caronline",
       "url": "https://t.me/s/caronline_original"
     },
     {
-      "title": "کانال مهدی مطهرنیا",
-      "app_name": "tgm-motaharnia",
-      "url": "https://t.me/s/MehdiMotaharnia1344"
+      "title": "کانال وحید آنلاین",
+      "app_name": "tgm-vahidonline",
+      "url": "https://t.me/s/VahidOnline"
     },
     {
       "title": "کانال ایران اینترنشنال",
@@ -71,13 +76,23 @@
       "url": "https://t.me/s/euronewspe"
     },
     {
-      "title": "کانال وحید آنلاین",
-      "app_name": "tgm-vahidonline",
-      "url": "https://t.me/s/VahidOnline"
+      "title": "کانال العربیه فارسی",
+      "app_name": "tgm-alarabiyafar",
+      "url": "https://t.me/s/Alarabiya_far"
     }
   ],
 
   "rss": [
+    {
+      "title": "تی آر تی فارسی",
+      "app_name": "rss-trtfarsi",
+      "url": "https://news.google.com/rss/search?q=when%3A1d%20site:trtfarsi.com&hl=en-US&gl=US&ceid=US:en"
+    },
+    {
+      "title": "رادیو بین‌المللی فرانسه",
+      "app_name": "rss-rfifa",
+      "url": "https://www.rfi.fr/fa/rss"
+    },
     {
       "title": "اخبار جهان",
       "app_name": "rss-global",
