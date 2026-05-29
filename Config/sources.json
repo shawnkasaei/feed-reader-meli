@@ -26,68 +26,63 @@
       "url": "https://t.me/s/VahidOnline"
     },
     {
-      "title": "کانال ایران اینترنشنال",
+      "title": "ایران اینترنشنال",
       "app_name": "tgm-iranintl",
       "url": "https://t.me/s/iranintltv"
     },
     {
-      "title": "کانال ضد تی وی",
+      "title": "ضد تی وی",
       "app_name": "tgm-ztv",
       "url": "https://t.me/s/ZTVofficial"
     },
     {
-      "title": "کانال منوتو",
+      "title": "منوتو",
       "app_name": "tgm-manoto",
       "url": "https://t.me/s/manototv"
     },
     {
-      "title": "کانال صدای آمریکا",
+      "title": "صدای آمریکا",
       "app_name": "tgm-voapersian",
       "url": "https://t.me/s/farsivoa"
     },
     {
-      "title": "کانال بی‌بی‌سی فارسی",
+      "title": "بی‌بی‌سی فارسی",
       "app_name": "tgm-bbcpersian",
       "url": "https://t.me/s/bbcpersian"
     },
     {
-      "title": "کانال رادیو فردا",
+      "title": "رادیو فردا",
       "app_name": "tgm-radiofarda",
       "url": "https://t.me/s/radiofarda"
     },
     {
-      "title": "کانال ایران وایر",
+      "title": "ایران وایر",
       "app_name": "tgm-iranwire",
       "url": "https://t.me/s/Farsi_Iranwire"
     },
     {
-      "title": "کانال دویچه وله فارسی",
+      "title": "دویچه وله فارسی",
       "app_name": "tgm-dwfarsi",
       "url": "https://t.me/s/dw_farsi"
     },
     {
-      "title": "کانال ایندیپندنت فارسی",
+      "title": "ایندیپندنت فارسی",
       "app_name": "tgm-indypersian",
       "url": "https://t.me/s/indypersian"
     },
     {
-      "title": "کانال یورونیوز فارسی",
+      "title": "یورونیوز فارسی",
       "app_name": "tgm-euronewsfarsi",
       "url": "https://t.me/s/euronewspe"
     },
     {
-      "title": "کانال العربیه فارسی",
+      "title": "العربیه فارسی",
       "app_name": "tgm-alarabiyafar",
       "url": "https://t.me/s/Alarabiya_far"
     }
   ],
 
   "rss": [
-    {
-      "title": "تی آر تی فارسی",
-      "app_name": "rss-trtfarsi",
-      "url": "https://news.google.com/rss/search?q=when%3A1d%20site:trtfarsi.com&hl=en-US&gl=US&ceid=US:en"
-    },
     {
       "title": "رادیو بین‌المللی فرانسه",
       "app_name": "rss-rfifa",
