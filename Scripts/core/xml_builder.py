@@ -1,6 +1,5 @@
 import re
 import xml.etree.ElementTree as ET
-from core.time_utils import TimeUtils
 from core.text_id_generator import TextIDGenerator
 
 class XMLBuilder:
