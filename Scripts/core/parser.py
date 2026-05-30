@@ -1,7 +1,7 @@
 import re
 from core.string_utils import StringUtils
-from models.feed_item import FeedItem
 from core.time_utils import TimeUtils
+from models.feed_item import FeedItem
 
 
 class Parser:
