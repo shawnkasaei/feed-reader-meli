@@ -38,7 +38,7 @@ class App:
 
             try:
                 html = self.fetcher.get_text(source["url"])
-                items = Telegram.parse(html)
+                items = Telegram.parse(html=html)
 
                 # build xml
                 xml_data = self.xml_builder.build(
@@ -72,7 +72,7 @@ class App:
 
             try:
                 xml = self.fetcher.get_text(source["url"])
-                items = RSS.parse(xml)
+                items = RSS.parse(xml=xml)
 
                 xml_data = self.xml_builder.build(
                     items,
