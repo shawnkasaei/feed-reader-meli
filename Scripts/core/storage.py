@@ -14,10 +14,10 @@ class Storage:
         self.feeds.mkdir(parents=True, exist_ok=True)
         (self.feeds / f"{name}.xml").write_bytes(data)
 
+    def save_json(self, name: str, data: str):
+        self.feeds.mkdir(parents=True, exist_ok=True)
+        (self.feeds / f"{name}.json").write_text(data, encoding="utf-8")
+
     def save_html(self, html: str):
         self.view.mkdir(parents=True, exist_ok=True)
         (self.view / "index.html").write_text(html, encoding="utf-8")
-
-    def save_css(self, css: str):
-        self.view.mkdir(parents=True, exist_ok=True)
-        (self.view / "style.css").write_text(css, encoding="utf-8")
