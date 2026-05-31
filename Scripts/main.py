@@ -20,6 +20,7 @@ class App:
         self.config = json.loads(
             (BASE / "Config" / "sources.json").read_text(encoding="utf-8")
         )
+        self.title_char_limit = 120
 
         # core services
         self.fetcher = Fetcher()
@@ -38,7 +39,7 @@ class App:
 
             try:
                 html = self.fetcher.get_text(source["url"])
-                items = self.tgm_parser.parse(html=html)
+                items = self.tgm_parser.parse(html=html, title_char_limit=self.title_char_limit)
 
                 # build xml
                 xml_data = self.xml_builder.build(
@@ -72,7 +73,7 @@ class App:
 
             try:
                 xml = self.fetcher.get_text(source["url"])
-                items = self.rss_parser.parse(xml=xml)
+                items = self.rss_parser.parse(xml=xml, title_char_limit=self.title_char_limit)
 
                 xml_data = self.xml_builder.build(
                     items,
