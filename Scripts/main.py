@@ -20,7 +20,7 @@ class App:
         self.config = json.loads(
             (BASE / "Config" / "sources.json").read_text(encoding="utf-8")
         )
-        self.title_char_limit = 120
+        self.title_char_limit = 100
 
         # core services
         self.fetcher = Fetcher()
