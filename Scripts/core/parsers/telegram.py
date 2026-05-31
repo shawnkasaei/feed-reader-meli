@@ -16,13 +16,11 @@ class Telegram:
 
         for full_block, data_post in blocks:
 
-            # Extract text safely
             text = re.search(
                 r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
                 full_block
             )
 
-            # Extract time
             time = re.search(
                 r'<time[^>]*datetime="([^"]+)"',
                 full_block

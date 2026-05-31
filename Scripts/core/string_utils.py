@@ -31,17 +31,11 @@ class StringUtils:
         if not text:
             return ""
 
-        # 1. Decode HTML entities first (important)
         text = html.unescape(text)
 
-        # 2. Remove script/style blocks completely
         text = re.sub(r"<script[\s\S]*?</script>", "", text, flags=re.IGNORECASE)
         text = re.sub(r"<style[\s\S]*?</style>", "", text, flags=re.IGNORECASE)
-
-        # 3. Remove all HTML tags
         text = re.sub(r"<[^>]*>", "", text)
-
-        # 4. Normalize whitespace (includes &nbsp; after unescape)
         text = re.sub(r"\s+", " ", text).strip()
 
         return text
