@@ -13,7 +13,7 @@ class StringUtils:
         return escape(str(value))
     
     @staticmethod
-    def truncate_text(text, word_limit):
+    def truncate_text_word(text, word_limit):
 
         if not text:
             return ""
@@ -24,6 +24,17 @@ class StringUtils:
             return text
 
         return " ".join(words[:word_limit]) + "..."
+    
+    @staticmethod
+    def truncate_text_char(text, char_limit):
+
+        if not text:
+            return ""
+
+        if len(text) <= char_limit:
+            return text
+
+        return text[:char_limit].rstrip() + "..."
     
     @staticmethod
     def remove_html_shenanegans(text):

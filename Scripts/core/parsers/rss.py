@@ -6,7 +6,7 @@ from models.feed_item import FeedItem
 
 class RSS:
 
-    def parse(self, xml: str, title_word_limit:int = 12):
+    def parse(self, xml: str, title_char_limit:int = 60):
         items = []
 
         for item in re.findall(r"<item>([\s\S]*?)<\/item>", xml):
@@ -24,7 +24,7 @@ class RSS:
 
                 items.append(
                     FeedItem(
-                        title=StringUtils.truncate_text(t, title_word_limit),
+                        title=StringUtils.truncate_text_char(t, title_char_limit),
                         content=StringUtils.remove_html_shenanegans(c),
                         date=TimeUtils.to_string(dt),
                         link=l

@@ -6,7 +6,7 @@ from models.feed_item import FeedItem
 
 class Telegram:
 
-    def parse(self, html: str, title_word_limit:int = 12):
+    def parse(self, html: str, title_char_limit:int = 60):
         blocks = re.findall(
             r'(<div class="tgme_widget_message[^"]*"[^>]*data-post="([^"]+)"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>)',
             html
@@ -39,7 +39,7 @@ class Telegram:
 
                 items.insert(0,
                     FeedItem(
-                        title=StringUtils.truncate_text(c, title_word_limit),
+                        title=StringUtils.truncate_text_char(c, title_char_limit),
                         content=c,
                         date=TimeUtils.to_string(dt),
                         link=link
