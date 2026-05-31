@@ -36,11 +36,6 @@
       "url": "https://t.me/s/ZTVofficial"
     },
     {
-      "title": "منوتو",
-      "app_name": "tgm-manoto",
-      "url": "https://t.me/s/manototv"
-    },
-    {
       "title": "صدای آمریکا",
       "app_name": "tgm-voapersian",
       "url": "https://t.me/s/farsivoa"
@@ -84,7 +79,7 @@
 
   "rss": [
     {
-      "title": "رادیو بین‌المللی فرانسه",
+      "title": "رادیو بین‌المللی فرانسه فارسی",
       "app_name": "rss-rfifa",
       "url": "https://www.rfi.fr/fa/rss"
     },
