@@ -1,11 +1,9 @@
 import json
 import time
 from pathlib import Path
-from datetime import datetime
-
 from core.fetcher import Fetcher
-from core.parsers.rss import RSS
 from core.parsers.telegram import Telegram
+from core.parsers.rss import RSS
 from core.xml_builder import XMLBuilder
 from core.html_builder import HTMLBuilder
 from core.storage import Storage
@@ -25,6 +23,8 @@ class App:
 
         # core services
         self.fetcher = Fetcher()
+        self.tgm_parser = Telegram()
+        self.rss_parser = RSS()
         self.xml_builder = XMLBuilder()
         self.html_builder = HTMLBuilder()
         self.storage = Storage(BASE)
@@ -38,7 +38,7 @@ class App:
 
             try:
                 html = self.fetcher.get_text(source["url"])
-                items = Telegram.parse(html=html)
+                items = self.tgm_parser.parse(html=html)
 
                 # build xml
                 xml_data = self.xml_builder.build(
@@ -72,7 +72,7 @@ class App:
 
             try:
                 xml = self.fetcher.get_text(source["url"])
-                items = RSS.parse(xml=xml)
+                items = self.rss_parser.parse(xml=xml)
 
                 xml_data = self.xml_builder.build(
                     items,
