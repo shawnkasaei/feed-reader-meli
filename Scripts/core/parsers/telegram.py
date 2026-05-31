@@ -4,11 +4,9 @@ from core.time_utils import TimeUtils
 from models.feed_item import FeedItem
 
 
-class Parser:
+class Telegram:
 
-    TITLE_WORD_LIMIT = 12
-
-    def parse_telegram(self, html: str):
+    def parse(self, html: str, title_word_limit:int = 12):
         blocks = re.findall(
             r'(<div class="tgme_widget_message[^"]*"[^>]*data-post="([^"]+)"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>)',
             html
@@ -43,40 +41,10 @@ class Parser:
 
                 items.insert(0,
                     FeedItem(
-                        title=StringUtils.truncate_text(c, self.TITLE_WORD_LIMIT),
+                        title=StringUtils.truncate_text(c, title_word_limit),
                         content=c,
                         date=TimeUtils.to_string(dt),
                         link=link
-                    )
-                )
-
-            except:
-                continue
-
-        return items
-
-    def parse_rss(self, xml: str):
-        items = []
-
-        for item in re.findall(r"<item>([\s\S]*?)<\/item>", xml):
-
-            t = re.search(r"<title>([\s\S]*?)<\/title>", item).group(1).strip()
-            c = re.search(r"<description>([\s\S]*?)<\/description>", item).group(1).strip()
-            d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item).group(1).strip()
-            l = re.search(r"<link>([\s\S]*?)<\/link>", item).group(1).strip()
-
-            if not t or not d:
-                continue
-
-            try:
-                dt = TimeUtils.parse_rss(d)
-
-                items.append(
-                    FeedItem(
-                        title=StringUtils.truncate_text(t, self.TITLE_WORD_LIMIT),
-                        content=StringUtils.remove_html_shenanegans(c),
-                        date=TimeUtils.to_string(dt),
-                        link=l
                     )
                 )
 

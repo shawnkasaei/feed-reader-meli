@@ -4,7 +4,8 @@ from pathlib import Path
 from datetime import datetime
 
 from core.fetcher import Fetcher
-from core.parser import Parser
+from core.parsers.rss import RSS
+from core.parsers.telegram import Telegram
 from core.xml_builder import XMLBuilder
 from core.html_builder import HTMLBuilder
 from core.storage import Storage
@@ -24,7 +25,6 @@ class App:
 
         # core services
         self.fetcher = Fetcher()
-        self.parser = Parser()
         self.xml_builder = XMLBuilder()
         self.html_builder = HTMLBuilder()
         self.storage = Storage(BASE)
@@ -38,7 +38,7 @@ class App:
 
             try:
                 html = self.fetcher.get(source["url"])
-                items = self.parser.parse_telegram(html)
+                items = Telegram.parse(html)
 
                 # build xml
                 xml_data = self.xml_builder.build(
@@ -72,7 +72,7 @@ class App:
 
             try:
                 xml = self.fetcher.get(source["url"])
-                items = self.parser.parse_rss(xml)
+                items = RSS.parse(xml)
 
                 xml_data = self.xml_builder.build(
                     items,
