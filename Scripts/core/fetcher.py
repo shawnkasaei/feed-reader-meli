@@ -6,7 +6,7 @@ class Fetcher:
             "User-Agent": "Mozilla/5.0"
         }
 
-    def get(self, url: str) -> str:
+    def get_text(self, url: str) -> str:
         r = requests.get(url, headers=self.headers, timeout=15)
         r.raise_for_status()
         return r.text

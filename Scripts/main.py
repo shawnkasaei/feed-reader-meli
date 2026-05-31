@@ -37,7 +37,7 @@ class App:
         for source in self.config.get("telegram", []):
 
             try:
-                html = self.fetcher.get(source["url"])
+                html = self.fetcher.get_text(source["url"])
                 items = Telegram.parse(html)
 
                 # build xml
@@ -71,7 +71,7 @@ class App:
         for source in self.config.get("rss", []):
 
             try:
-                xml = self.fetcher.get(source["url"])
+                xml = self.fetcher.get_text(source["url"])
                 items = RSS.parse(xml)
 
                 xml_data = self.xml_builder.build(
