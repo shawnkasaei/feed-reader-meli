@@ -85,7 +85,7 @@
   "website": [
     {
       "title": "رادیو تلویزیون ژاپن فارسی",
-      "app_name": "website-nhkfarsi",
+      "app_name": "site-nhkfarsi",
       "url": "https://www3.nhk.or.jp/nhkworld/fa/news/list/",
       "selectors": {
         "container": "body > div.l-wrapper.-show > div > div > div > div.c-list.-type01 > ul > li",
