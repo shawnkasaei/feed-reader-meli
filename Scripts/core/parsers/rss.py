@@ -20,13 +20,14 @@ class RSS:
                 continue
 
             try:
-                dt = TimeUtils.parse_rss(d)
+                dt = TimeUtils.normalize(d)
+                dt = TimeUtils.to_string(dt)
 
                 items.append(
                     FeedItem(
                         title=StringUtils.truncate_text_char(t, title_char_limit),
                         content=StringUtils.remove_html_shenanegans(c),
-                        date=TimeUtils.to_string(dt),
+                        date=dt,
                         link=l
                     )
                 )

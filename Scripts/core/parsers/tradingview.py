@@ -1,5 +1,4 @@
-from core.time_utils import TimeUtils
-import tradingview_screener # Add this to requirements.txt - pip install tradingview-screener
+import tradingview_screener
 
 class TradingView:
 
@@ -35,19 +34,11 @@ class TradingView:
             "source": "tradingview"
         }
 
-    def get_index(self, symbol): # Under Construction
-        data = (tradingview_screener.Query()
-                .set_index(symbol)
-                .limit(500)
-                .get_scanner_data())
-        
-        return data
+    def get_index(self, symbol):
+        return None
 
     def get_commodity(self, symbol):
         return None
 
     def get_forex(self, symbol):
         return None
-    
-if __name__ == "__main__":
-    print(TradingView().get_index("SYML:SP;SPX"))

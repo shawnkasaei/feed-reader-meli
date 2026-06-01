@@ -4,6 +4,7 @@ from pathlib import Path
 from core.fetcher import Fetcher
 from core.parsers.telegram import Telegram
 from core.parsers.rss import RSS
+from core.parsers.website import Website
 from core.xml_builder import XMLBuilder
 from core.html_builder import HTMLBuilder
 from core.storage import Storage
@@ -26,6 +27,7 @@ class App:
         self.fetcher = Fetcher()
         self.tgm_parser = Telegram()
         self.rss_parser = RSS()
+        self.website_parser = Website()
         self.xml_builder = XMLBuilder()
         self.html_builder = HTMLBuilder()
         self.storage = Storage(BASE)
@@ -38,7 +40,7 @@ class App:
         for source in self.config.get("telegram", []):
 
             try:
-                html = self.fetcher.get_text(source["url"])
+                html = self.fetcher.get_text_by_requests(source["url"])
                 items = self.tgm_parser.parse(html=html, title_char_limit=self.title_char_limit)
 
                 # build xml
@@ -68,11 +70,43 @@ class App:
 
             time.sleep(1)
 
+        # ---------- Website ----------
+        for source in self.config.get("website", []):
+
+            try:
+                html = self.fetcher.get_text_by_requests(source["url"])
+                items = self.website_parser.parse(html=html, scraping_rules=json.dumps(source["selectors"]), title_char_limit=self.title_char_limit)
+
+                xml_data = self.xml_builder.build(
+                    items,
+                    source["title"],
+                    source["app_name"]
+                )
+
+                self.storage.save_xml(
+                    source["app_name"],
+                    xml_data
+                )
+
+                feeds.append({
+                    "source": source["title"],
+                    "file": source["app_name"],
+                    "items": items
+                })
+
+                print(f"✔ Website -> {source['app_name']}")
+
+            except Exception as e:
+                print(f"❌ Website error -> {source['title']}")
+                print(e)
+
+            time.sleep(1)
+
         # ---------- RSS ----------
         for source in self.config.get("rss", []):
 
             try:
-                xml = self.fetcher.get_text(source["url"])
+                xml = self.fetcher.get_text_by_requests(source["url"])
                 items = self.rss_parser.parse(xml=xml, title_char_limit=self.title_char_limit)
 
                 xml_data = self.xml_builder.build(

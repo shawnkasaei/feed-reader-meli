@@ -74,6 +74,28 @@
       "title": "العربیه فارسی",
       "app_name": "tgm-alarabiyafar",
       "url": "https://t.me/s/Alarabiya_far"
+    },
+    {
+      "title": "تی آر تی فارسی",
+      "app_name": "tgm-trtfarsi",
+      "url": "https://t.me/s/farsi_trt"
+    },
+  ],
+
+  "website": [
+    {
+      "title": "رادیو تلویزیون ژاپن فارسی",
+      "app_name": "website-nhkfarsi",
+      "url": "https://www3.nhk.or.jp/nhkworld/fa/news/list/",
+      "selectors": {
+        "container": "body > div.l-wrapper.-show > div > div > div > div.c-list.-type01 > ul > li",
+        "title": "div.c-item__texts > div.c-item__title > a",
+        "description": null,
+        "date": "div.c-item__texts > div.c-item__info > span",
+        "date_format": null,
+        "url_base": "https://www3.nhk.or.jp",
+        "url": "div.c-item__texts > div.c-item__title > a"
+      }
     }
   ],
 
@@ -82,16 +104,6 @@
       "title": "رادیو بین‌المللی فرانسه فارسی",
       "app_name": "rss-rfifa",
       "url": "https://www.rfi.fr/fa/rss"
-    },
-    {
-      "title": "تی آر تی فارسی",
-      "app_name": "rss-trtfarsi",
-      "url": ""
-    },
-    {
-      "title": "رادیو تلویزیون ژاپن فارسی",
-      "app_name": "rss-nhkfarsi",
-      "url": ""
     },
     {
       "title": "اخبار جهان",

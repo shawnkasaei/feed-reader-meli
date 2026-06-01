@@ -32,16 +32,15 @@ class Telegram:
             try:
                 c = text.group(1).strip()
                 c = StringUtils.remove_html_shenanegans(c)
-
-                dt = TimeUtils.parse_telegram(time.group(1))
-
+                dt = TimeUtils.normalize(time.group(1))
+                dt = TimeUtils.to_string(dt)
                 link = f"https://t.me/{data_post}"
 
                 items.insert(0,
                     FeedItem(
                         title=StringUtils.truncate_text_char(c, title_char_limit),
                         content=c,
-                        date=TimeUtils.to_string(dt),
+                        date=dt,
                         link=link
                     )
                 )
