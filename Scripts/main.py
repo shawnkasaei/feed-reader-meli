@@ -1,5 +1,4 @@
 import json
-import time
 from pathlib import Path
 from core.fetcher import Fetcher
 from core.parsers.telegram import Telegram
@@ -22,7 +21,7 @@ class App:
             (BASE / "Config" / "sources.json").read_text(encoding="utf-8")
         )
         self.title_char_limit = 100
-
+ 
         # core services
         self.fetcher = Fetcher()
         self.tgm_parser = Telegram()
@@ -68,8 +67,6 @@ class App:
                 print(f"❌ Telegram error -> {source['title']}")
                 print(e)
 
-            time.sleep(1)
-
         # ---------- Website ----------
         for source in self.config.get("website", []):
 
@@ -100,8 +97,6 @@ class App:
                 print(f"❌ Website error -> {source['title']}")
                 print(e)
 
-            time.sleep(1)
-
         # ---------- RSS ----------
         for source in self.config.get("rss", []):
 
@@ -131,8 +126,6 @@ class App:
             except Exception as e:
                 print(f"❌ RSS error -> {source['title']}")
                 print(e)
-
-            time.sleep(1)
 
         # ---------- BUILD UI ----------
         html = self.html_builder.build(feeds)
