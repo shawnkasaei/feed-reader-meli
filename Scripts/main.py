@@ -21,13 +21,12 @@ class App:
             (BASE / "Config" / "sources.json").read_text(encoding="utf-8")
         )
         self.title_char_limit = 100
-        self.feed_items_limit = 9
+        self.html_feed_items_limit = 9
  
-        # core services
         self.fetcher = Fetcher()
-        self.tgm_parser = Telegram(False, self.feed_items_limit, True)
-        self.rss_parser = RSS(False, self.feed_items_limit, False)
-        self.website_parser = Website(False, self.feed_items_limit, False)
+        self.tgm_parser = Telegram(False, True)
+        self.rss_parser = RSS(False, False)
+        self.website_parser = Website(False, False)
         self.xml_builder = XMLBuilder()
         self.html_builder = HTMLBuilder()
         self.storage = Storage(BASE)
@@ -42,14 +41,12 @@ class App:
                 html = self.fetcher.get_text_by_requests(source["url"])
                 items = self.tgm_parser.parse(html=html, title_char_limit=self.title_char_limit)
 
-                # build xml
                 xml_data = self.xml_builder.build(
                     items,
                     source["title"],
                     source["app_name"]
                 )
 
-                # save xml
                 self.storage.save_xml(
                     source["app_name"],
                     xml_data
@@ -58,7 +55,7 @@ class App:
                 feeds.append({
                     "source": source["title"],
                     "file": source["app_name"],
-                    "items": items
+                    "items": items[0:self.html_feed_items_limit]
                 })
 
                 print(f"✔ Telegram -> {source['app_name']}")
@@ -87,7 +84,7 @@ class App:
                 feeds.append({
                     "source": source["title"],
                     "file": source["app_name"],
-                    "items": items
+                    "items": items[0:self.html_feed_items_limit]
                 })
 
                 print(f"✔ Website -> {source['app_name']}")
@@ -116,7 +113,7 @@ class App:
                 feeds.append({
                     "source": source["title"],
                     "file": source["app_name"],
-                    "items": items
+                    "items": items[0:self.html_feed_items_limit]
                 })
 
                 print(f"✔ RSS -> {source['app_name']}")

@@ -7,10 +7,9 @@ from models.feed_item import FeedItem
 
 class Website:
 
-    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, reverse_items: bool = False):
+    def __init__(self, allow_duplicates: bool = True, reverse_items: bool = False):
         
         self.allow_duplicates = allow_duplicates
-        self.items_limit = items_limit
         self.reverse_items = reverse_items
 
     def parse(self, html:str, scraping_rules: str, title_char_limit:int = 60):
@@ -22,15 +21,9 @@ class Website:
         containers = soup.select(rules.get("container"))
 
         items = []
-        count = 0
 
         for c in containers:
-
-            if self.items_limit != 0:
-                count += 1
-                if self.items_limit < count:
-                    break
-            
+           
             title_selector = rules.get("title")
             title = c.select_one(title_selector).get_text(strip=True) if title_selector else ""
 

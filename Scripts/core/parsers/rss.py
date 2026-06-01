@@ -6,23 +6,16 @@ from models.feed_item import FeedItem
 
 class RSS:
 
-    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, reverse_items: bool = False):
+    def __init__(self, allow_duplicates: bool = True, reverse_items: bool = False):
         
         self.allow_duplicates = allow_duplicates
-        self.items_limit = items_limit
         self.reverse_items = reverse_items
 
     def parse(self, xml: str, title_char_limit:int = 60):
 
         items = []
-        count = 0
 
         for item in re.findall(r"<item>([\s\S]*?)<\/item>", xml):
-
-            if self.items_limit != 0:
-                count += 1
-                if self.items_limit < count:
-                    break
 
             t = re.search(r"<title>([\s\S]*?)<\/title>", item).group(1).strip()
             t = StringUtils.truncate_text_char(t, title_char_limit)

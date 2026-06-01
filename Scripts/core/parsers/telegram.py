@@ -6,10 +6,9 @@ from models.feed_item import FeedItem
 
 class Telegram:
 
-    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, reverse_items: bool = False):
+    def __init__(self, allow_duplicates: bool = True, reverse_items: bool = False):
         
         self.allow_duplicates = allow_duplicates
-        self.items_limit = items_limit
         self.reverse_items = reverse_items
 
     def parse(self, html: str, title_char_limit:int = 60):
@@ -20,14 +19,8 @@ class Telegram:
         )
 
         items = []
-        count = 0
 
         for full_block, data_post in blocks:
-
-            if self.items_limit != 0:
-                count += 1
-                if self.items_limit < count:
-                    break
 
             text = re.search(
                 r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
