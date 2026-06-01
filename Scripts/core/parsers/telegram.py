@@ -6,15 +6,28 @@ from models.feed_item import FeedItem
 
 class Telegram:
 
+    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, revese_items: bool = False):
+        
+        self.allow_duplicates = allow_duplicates
+        self.items_limit = items_limit
+        self.revese_items = revese_items
+
     def parse(self, html: str, title_char_limit:int = 60):
+        
         blocks = re.findall(
             r'(<div class="tgme_widget_message[^"]*"[^>]*data-post="([^"]+)"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>)',
             html
         )
 
         items = []
+        count = 0
 
         for full_block, data_post in blocks:
+
+            if self.items_limit != 0:
+                count += 1
+                if self.items_limit == count:
+                    break
 
             text = re.search(
                 r'tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>',
@@ -26,19 +39,23 @@ class Telegram:
                 full_block
             )
 
-            if not text or not time:
-                continue
-
             try:
                 c = text.group(1).strip()
                 c = StringUtils.remove_html_shenanegans(c)
+
+                t = StringUtils.truncate_text_char(c, title_char_limit)
+
                 dt = TimeUtils.normalize(time.group(1))
                 dt = TimeUtils.to_string(dt)
+                
                 link = f"https://t.me/{data_post}"
 
-                items.insert(0,
+                if (list(filter(lambda x: x.title == t, items))) and not self.allow_duplicates:
+                    continue
+
+                items.append(
                     FeedItem(
-                        title=StringUtils.truncate_text_char(c, title_char_limit),
+                        title=t,
                         content=c,
                         date=dt,
                         link=link
@@ -48,4 +65,4 @@ class Telegram:
             except:
                 continue
 
-        return items
+        return items if self.revese_items else items.reverse()

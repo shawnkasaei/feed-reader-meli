@@ -7,6 +7,12 @@ from models.feed_item import FeedItem
 
 class Website:
 
+    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, revese_items: bool = False):
+        
+        self.allow_duplicates = allow_duplicates
+        self.items_limit = items_limit
+        self.revese_items = revese_items
+
     def parse(self, html:str, scraping_rules: str, title_char_limit:int = 60):
 
         rules = json.loads(scraping_rules)
@@ -15,9 +21,16 @@ class Website:
 
         containers = soup.select(rules.get("container"))
 
-        results = []
+        items = []
+        count = 0
 
         for c in containers:
+
+            if self.items_limit != 0:
+                count += 1
+                if self.items_limit == count:
+                    break
+            
             title_selector = rules.get("title")
             title = c.select_one(title_selector).get_text(strip=True) if title_selector else ""
 
@@ -28,26 +41,34 @@ class Website:
             date = c.select_one(date_selector).get_text(strip=True) if date_selector else ""
 
             date_format = rules.get("date_format")
-            
-            if date and date_format:
-                date = TimeUtils.normalize(date, date_format)
-                date = TimeUtils.to_string(date)
-
+        
             url_selector = rules.get("url")
             url = c.select_one(url_selector).get("href") if url_selector else ""
 
             url_base = rules.get("url_base")
 
-            if url_base and url:
-                url = url_base + url
+            try:
+                title = StringUtils.truncate_text_char(title, title_char_limit)
+        
+                if date and date_format:
+                    date = TimeUtils.normalize(date, date_format)
+                    date = TimeUtils.to_string(date)
 
-            results.append(
-                    FeedItem(
-                        title=StringUtils.truncate_text_char(title, title_char_limit),
-                        content=description,
-                        date=date,
-                        link=url
+                if url_base and url:
+                    url = url_base + url
+
+                if (list(filter(lambda x: x.title == title, items))) and not self.allow_duplicates:
+                    continue
+
+                items.append(
+                        FeedItem(
+                            title=title,
+                            content=description,
+                            date=date,
+                            link=url
+                        )
                     )
-                )
+            except:
+                continue
 
-        return results
+        return items if self.revese_items else items.reverse()

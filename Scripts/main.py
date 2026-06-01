@@ -21,12 +21,13 @@ class App:
             (BASE / "Config" / "sources.json").read_text(encoding="utf-8")
         )
         self.title_char_limit = 100
+        self.feed_items_limit = 9
  
         # core services
         self.fetcher = Fetcher()
-        self.tgm_parser = Telegram()
-        self.rss_parser = RSS()
-        self.website_parser = Website()
+        self.tgm_parser = Telegram(False, self.feed_items_limit, True)
+        self.rss_parser = RSS(False, self.feed_items_limit, False)
+        self.website_parser = Website(False, self.feed_items_limit, False)
         self.xml_builder = XMLBuilder()
         self.html_builder = HTMLBuilder()
         self.storage = Storage(BASE)
