@@ -17,10 +17,8 @@ class Fetcher:
     def get_text_by_selenium(self, url: str, css_selector_visibility_element:str="body") -> str:
         
         options = Options()
-        options.add_argument("--headless")
 
         driver = webdriver.Chrome(options=options)
-        driver.set_page_load_timeout(self.timeout)
         driver.get(url)
 
         WebDriverWait(driver, self.timeout).until(

@@ -19,13 +19,13 @@ class Website:
 
         for c in containers:
             title_selector = rules.get("title")
-            title = c.select_one(title_selector).get_text(strip=True) if title_selector else None
+            title = c.select_one(title_selector).get_text(strip=True) if title_selector else ""
 
             description_selector = rules.get("description")
-            description = c.select_one(description_selector).get_text(strip=True) if description_selector else None
+            description = c.select_one(description_selector).get_text(strip=True) if description_selector else "" 
 
             date_selector = rules.get("date")
-            date = c.select_one(date_selector).get_text(strip=True) if date_selector else None
+            date = c.select_one(date_selector).get_text(strip=True) if date_selector else ""
 
             date_format = rules.get("date_format")
             
@@ -34,7 +34,7 @@ class Website:
                 date = TimeUtils.to_string(date)
 
             url_selector = rules.get("url")
-            url = c.select_one(url_selector).get("href") if url_selector else None
+            url = c.select_one(url_selector).get("href") if url_selector else ""
 
             url_base = rules.get("url_base")
 
