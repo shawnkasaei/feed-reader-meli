@@ -71,7 +71,7 @@ class App:
         for source in self.config.get("website", []):
 
             try:
-                html = self.fetcher.get_text_by_requests(source["url"])
+                html = self.fetcher.get_text_by_selenium(source["url"])
                 items = self.website_parser.parse(html=html, scraping_rules=json.dumps(source["selectors"]), title_char_limit=self.title_char_limit)
 
                 xml_data = self.xml_builder.build(
