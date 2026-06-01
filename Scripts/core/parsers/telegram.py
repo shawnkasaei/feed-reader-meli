@@ -26,7 +26,7 @@ class Telegram:
 
             if self.items_limit != 0:
                 count += 1
-                if self.items_limit == count:
+                if self.items_limit < count:
                     break
 
             text = re.search(

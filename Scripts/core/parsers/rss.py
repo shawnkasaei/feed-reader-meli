@@ -21,7 +21,7 @@ class RSS:
 
             if self.items_limit != 0:
                 count += 1
-                if self.items_limit == count:
+                if self.items_limit < count:
                     break
 
             t = re.search(r"<title>([\s\S]*?)<\/title>", item).group(1).strip()
