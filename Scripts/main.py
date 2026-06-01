@@ -35,7 +35,6 @@ class App:
 
         feeds = []
 
-        # ---------- TELEGRAM ----------
         for source in self.config.get("telegram", []):
 
             try:
@@ -67,7 +66,6 @@ class App:
                 print(f"❌ Telegram error -> {source['title']}")
                 print(e)
 
-        # ---------- Website ----------
         for source in self.config.get("website", []):
 
             try:
@@ -97,7 +95,6 @@ class App:
                 print(f"❌ Website error -> {source['title']}")
                 print(e)
 
-        # ---------- RSS ----------
         for source in self.config.get("rss", []):
 
             try:
@@ -127,7 +124,6 @@ class App:
                 print(f"❌ RSS error -> {source['title']}")
                 print(e)
 
-        # ---------- BUILD UI ----------
         html = self.html_builder.build(feeds)
 
         self.storage.save_html(html)
@@ -135,6 +131,5 @@ class App:
         print("✔ index.html generated in Feeds/view/")
 
 
-# ---------- ENTRY POINT ----------
 if __name__ == "__main__":
     App().run()
