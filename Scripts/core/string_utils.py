@@ -37,7 +37,7 @@ class StringUtils:
         return text[:char_limit].rstrip() + "..."
     
     @staticmethod
-    def remove_html_shenanegans(text):
+    def remove_html_shenanigans(text):
 
         if not text:
             return ""

@@ -28,7 +28,7 @@ class RSS:
             t = StringUtils.truncate_text_char(t, title_char_limit)
 
             c = re.search(r"<description>([\s\S]*?)<\/description>", item).group(1).strip()
-            c = StringUtils.remove_html_shenanegans(c)
+            c = StringUtils.remove_html_shenanigans(c)
             
             d = re.search(r"<pubDate>([\s\S]*?)<\/pubDate>", item).group(1).strip()
             

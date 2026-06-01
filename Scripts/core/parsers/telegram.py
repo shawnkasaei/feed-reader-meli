@@ -41,7 +41,7 @@ class Telegram:
 
             try:
                 c = text.group(1).strip()
-                c = StringUtils.remove_html_shenanegans(c)
+                c = StringUtils.remove_html_shenanigans(c)
 
                 t = StringUtils.truncate_text_char(c, title_char_limit)
 
