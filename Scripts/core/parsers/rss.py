@@ -53,4 +53,4 @@ class RSS:
             except:
                 continue
 
-        return items if not self.reverse_items else items.reverse()
+        return items if not self.reverse_items else items[::-1]
