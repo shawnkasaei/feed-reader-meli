@@ -6,11 +6,11 @@ from models.feed_item import FeedItem
 
 class RSS:
 
-    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, revese_items: bool = False):
+    def __init__(self, allow_duplicates: bool = True, items_limit: int = 0, reverse_items: bool = False):
         
         self.allow_duplicates = allow_duplicates
         self.items_limit = items_limit
-        self.revese_items = revese_items
+        self.reverse_items = reverse_items
 
     def parse(self, xml: str, title_char_limit:int = 60):
 
