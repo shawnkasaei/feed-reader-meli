@@ -14,7 +14,7 @@ Thumbs.db
 .idea/
 
 # Python
-__pycache__/
+*/__pycache__/
 *.pyc
 venv/
 
