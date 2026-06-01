@@ -1,9 +1,10 @@
 import requests
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 class Fetcher:
 
@@ -16,9 +17,10 @@ class Fetcher:
 
     def get_text_by_selenium(self, url: str, css_selector_visibility_element:str="body") -> str:
         
-        options = Options()
+        driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager().install())
+        )
 
-        driver = webdriver.Chrome(options=options)
         driver.get(url)
 
         WebDriverWait(driver, self.timeout).until(
@@ -26,6 +28,7 @@ class Fetcher:
         )
 
         html = driver.page_source
+        
         driver.quit()
         
         return html
