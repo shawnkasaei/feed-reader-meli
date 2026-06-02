@@ -1,24 +1,19 @@
 {
   "telegram": [
     {
-      "title": "کانال شاهزاده رضا پهلوی",
+      "title": "شاهزاده رضا پهلوی",
       "app_name": "tgm-rezapahlavi",
       "url": "https://t.me/s/OfficialRezaPahlavi"
     },
     {
-      "title": "کانال مهدی مطهرنیا",
-      "app_name": "tgm-motaharnia",
-      "url": "https://t.me/s/MehdiMotaharnia1344"
-    },
-    {
-      "title": "کانال کار آنلاین",
+      "title": "کار آنلاین",
       "app_name": "tgm-caronline",
       "url": "https://t.me/s/caronline_original"
     },
     {
-      "title": "کانال وحید آنلاین",
-      "app_name": "tgm-vahidonline",
-      "url": "https://t.me/s/VahidOnline"
+      "title": "مهدی مطهرنیا",
+      "app_name": "tgm-motaharnia",
+      "url": "https://t.me/s/MehdiMotaharnia1344"
     },
     {
       "title": "آشیان سیمرغ",
@@ -49,6 +44,11 @@
       "title": "رادیو فردا",
       "app_name": "tgm-radiofarda",
       "url": "https://t.me/s/radiofarda"
+    },
+    {
+      "title": "وحید آنلاین",
+      "app_name": "tgm-vahidonline",
+      "url": "https://t.me/s/VahidOnline"
     },
     {
       "title": "ایران وایر",
@@ -113,17 +113,17 @@
     {
       "title": "ایران در نگاه جهان",
       "app_name": "rss-global-iran",
-      "url": "https://news.google.com/rss/search?q=when%3A1d%20Iran%20OR%20Tehran%20OR%20Hormuz%20OR%20Persian%20OR%20IRGC%20OR%20Pahlvai&hl=en-US&gl=US&ceid=US:en"
+      "url": "https://news.google.com/rss/search?q=when%3A3d%20Iran%20OR%20Tehran%20OR%20Hormuz%20OR%20Persian%20OR%20IRGC%20OR%20Pahlvai&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "title": "اندیشکده‌های جهان",
       "app_name": "rss-thinktanks",
-      "url": "https://news.google.com/rss/search?q=when%3A1d%20site%3Abrookings.edu%20OR%20site%3Acfr.org%20OR%20site%3Arand.org%20OR%20site%3Acsis.org%20OR%20site%3Acarnegieendowment.org%20OR%20site%3Aatlanticcouncil.org%20OR%20site%3Aheritage.org%20OR%20site%3Aamericafirstpolicy.com%20OR%20site%3Ahoover.org%20OR%20site%3Acato.org%20OR%20site%3Awashingtoninstitute.org%20OR%20site%3Achathamhouse.org%20OR%20site%3Aiiss.org%20OR%20site%3Aifri.org%20OR%20site%3Afrstrategie.org%20OR%20site%3Aswp-berlin.org%20OR%20site%3Asipri.org%20OR%20site%3Abruegel.org%20OR%20site%3Avaldaiclub.com%20OR%20site%3Aimemo.ru%20OR%20site%3Asiis.org.cn%20OR%20site%3Aorfonline.org&hl=en-US&gl=US&ceid=US:en"
+      "url": "https://news.google.com/rss/search?q=when%3A3d%20site%3Abrookings.edu%20OR%20site%3Acfr.org%20OR%20site%3Arand.org%20OR%20site%3Acsis.org%20OR%20site%3Acarnegieendowment.org%20OR%20site%3Aatlanticcouncil.org%20OR%20site%3Aheritage.org%20OR%20site%3Aamericafirstpolicy.com%20OR%20site%3Ahoover.org%20OR%20site%3Acato.org%20OR%20site%3Awashingtoninstitute.org%20OR%20site%3Achathamhouse.org%20OR%20site%3Aiiss.org%20OR%20site%3Aifri.org%20OR%20site%3Afrstrategie.org%20OR%20site%3Aswp-berlin.org%20OR%20site%3Asipri.org%20OR%20site%3Abruegel.org%20OR%20site%3Avaldaiclub.com%20OR%20site%3Aimemo.ru%20OR%20site%3Asiis.org.cn%20OR%20site%3Aorfonline.org&hl=en-US&gl=US&ceid=US:en"
     },
     {
       "title": "ایران در نگاه اندیشکده‌ها",
       "app_name": "rss-thinktanks-iran",
-      "url": "https://news.google.com/rss/search?q=when%3A3d%20(Iran%20OR%20Tehran%20OR%20IRGC%20OR%20Pahlavi)%20site%3Abrookings.edu%20OR%20site%3Acfr.org%20OR%20site%3Arand.org%20OR%20site%3Acsis.org%20OR%20site%3Acarnegieendowment.org%20OR%20site%3Aatlanticcouncil.org%20OR%20site%3Aheritage.org%20OR%20site%3Aamericafirstpolicy.com%20OR%20site%3Ahoover.org%20OR%20site%3Acato.org%20OR%20site%3Awashingtoninstitute.org%20OR%20site%3Achathamhouse.org%20OR%20site%3Aiiss.org%20OR%20site%3Aifri.org%20OR%20site%3Afrstrategie.org%20OR%20site%3Aswp-berlin.org%20OR%20site%3Asipri.org%20OR%20site%3Abruegel.org%20OR%20site%3Avaldaiclub.com%20OR%20site%3Aimemo.ru%20OR%20site%3Asiis.org.cn%20OR%20site%3Aorfonline.org&hl=en-US&gl=US&ceid=US:en"
+      "url": "https://news.google.com/rss/search?q=when%3A10d%20(Iran%20OR%20Tehran%20OR%20IRGC%20OR%20Pahlavi)%20site%3Abrookings.edu%20OR%20site%3Acfr.org%20OR%20site%3Arand.org%20OR%20site%3Acsis.org%20OR%20site%3Acarnegieendowment.org%20OR%20site%3Aatlanticcouncil.org%20OR%20site%3Aheritage.org%20OR%20site%3Aamericafirstpolicy.com%20OR%20site%3Ahoover.org%20OR%20site%3Acato.org%20OR%20site%3Awashingtoninstitute.org%20OR%20site%3Achathamhouse.org%20OR%20site%3Aiiss.org%20OR%20site%3Aifri.org%20OR%20site%3Afrstrategie.org%20OR%20site%3Aswp-berlin.org%20OR%20site%3Asipri.org%20OR%20site%3Abruegel.org%20OR%20site%3Avaldaiclub.com%20OR%20site%3Aimemo.ru%20OR%20site%3Asiis.org.cn%20OR%20site%3Aorfonline.org&hl=en-US&gl=US&ceid=US:en"
     }
   ]
 } 
